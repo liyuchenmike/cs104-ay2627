@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 1: statements, logical equivalence, conditionals and valid inference.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 1 · Logical Reasoning, Part I · CS104</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body data-lesson="week-01">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2025–26</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../index.html">Course home</a>
+      <a aria-current="page" href="week-01.html">Week 1</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../index.html">Course home</a> <span aria-hidden="true">/</span> Week 1</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 01 · Logical reasoning</p>
+          <h1>When does a conclusion really follow?</h1>
+          <p class="lesson-summary">Learn the language that lets us turn everyday claims into precise forms, compare their truth conditions and decide whether an argument is valid.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+          <ul>
+            <li>translate statements using ¬, ∧, ∨, → and ↔;</li>
+            <li>construct and interpret truth tables;</li>
+            <li>use equivalence laws without changing meaning;</li>
+            <li>distinguish a conditional from its converse, inverse and contrapositive;</li>
+            <li>test an argument form for validity.</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+        <a href="#lecture">Lecture</a>
+        <a href="#statements">1. Statements</a>
+        <a href="#equivalence">2. Equivalence</a>
+        <a href="#conditionals">3. Conditionals</a>
+        <a href="#inference">4. Inference</a>
+        <a href="#quiz">5. Quiz</a>
+        <a href="#transcript">Transcript</a>
+      </nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Logical reasoning, Part I</h2>
+          <p>Use the chapter buttons to revisit a concept. During playback, the video pauses at selected points for short retrieval questions. These checkpoints are for learning, not grading.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="../assets/images/week-01-cover.webp">
+              <source src="../assets/video/week-01-logical-reasoning.mp4" type="video/mp4">
+              <track kind="captions" src="../assets/video/week-01-logical-reasoning.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video. Use the transcript below instead.
+            </video>
+            <div class="chapters" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">00:00 · Why logic?</button>
+              <button class="chapter-button" type="button" data-time="53">00:53 · Statements</button>
+              <button class="chapter-button" type="button" data-time="340">05:40 · Truth tables + equivalence</button>
+              <button class="chapter-button" type="button" data-time="664">11:04 · Conditionals</button>
+              <button class="chapter-button" type="button" data-time="1035">17:15 · Inference</button>
+              <button class="chapter-button" type="button" data-time="1311">21:51 · Summary</button>
+            </div>
+            <div class="video-caption"><span>Includes English captions and four knowledge checks.</span><span id="video-status">Progress saves in this browser.</span></div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="statements">
+          <p class="eyebrow">1 · Logical form</p>
+          <h2>Statements have a truth value</h2>
+          <p>A <strong>statement</strong>, also called a proposition, is a declarative sentence that is either true or false—but not both. “Four is even” is a statement. “Close the window” and “What time is it?” are not statements because they do not assert something that can be assigned a truth value.</p>
+
+          <div class="concept-box">
+            <h3>Separate form from content</h3>
+            <p>We use letters such as <span class="symbol">p</span>, <span class="symbol">q</span> and <span class="symbol">r</span> as statement variables. This lets us study the structure of reasoning even when the subject changes.</p>
+            <p>If <span class="symbol">p</span> means “Jane is a mathematics major,” <span class="symbol">q</span> means “Jane is a computer science major,” and <span class="symbol">r</span> means “Jane will take CS104,” then an argument can be represented compactly as <span class="symbol">p ∨ q, q, ∴ r</span>. The symbols expose its form so we can ask whether the conclusion actually follows.</p>
+          </div>
+
+          <h3>The basic operators</h3>
+          <div class="law-grid">
+            <div><strong>Negation</strong><code>¬p</code><span>“not p”; reverses the truth value.</span></div>
+            <div><strong>Conjunction</strong><code>p ∧ q</code><span>“p and q”; true only when both are true.</span></div>
+            <div><strong>Disjunction</strong><code>p ∨ q</code><span>inclusive “or”; true when at least one is true.</span></div>
+            <div><strong>Conditional</strong><code>p → q</code><span>“if p, then q”; false only when p is true and q is false.</span></div>
+          </div>
+
+          <table class="truth-table">
+            <caption>Truth values for the basic binary operators</caption>
+            <thead><tr><th scope="col">p</th><th scope="col">q</th><th scope="col">p ∧ q</th><th scope="col">p ∨ q</th><th scope="col">p → q</th></tr></thead>
+            <tbody>
+              <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td></tr>
+              <tr><td>T</td><td>F</td><td>F</td><td>T</td><td class="critical">F</td></tr>
+              <tr><td>F</td><td>T</td><td>F</td><td>T</td><td>T</td></tr>
+              <tr><td>F</td><td>F</td><td>F</td><td>F</td><td>T</td></tr>
+            </tbody>
+          </table>
+
+          <div class="worked-example">
+            <h3>Worked example: build from the inside out</h3>
+            <p>Evaluate <span class="symbol">¬(p ∧ q) ∧ (p ∨ q)</span> when <span class="symbol">p</span> is true and <span class="symbol">q</span> is false.</p>
+            <ol>
+              <li><span class="symbol">p ∧ q</span> is false because a conjunction needs two true components.</li>
+              <li><span class="symbol">¬(p ∧ q)</span> is therefore true.</li>
+              <li><span class="symbol">p ∨ q</span> is true because inclusive “or” needs at least one true component.</li>
+              <li>The outer conjunction combines true with true, so the whole expression is <strong>true</strong>.</li>
+            </ol>
+          </div>
+
+          <div class="misconception">
+            <h3>Common mistake: reading ∨ as “one but not both”</h3>
+            <p>Unless explicitly stated otherwise, mathematical disjunction is inclusive. <span class="symbol">p ∨ q</span> is true when p alone is true, q alone is true, <em>or both are true</em>. Exclusive-or is a different operation.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="equivalence">
+          <p class="eyebrow">2 · Same meaning, different form</p>
+          <h2>Logical equivalence compares every possibility</h2>
+          <p>Two statement forms are <strong>logically equivalent</strong> when they have identical truth values for every possible assignment of their variables. We write <span class="symbol">P ≡ Q</span>. One matching example is not enough; every row must match.</p>
+
+          <div class="formula-card">¬(p ∧ q) ≡ ¬p ∨ ¬q &nbsp;&nbsp; and &nbsp;&nbsp; ¬(p ∨ q) ≡ ¬p ∧ ¬q</div>
+          <p>De Morgan’s laws say that negating a grouped “and” changes it into an “or” of negations, while negating a grouped “or” changes it into an “and” of negations. The operator changes because the condition for the original compound statement to fail changes.</p>
+
+          <div class="worked-example">
+            <h3>Why De Morgan’s law makes sense</h3>
+            <p>Negate: “John is six feet tall <strong>and</strong> weighs at least 200 pounds.”</p>
+            <p>For the original conjunction to be false, at least one component must fail. Its correct negation is: “John is <strong>not</strong> six feet tall <strong>or</strong> John does <strong>not</strong> weigh at least 200 pounds.” Saying “not tall and not heavy” is too strong; it misses cases where only one property fails.</p>
+          </div>
+
+          <h3>Equivalences worth recognising</h3>
+          <div class="law-grid">
+            <div><strong>Commutative</strong><code>p ∨ q ≡ q ∨ p</code><code>p ∧ q ≡ q ∧ p</code></div>
+            <div><strong>Associative</strong><code>(p ∨ q) ∨ r ≡ p ∨ (q ∨ r)</code><code>(p ∧ q) ∧ r ≡ p ∧ (q ∧ r)</code></div>
+            <div><strong>Distributive</strong><code>p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)</code><code>p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)</code></div>
+            <div><strong>Double negation</strong><code>¬¬p ≡ p</code></div>
+            <div><strong>Absorption</strong><code>p ∨ (p ∧ q) ≡ p</code><code>p ∧ (p ∨ q) ≡ p</code></div>
+            <div><strong>Identity / domination</strong><code>p ∧ T ≡ p; p ∨ F ≡ p</code><code>p ∨ T ≡ T; p ∧ F ≡ F</code></div>
+          </div>
+
+          <div class="concept-box">
+            <h3>How to disprove equivalence efficiently</h3>
+            <p>You do not need a complete truth table if you can find a single <strong>counterexample</strong>: one assignment on which the two forms differ. For example, <span class="symbol">¬(p ∧ q)</span> and <span class="symbol">¬p ∧ ¬q</span> differ when p is true and q is false. The first is true; the second is false.</p>
+          </div>
+
+          <div class="checkpoint">
+            <span class="checkpoint-mark" aria-hidden="true">?</span>
+            <div><h3>Pause and predict</h3><p>Before continuing, negate “The bus was late or Tom’s watch was slow.” Your answer should require <em>both</em> original components to fail.</p></div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="conditionals">
+          <p class="eyebrow">3 · If–then reasoning</p>
+          <h2>A conditional rules out one case</h2>
+          <p>In <span class="symbol">p → q</span>, p is the <strong>hypothesis</strong> and q is the <strong>conclusion</strong>. The conditional promises that whenever p occurs, q follows. It is broken only by a true hypothesis paired with a false conclusion.</p>
+
+          <div class="formula-card">p → q ≡ ¬p ∨ q</div>
+          <p>This equivalence explains why a conditional with a false hypothesis is considered true: <span class="symbol">¬p</span> is already true. It does not claim that q is caused by p; logical implication records a truth condition, not necessarily a causal relationship.</p>
+
+          <div class="worked-example">
+            <h3>Rewriting a real sentence</h3>
+            <p>“You get to work on time or you are fired.” Let p mean “you get to work on time” and q mean “you are fired.” The sentence has form <span class="symbol">p ∨ q</span>.</p>
+            <p>Using <span class="symbol">p → q ≡ ¬p ∨ q</span>, it becomes: “If you do not get to work on time, then you are fired.” Notice that the hypothesis is the negation of p.</p>
+          </div>
+
+          <div class="concept-box">
+            <h3>Negating an if–then statement</h3>
+            <p>To make <span class="symbol">p → q</span> false, p must be true and q false. Therefore:</p>
+            <div class="formula-card">¬(p → q) ≡ p ∧ ¬q</div>
+            <p>The negation of “If my car is in the repair shop, then I cannot get to class” is “My car is in the repair shop <strong>and</strong> I can get to class.”</p>
+          </div>
+
+          <h3>Related conditionals</h3>
+          <div class="law-grid">
+            <div><strong>Original</strong><code>p → q</code></div>
+            <div><strong>Contrapositive</strong><code>¬q → ¬p</code><span>Always equivalent to the original.</span></div>
+            <div><strong>Converse</strong><code>q → p</code><span>Not generally equivalent to the original.</span></div>
+            <div><strong>Inverse</strong><code>¬p → ¬q</code><span>Equivalent to the converse, not generally to the original.</span></div>
+          </div>
+
+          <div class="misconception">
+            <h3>Common mistake: reversing the arrow</h3>
+            <p>From “If Howard can swim across the lake, then Howard can swim to the island,” you may infer the contrapositive: “If Howard cannot swim to the island, then Howard cannot swim across the lake.” You may <em>not</em> infer the converse; swimming to the island might be much easier.</p>
+          </div>
+
+          <h3>Only if, biconditional and conditions</h3>
+          <p>“p only if q” means <span class="symbol">p → q</span>: q is necessary for p. “p if q” means <span class="symbol">q → p</span>: q is sufficient for p. “p if and only if q,” written <span class="symbol">p ↔ q</span>, means both directions hold.</p>
+          <div class="formula-card">p ↔ q ≡ (p → q) ∧ (q → p)</div>
+          <p>If “John is eligible to vote” implies “John is at least 18,” then eligibility is a <strong>sufficient</strong> condition for being at least 18, while being at least 18 is a <strong>necessary</strong> condition for eligibility. Necessary does not automatically mean sufficient.</p>
+        </section>
+
+        <section class="lesson-section" id="inference">
+          <p class="eyebrow">4 · Rules of inference</p>
+          <h2>Validity protects the move from premises to conclusion</h2>
+          <p>An <strong>argument</strong> is a sequence of premises followed by a conclusion. An argument form is valid when there is no substitution of statements that makes all its premises true and its conclusion false. Validity concerns the structure of the inference—not whether the actual premises happen to be true.</p>
+
+          <div class="inference-list">
+            <article><h3>Direct implication</h3><code>p → q<br>p<br>∴ q</code></article>
+            <article><h3>Contrapositive implication</h3><code>p → q<br>¬q<br>∴ ¬p</code></article>
+            <article><h3>Specialisation</h3><code>p ∧ q<br>∴ p</code></article>
+            <article><h3>Elimination</h3><code>p ∨ q<br>¬p<br>∴ q</code></article>
+            <article><h3>Transitivity</h3><code>p → q<br>q → r<br>∴ p → r</code></article>
+            <article><h3>Division into cases</h3><code>p ∨ q<br>p → r<br>q → r<br>∴ r</code></article>
+          </div>
+
+          <div class="worked-example">
+            <h3>Testing validity with critical rows</h3>
+            <p>Consider premises <span class="symbol">p → (q ∨ ¬r)</span> and <span class="symbol">q → (p ∧ r)</span>, with conclusion <span class="symbol">∴ p → r</span>.</p>
+            <ol>
+              <li>Construct columns for the components, both premises and the conclusion.</li>
+              <li>Identify the <strong>critical rows</strong> where every premise is true.</li>
+              <li>Inspect the conclusion only in those critical rows.</li>
+              <li>If the conclusion is true in every critical row, the argument is valid. One false conclusion in a critical row makes it invalid.</li>
+            </ol>
+          </div>
+
+          <div class="concept-box">
+            <h3>Detective Sam’s four suspects</h3>
+            <p>Exactly one suspect killed Ama and exactly one suspect is telling the truth:</p>
+            <ul>
+              <li>Suspect 1: “Suspect 3 killed Ama.”</li>
+              <li>Suspect 2: “Suspect 4 did not kill Ama.”</li>
+              <li>Suspect 3: “Suspects 1 and 4 did not kill Ama.”</li>
+              <li>Suspect 4: “Suspect 3 did not kill Ama.”</li>
+            </ul>
+            <p>Test each possible killer. If Suspect 4 is the killer, statements 1, 2 and 3 are false while statement 4 is true—exactly one truth. Every other candidate produces more than one true statement. Therefore, <strong>Suspect 4 killed Ama</strong>.</p>
+          </div>
+
+          <div class="misconception">
+            <h3>Valid does not mean “conclusion sounds reasonable”</h3>
+            <p>A valid form guarantees only this: <em>if</em> all premises are true, the conclusion cannot be false. An argument may be valid with false premises, and an invalid argument can accidentally have a true conclusion.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">5 · Retrieval practice</p>
+          <h2>Week 1 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer to receive an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+
+        <section class="lesson-section transcript" id="transcript">
+          <p class="eyebrow">Accessible alternative</p>
+          <h2>Lecture transcript</h2>
+          <p>The transcript follows the lecture chapters and is useful for review, search and note-taking. <a class="text-link" href="../assets/video/week-01-transcript.txt" download>Download the complete transcript</a>.</p>
+          <div id="transcript-content">
+            <details><summary>Chapter 1 · Why logical form matters</summary><div><p>Logical reasoning asks whether a conclusion follows because of an argument’s structure. By replacing content with statement variables, we can evaluate a form once and reuse the result across mathematics, computing and everyday decisions.</p></div></details>
+            <details><summary>Chapter 2 · Statements and operators</summary><div><p>A statement is true or false, but not both. Negation reverses a truth value. Conjunction requires both components. Inclusive disjunction requires at least one. Parentheses and the conventional order—negation, conjunction/disjunction, implication—remove ambiguity.</p></div></details>
+            <details><summary>Chapter 3 · Truth tables and equivalence</summary><div><p>A truth table examines every assignment. Equivalent forms match on every row. De Morgan’s laws distribute negation while switching and with or. A single row on which two forms differ is enough to disprove equivalence.</p></div></details>
+            <details><summary>Chapter 4 · Conditional statements</summary><div><p>The conditional p implies q is false only when p is true and q false. It is equivalent to not p or q. Its negation is p and not q. The contrapositive is equivalent to the original; the converse and inverse are not generally equivalent to it.</p></div></details>
+            <details><summary>Chapter 5 · Biconditionals and conditions</summary><div><p>A biconditional requires both implication directions. “p only if q” makes q necessary for p, while “p if q” makes q sufficient for p. Keeping the arrow direction explicit prevents the most common translation errors.</p></div></details>
+            <details><summary>Chapter 6 · Arguments and validity</summary><div><p>An argument is valid when no critical row has true premises and a false conclusion. Standard rules—direct implication, contrapositive implication, specialisation, elimination, transitivity and cases—package forms already known to be valid.</p></div></details>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 1</strong></p>
+    <p><a href="../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="../assets/js/week-01.js"></script>
+</body>
+</html>

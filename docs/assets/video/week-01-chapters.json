@@ -1,0 +1,29 @@
+{
+  "duration": 1363.2602939999997,
+  "chapters": [
+    {
+      "title": "Why logical form matters",
+      "time": 0
+    },
+    {
+      "title": "Statements and symbolic form",
+      "time": 53.02
+    },
+    {
+      "title": "Truth tables and equivalence",
+      "time": 339.58
+    },
+    {
+      "title": "Conditional statements",
+      "time": 664.37
+    },
+    {
+      "title": "Arguments and validity",
+      "time": 1034.5
+    },
+    {
+      "title": "Summary and next steps",
+      "time": 1310.59
+    }
+  ]
+}
