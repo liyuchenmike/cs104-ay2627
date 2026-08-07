@@ -31,7 +31,7 @@ for (const file of htmlFiles) {
   }
 }
 
-const video = path.join(root, "assets", "video", "week-01-logical-reasoning-v2.mp4");
+const video = path.join(root, "assets", "video", "week-01-logical-reasoning-v3.mp4");
 const captions = path.join(root, "assets", "video", "week-01-logical-reasoning.vtt");
 if (!fs.existsSync(video) || fs.statSync(video).size < 1_000_000) errors.push("Week 1 video is missing or unexpectedly small");
 if (!fs.existsSync(captions) || !fs.readFileSync(captions, "utf8").startsWith("WEBVTT")) errors.push("Week 1 captions are missing or invalid");

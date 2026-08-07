@@ -12,25 +12,31 @@ const clipsDir = path.join(work, "clips");
 const audioDir = path.join(work, "audio");
 const textDir = path.join(work, "text");
 const outputDir = path.join(root, "docs", "assets", "video");
-const outputVideo = path.join(outputDir, "week-01-logical-reasoning-v2.mp4");
+const outputVideo = path.join(outputDir, "week-01-logical-reasoning-v3.mp4");
+const unmasteredVideo = path.join(work, "week-01-unmastered.mp4");
 const outputVtt = path.join(outputDir, "week-01-logical-reasoning.vtt");
 const outputChapters = path.join(outputDir, "week-01-chapters.json");
 const outputTranscript = path.join(outputDir, "week-01-transcript.txt");
 const cover = path.join(root, "docs", "assets", "images", "week-01-cover.webp");
 const pdf = path.join(pdfDir, "week-01-powerpoint.pdf");
-const ttsPython = path.join(root, ".tts-venv", "bin", "python");
-const ttsScript = path.join(root, "tools", "generate-kokoro-audio.py");
+const ttsPython = path.join(root, ".voice-venv", "bin", "python");
+const ttsScript = path.join(root, "tools", "generate-f5-audio.py");
 const ttsManifest = path.join(work, "tts-manifest.json");
-const modelCache = path.join(work, "model-cache");
+const modelCache = path.join(root, "voice-work", "model-cache");
+const voiceReference = path.join(root, "record.m4a");
+const voiceReferenceText = "Hello, and welcome to CS 104. In this course, we will learn how careful reasoning help us understand arguments, solve problems.";
+const reuseVoiceAudio = process.env.REUSE_VOICE_AUDIO === "1";
 
 for (const dir of [pdfDir, slidesDir, clipsDir, audioDir, textDir]) {
+  if (dir === audioDir && reuseVoiceAudio) continue;
   fs.rmSync(dir, { recursive: true, force: true });
 }
 for (const dir of [work, pdfDir, slidesDir, clipsDir, audioDir, textDir, outputDir, modelCache]) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-if (!fs.existsSync(ttsPython)) throw new Error("Create .tts-venv and install kokoro plus soundfile before building the video.");
+if (!fs.existsSync(ttsPython)) throw new Error("Create .voice-venv and install f5-tts before building the video.");
+if (!fs.existsSync(voiceReference)) throw new Error("The private voice reference record.m4a is missing.");
 
 run("osascript", [
   "-e", "tell application \"Microsoft PowerPoint\"",
@@ -51,13 +57,24 @@ run("magick", [slidePath(1), "-resize", "1920x1080", "-quality", "86", cover]);
 const speechManifest = narration.map((segment, index) => ({
   name: String(index + 1).padStart(2, "0"),
   text: segment.narration.replace(/\s+/g, " ").trim(),
-  voice: "af_heart",
   speed: segment.chapter === "Summary and next steps" ? 1.0 : 1.03
 }));
 fs.writeFileSync(ttsManifest, JSON.stringify(speechManifest, null, 2) + "\n");
-run(ttsPython, [ttsScript, ttsManifest, audioDir], {
-  env: { HF_HOME: modelCache, PYTORCH_ENABLE_MPS_FALLBACK: "1" }
-});
+if (reuseVoiceAudio) {
+  const completedAudio = fs.readdirSync(audioDir).filter(name => name.endsWith(".wav"));
+  if (completedAudio.length !== narration.length) {
+    throw new Error(`Expected ${narration.length} reusable audio segments; found ${completedAudio.length}.`);
+  }
+} else {
+  run(ttsPython, [ttsScript, ttsManifest, audioDir, voiceReference, voiceReferenceText], {
+    env: {
+      HF_HOME: modelCache,
+      MPLCONFIGDIR: path.join(root, "voice-work", "matplotlib"),
+      XDG_CACHE_HOME: path.join(root, "voice-work", "cache"),
+      PYTORCH_ENABLE_MPS_FALLBACK: "1"
+    }
+  });
+}
 
 let timeline = 0;
 const cues = [];
@@ -84,7 +101,7 @@ for (let index = 0; index < narration.length; index += 1) {
     "-loop", "1", "-framerate", "2", "-i", slidePath(segment.slide),
     "-i", audioFile,
     "-vf", "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=white,format=yuv420p",
-    "-af", "loudnorm=I=-16:LRA=11:TP=-1.5",
+    "-af", "loudnorm=I=-16:LRA=11:TP=-1.5,alimiter=limit=0.84:level=false",
     "-c:v", "libx264", "-preset", "medium", "-crf", "29", "-tune", "stillimage",
     "-c:a", "aac", "-b:a", "112k", "-ar", "48000",
     "-t", duration.toFixed(3), "-movflags", "+faststart", clipFile
@@ -109,7 +126,14 @@ for (let index = 0; index < narration.length; index += 1) {
 
 const concatFile = path.join(work, "concat.txt");
 fs.writeFileSync(concatFile, concatLines.join("\n") + "\n");
-run("ffmpeg", ["-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", concatFile, "-c", "copy", "-movflags", "+faststart", outputVideo]);
+run("ffmpeg", ["-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", concatFile, "-c", "copy", "-movflags", "+faststart", unmasteredVideo]);
+run("ffmpeg", [
+  "-y", "-loglevel", "error", "-i", unmasteredVideo,
+  "-c:v", "copy", "-af", "loudnorm=I=-18:LRA=11:TP=-2",
+  "-c:a", "aac", "-b:a", "112k", "-ar", "48000",
+  "-movflags", "+faststart", outputVideo
+]);
+fs.rmSync(unmasteredVideo, { force: true });
 
 const vtt = ["WEBVTT", "", ...cues.flatMap((cue, index) => [
   String(index + 1),

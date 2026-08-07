@@ -6,7 +6,7 @@ A static, accessible course companion with weekly explanations, narrated lecture
 
 - Course portal covering the six uploaded lecture topics
 - Complete Week 1 lesson: Logical Reasoning, Part I
-- 23-minute narrated lecture video with captions and chapter navigation
+- 30-minute narrated lecture video with captions and chapter navigation
 - Detailed explanations, worked examples and misconceptions
 - Ten-question mastery check with immediate feedback and browser-local progress
 - Four optional knowledge checks embedded in the video timeline
@@ -31,7 +31,7 @@ The original PowerPoint files remain local and are excluded from Git. The public
 
 ## Rebuilding the Week 1 video
 
-The media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, a local [Kokoro neural voice](https://github.com/hexgrad/kokoro), ImageMagick, Poppler and FFmpeg:
+The media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, local [F5-TTS voice cloning](https://github.com/SWivid/F5-TTS), ImageMagick, Poppler and FFmpeg. The private `record.m4a` reference is excluded from Git; only the finished synthesized narration is published:
 
 ```sh
 node tools/build-week1-video.mjs

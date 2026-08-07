@@ -77,28 +77,28 @@
 
   const videoCheckpoints = [
     {
-      time: 245,
+      time: 317,
       prompt: "If p is true and q is false, what is p ∧ q?",
       options: ["True", "False"],
       answer: 1,
       explanation: "A conjunction is true only when both components are true."
     },
     {
-      time: 655,
+      time: 690,
       prompt: "Negate: ‘The server is fast or the network is reliable.’",
       options: ["The server is not fast or the network is not reliable.", "The server is not fast and the network is not reliable.", "The server is fast and the network is reliable."],
       answer: 1,
       explanation: "De Morgan’s law changes the disjunction to a conjunction and negates both components."
     },
     {
-      time: 980,
+      time: 1178,
       prompt: "Which form is always equivalent to p → q?",
       options: ["q → p", "¬p → ¬q", "¬q → ¬p"],
       answer: 2,
       explanation: "A conditional and its contrapositive always have the same truth values."
     },
     {
-      time: 1250,
+      time: 1665,
       prompt: "When testing validity, which truth-table rows are critical?",
       options: ["Rows where the conclusion is false", "Rows where all premises are true", "Rows where at least one premise is false"],
       answer: 1,
