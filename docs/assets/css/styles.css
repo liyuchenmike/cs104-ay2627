@@ -90,7 +90,7 @@ h1 span { color: var(--blue); }
 
 .section { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; padding: 7rem 0; }
 .section-heading { display: grid; grid-template-columns: 1fr .75fr; align-items: end; gap: 3rem; margin-bottom: 3rem; }
-.section-heading h2, .study-intro h2, .lesson-section h2 { margin: 0; font-family: Georgia, serif; font-size: clamp(2.2rem, 4vw, 4rem); font-weight: 500; }
+.section-heading h2, .lesson-section h2 { margin: 0; font-family: Georgia, serif; font-size: clamp(2.2rem, 4vw, 4rem); font-weight: 500; }
 .section-heading > p { color: var(--muted); margin: 0; }
 .week-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .week-card { display: grid; grid-template-columns: 84px 1fr; min-height: 260px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,253,250,.74); overflow: hidden; transition: transform .2s, box-shadow .2s; }
@@ -108,13 +108,6 @@ h1 span { color: var(--blue); }
 .topic-list li { padding: .35rem .65rem; border-radius: 999px; background: #eef1f2; color: var(--muted); font-size: .8rem; }
 .coming-soon { margin-top: 1.5rem; font-size: .82rem; font-weight: 800; }
 
-.study-section { display: grid; grid-template-columns: .8fr 1.2fr; gap: 6rem; border-top: 1px solid var(--line); }
-.study-intro p:last-child { color: var(--muted); }
-.study-steps { list-style: none; padding: 0; margin: 0; }
-.study-steps li { display: grid; grid-template-columns: 58px 1fr; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line); }
-.study-steps span { color: var(--blue); font-family: Georgia, serif; font-size: 1.2rem; }
-.study-steps strong { font-size: 1.05rem; }
-.study-steps p { margin: .15rem 0 0; color: var(--muted); }
 .site-footer { display: flex; justify-content: space-between; gap: 2rem; padding: 2rem max(1rem, calc((100% - var(--max)) / 2)); color: #c9d1da; background: var(--navy); font-size: .84rem; }
 
 /* Lesson page */
@@ -142,6 +135,7 @@ h1 span { color: var(--blue); }
 .video-panel { padding: 1rem; border-radius: 24px; color: white; background: var(--navy); box-shadow: var(--shadow); }
 .video-panel video { display: block; width: 100%; max-height: 68vh; background: #020915; border-radius: 14px; }
 .video-caption { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: .85rem .35rem 0; color: #b9c5d0; font-size: .8rem; }
+.video-caption a { color: var(--cyan); font-weight: 800; }
 .chapters { display: flex; flex-wrap: wrap; gap: .5rem; padding: 1rem 0 0; }
 .chapter-button { padding: .4rem .65rem; color: #d5dce4; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; cursor: pointer; }
 .chapter-button:hover, .chapter-button:focus { color: var(--navy); background: var(--lime); outline: none; }
@@ -190,10 +184,6 @@ h1 span { color: var(--blue); }
 .quiz-result { display: none; margin: 2rem 0; padding: 1.5rem; border-radius: var(--radius); color: white; background: var(--navy); }
 .quiz-result.is-visible { display: block; }
 .quiz-result strong { color: var(--lime); font-size: 1.5rem; }
-.transcript details { margin: .8rem 0; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
-.transcript summary { padding: 1rem; cursor: pointer; font-weight: 800; }
-.transcript details div { padding: 0 1rem 1rem; color: var(--muted); }
-
 .checkpoint-dialog { width: min(92vw, 620px); padding: 0; border: 0; border-radius: 22px; color: var(--ink); background: var(--white); box-shadow: 0 30px 90px rgba(0,0,0,.35); }
 .checkpoint-dialog::backdrop { background: rgba(3,12,25,.72); backdrop-filter: blur(4px); }
 .dialog-inner { padding: 1.7rem; }
@@ -208,7 +198,7 @@ h1 span { color: var(--blue); }
 
 @media (max-width: 850px) {
   .site-header nav { display: none; }
-  .course-hero, .lesson-hero, .section-heading, .study-section { grid-template-columns: 1fr; }
+  .course-hero, .lesson-hero, .section-heading { grid-template-columns: 1fr; }
   .course-hero { min-height: 0; padding: 3.5rem 0 5rem; }
   .logic-demo { transform: none; }
   .status-strip { grid-template-columns: repeat(2, 1fr); }
@@ -216,7 +206,6 @@ h1 span { color: var(--blue); }
   .status-strip div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .week-grid { grid-template-columns: 1fr; }
   .week-card-featured { grid-row: auto; }
-  .study-section { gap: 2rem; }
   .lesson-grid { grid-template-columns: 1fr; }
   .lesson-nav { position: static; display: flex; gap: .8rem; overflow-x: auto; padding: .7rem 0; border-bottom: 1px solid var(--line); }
   .lesson-nav p { display: none; }
