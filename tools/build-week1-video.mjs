@@ -12,28 +12,52 @@ const clipsDir = path.join(work, "clips");
 const audioDir = path.join(work, "audio");
 const textDir = path.join(work, "text");
 const outputDir = path.join(root, "docs", "assets", "video");
-const outputVideo = path.join(outputDir, "week-01-logical-reasoning.mp4");
+const outputVideo = path.join(outputDir, "week-01-logical-reasoning-v2.mp4");
 const outputVtt = path.join(outputDir, "week-01-logical-reasoning.vtt");
 const outputChapters = path.join(outputDir, "week-01-chapters.json");
 const outputTranscript = path.join(outputDir, "week-01-transcript.txt");
 const cover = path.join(root, "docs", "assets", "images", "week-01-cover.webp");
-const officeProfile = path.join(work, "libreoffice-profile");
+const pdf = path.join(pdfDir, "week-01-powerpoint.pdf");
+const ttsPython = path.join(root, ".tts-venv", "bin", "python");
+const ttsScript = path.join(root, "tools", "generate-kokoro-audio.py");
+const ttsManifest = path.join(work, "tts-manifest.json");
+const modelCache = path.join(work, "model-cache");
 
-for (const dir of [work, pdfDir, slidesDir, clipsDir, audioDir, textDir, outputDir, officeProfile]) {
+for (const dir of [pdfDir, slidesDir, clipsDir, audioDir, textDir]) {
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+for (const dir of [work, pdfDir, slidesDir, clipsDir, audioDir, textDir, outputDir, modelCache]) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-const existingSlides = fs.readdirSync(slidesDir).filter(name => name.endsWith(".png"));
-if (existingSlides.length < 50) {
-  run("soffice", [`-env:UserInstallation=file://${officeProfile}`, "--headless", "--convert-to", "pdf", "--outdir", pdfDir, deck]);
-  const pdf = path.join(pdfDir, "1-logical-reasoning-part1.pdf");
-  run("pdftoppm", ["-png", "-r", "120", pdf, path.join(slidesDir, "slide")]);
-}
+if (!fs.existsSync(ttsPython)) throw new Error("Create .tts-venv and install kokoro plus soundfile before building the video.");
+
+run("osascript", [
+  "-e", "tell application \"Microsoft PowerPoint\"",
+  "-e", `open POSIX file \"${deck}\"`,
+  "-e", "delay 3",
+  "-e", `save active presentation in POSIX file \"${pdf}\" as save as PDF`,
+  "-e", "close active presentation saving no",
+  "-e", "quit",
+  "-e", "end tell"
+]);
+run("pdftoppm", ["-png", "-r", "144", pdf, path.join(slidesDir, "slide")]);
 
 const renderedSlides = fs.readdirSync(slidesDir).filter(name => name.endsWith(".png")).sort(numericSort);
 if (renderedSlides.length < 50) throw new Error(`Expected 50 rendered slides; found ${renderedSlides.length}.`);
 
-run("magick", [slidePath(1), "-resize", "1280x720", "-quality", "82", cover]);
+run("magick", [slidePath(1), "-resize", "1920x1080", "-quality", "86", cover]);
+
+const speechManifest = narration.map((segment, index) => ({
+  name: String(index + 1).padStart(2, "0"),
+  text: segment.narration.replace(/\s+/g, " ").trim(),
+  voice: "af_heart",
+  speed: segment.chapter === "Summary and next steps" ? 1.0 : 1.03
+}));
+fs.writeFileSync(ttsManifest, JSON.stringify(speechManifest, null, 2) + "\n");
+run(ttsPython, [ttsScript, ttsManifest, audioDir], {
+  env: { HF_HOME: modelCache, PYTORCH_ENABLE_MPS_FALLBACK: "1" }
+});
 
 let timeline = 0;
 const cues = [];
@@ -45,10 +69,9 @@ for (let index = 0; index < narration.length; index += 1) {
   const segment = narration[index];
   const name = String(index + 1).padStart(2, "0");
   const textFile = path.join(textDir, `${name}.txt`);
-  const audioFile = path.join(audioDir, `${name}.aiff`);
+  const audioFile = path.join(audioDir, `${name}.wav`);
   const clipFile = path.join(clipsDir, `${name}.mp4`);
   fs.writeFileSync(textFile, segment.narration.replace(/\s+/g, " ").trim() + "\n");
-  run("say", ["-v", "Daniel", "-r", "172", "-f", textFile, "-o", audioFile]);
   const duration = probeDuration(audioFile) + 0.35;
 
   if (segment.chapter !== previousChapter) {
@@ -60,9 +83,10 @@ for (let index = 0; index < narration.length; index += 1) {
     "-y", "-loglevel", "error",
     "-loop", "1", "-framerate", "2", "-i", slidePath(segment.slide),
     "-i", audioFile,
-    "-vf", "scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=white,format=yuv420p",
-    "-c:v", "libx264", "-preset", "medium", "-crf", "31", "-tune", "stillimage",
-    "-c:a", "aac", "-b:a", "80k", "-ar", "44100",
+    "-vf", "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=white,format=yuv420p",
+    "-af", "loudnorm=I=-16:LRA=11:TP=-1.5",
+    "-c:v", "libx264", "-preset", "medium", "-crf", "29", "-tune", "stillimage",
+    "-c:a", "aac", "-b:a", "112k", "-ar", "48000",
     "-t", duration.toFixed(3), "-movflags", "+faststart", clipFile
   ]);
 
@@ -137,7 +161,10 @@ function splitCaptionText(text, maxWords) {
   return chunks;
 }
 
-function run(command, args) {
-  const result = spawnSync(command, args, { stdio: "inherit", env: process.env });
+function run(command, args, options = {}) {
+  const result = spawnSync(command, args, {
+    stdio: "inherit",
+    env: { ...process.env, ...(options.env || {}) }
+  });
   if (result.status !== 0) throw new Error(`${command} failed with exit code ${result.status}.`);
 }

@@ -1,4 +1,6 @@
 .DS_Store
+.tts-venv/
+__pycache__/
 lecture-notes/
 docs/assets/video/*.m4a
 docs/assets/video/*.aiff
