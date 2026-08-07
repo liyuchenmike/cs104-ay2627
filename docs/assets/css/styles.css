@@ -135,7 +135,6 @@ h1 span { color: var(--blue); }
 .video-panel { padding: 1rem; border-radius: 24px; color: white; background: var(--navy); box-shadow: var(--shadow); }
 .video-panel video { display: block; width: 100%; max-height: 68vh; background: #020915; border-radius: 14px; }
 .video-caption { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: .85rem .35rem 0; color: #b9c5d0; font-size: .8rem; }
-.video-caption a { color: var(--cyan); font-weight: 800; }
 .chapters { display: flex; flex-wrap: wrap; gap: .5rem; padding: 1rem 0 0; }
 .chapter-button { padding: .4rem .65rem; color: #d5dce4; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; cursor: pointer; }
 .chapter-button:hover, .chapter-button:focus { color: var(--navy); background: var(--lime); outline: none; }

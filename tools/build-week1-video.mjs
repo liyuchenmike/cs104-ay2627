@@ -16,7 +16,6 @@ const outputVideo = path.join(outputDir, "week-01-logical-reasoning-v3.mp4");
 const unmasteredVideo = path.join(work, "week-01-unmastered.mp4");
 const outputVtt = path.join(outputDir, "week-01-logical-reasoning.vtt");
 const outputChapters = path.join(outputDir, "week-01-chapters.json");
-const outputTranscript = path.join(outputDir, "week-01-transcript.txt");
 const cover = path.join(root, "docs", "assets", "images", "week-01-cover.webp");
 const pdf = path.join(pdfDir, "week-01-powerpoint.pdf");
 const ttsPython = path.join(root, ".voice-venv", "bin", "python");
@@ -143,9 +142,8 @@ const vtt = ["WEBVTT", "", ...cues.flatMap((cue, index) => [
 ])].join("\n");
 fs.writeFileSync(outputVtt, vtt);
 fs.writeFileSync(outputChapters, JSON.stringify({ duration: timeline, chapters: chapterStarts }, null, 2) + "\n");
-fs.writeFileSync(outputTranscript, narration.map(segment => `${segment.chapter.toUpperCase()}\n\n${segment.narration.replace(/\s+/g, " ").trim()}`).join("\n\n") + "\n");
 
-console.log(JSON.stringify({ outputVideo, outputVtt, outputTranscript, outputChapters, duration: timeline, chapters: chapterStarts }, null, 2));
+console.log(JSON.stringify({ outputVideo, outputVtt, outputChapters, duration: timeline, chapters: chapterStarts }, null, 2));
 
 function slidePath(number) {
   const suffix = String(number).padStart(2, "0");
