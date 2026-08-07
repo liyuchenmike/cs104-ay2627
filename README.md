@@ -1,4 +1,4 @@
-# CS104 AY2025–26 Learning Portal
+# CS104 AY2026–27 Learning Portal
 
 A static, accessible course companion with weekly explanations, narrated lectures, captions and interactive retrieval practice.
 
