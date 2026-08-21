@@ -31,10 +31,16 @@ for (const file of htmlFiles) {
   }
 }
 
-const video = path.join(root, "assets", "video", "week-01-logical-reasoning-v3.mp4");
-const captions = path.join(root, "assets", "video", "week-01-logical-reasoning.vtt");
-if (!fs.existsSync(video) || fs.statSync(video).size < 1_000_000) errors.push("Week 1 video is missing or unexpectedly small");
-if (!fs.existsSync(captions) || !fs.readFileSync(captions, "utf8").startsWith("WEBVTT")) errors.push("Week 1 captions are missing or invalid");
+const media = [
+  { week: "Week 1", video: "week-01-logical-reasoning-v3.mp4", captions: "week-01-logical-reasoning.vtt" },
+  { week: "Week 2", video: "week-02-logical-reasoning.mp4", captions: "week-02-logical-reasoning.vtt" }
+];
+for (const item of media) {
+  const video = path.join(root, "assets", "video", item.video);
+  const captions = path.join(root, "assets", "video", item.captions);
+  if (!fs.existsSync(video) || fs.statSync(video).size < 1_000_000) errors.push(`${item.week} video is missing or unexpectedly small`);
+  if (!fs.existsSync(captions) || !fs.readFileSync(captions, "utf8").startsWith("WEBVTT")) errors.push(`${item.week} captions are missing or invalid`);
+}
 
 if (errors.length) {
   console.error(errors.join("\n"));

@@ -56,9 +56,13 @@ def main() -> None:
 
     for item in manifest:
         destination = output_dir / f"{item['name']}.wav"
-        if destination.exists() and sf.info(destination).duration > 1:
-            print(f"Reusing completed {destination.name}", flush=True)
-            continue
+        if destination.exists():
+            try:
+                if sf.info(destination).duration > 1:
+                    print(f"Reusing completed {destination.name}", flush=True)
+                    continue
+            except RuntimeError:
+                destination.unlink(missing_ok=True)
         print(f"Generating {destination.name}...", flush=True)
         chunks = split_for_inference(item["text"])
         with sf.SoundFile(
@@ -76,7 +80,7 @@ def main() -> None:
                     model,
                     vocoder,
                     mel_spec_type="vocos",
-                    nfe_step=16,
+                    nfe_step=item.get("nfe_step", 16),
                     cfg_strength=2.0,
                     sway_sampling_coef=-1.0,
                     speed=item.get("speed", 1.03),
