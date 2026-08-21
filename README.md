@@ -5,11 +5,11 @@ A static, accessible course companion with weekly explanations, narrated lecture
 ## Current content
 
 - Course portal covering the six uploaded lecture topics
-- Complete Week 1 lesson: Logical Reasoning, Part I
-- 30-minute narrated lecture video with captions and chapter navigation
+- Complete Week 1 and Week 2 lessons: Logical Reasoning, Parts I and II
+- Chaptered narrated lecture videos with captions
 - Detailed explanations, worked examples and misconceptions
-- Ten-question mastery check with immediate feedback and browser-local progress
-- Four optional knowledge checks embedded in the video timeline
+- Ten-question mastery checks with immediate feedback and browser-local progress
+- Optional knowledge checks embedded in each video timeline
 
 ## Local preview
 
@@ -27,14 +27,15 @@ In the repository settings, choose **Pages**, select **Deploy from a branch**, t
 
 ## Source material
 
-The original PowerPoint files remain local and are excluded from Git. The public repository contains only the derived learning portal and Week 1 media.
+The original PowerPoint files remain local and are excluded from Git. The public repository contains only the derived learning portal and finished media.
 
-## Rebuilding the Week 1 video
+## Rebuilding the lecture videos
 
 The media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, local [F5-TTS voice cloning](https://github.com/SWivid/F5-TTS), ImageMagick, Poppler and FFmpeg. The private `record.m4a` reference is excluded from Git; only the finished synthesized narration is published:
 
 ```sh
 node tools/build-week1-video.mjs
+node tools/build-week2-video.mjs
 ```
 
 The generated MP4 is intentionally compact enough to be served directly by GitHub Pages.
