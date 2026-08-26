@@ -9,8 +9,8 @@ course/weeks/week-NN/
   week.json
   narration.mjs
 
-lecture-notes/week-NN/
-  lecture.pptx
+lecture-notes/
+  week-NN.pptx
 
 video-work/week-NN/
   audio/
@@ -42,6 +42,7 @@ Durable root directories are `course`, `docs`, `lecture-notes`, `skills`, `tools
 The following are deviations:
 
 - root `record.m4a`, `voice-recording-script.md`, `.tts-venv`, `.tmp-week*`, or `.DS_Store`;
+- directories or files other than zero-padded `week-NN.pptx` decks inside `lecture-notes`;
 - per-week builders or narration modules in `tools`;
 - week-specific files in `docs/assets/images`, `docs/assets/js`, or `docs/assets/video`;
 - extra directories within a canonical week folder;

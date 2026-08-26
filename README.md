@@ -31,7 +31,7 @@ Every week uses the same structure:
 
 ```text
 course/weeks/week-NN/        tracked config and narration
-lecture-notes/week-NN/       private original lecture.pptx
+lecture-notes/week-NN.pptx   private original lecture deck
 video-work/week-NN/          private build intermediates
 docs/weeks/week-NN/          public lesson and canonical assets
 ```

@@ -21,13 +21,12 @@ export async function validateWorkflow({ root = process.cwd(), week, phase = "co
 
   cleanupApprovedRootMetadata(projectRoot);
   checkForbiddenRoot(projectRoot, add);
+  checkLectureSources(projectRoot, add);
   checkLegacyTools(projectRoot, add);
   checkSharedPublicAssets(projectRoot, add);
 
-  const sourceDir = path.join(projectRoot, "lecture-notes", weekId);
-  const sourceDeck = path.join(sourceDir, "lecture.pptx");
+  const sourceDeck = path.join(projectRoot, "lecture-notes", `${weekId}.pptx`);
   requireFile(sourceDeck, add, "canonical source deck");
-  checkExactEntries(sourceDir, new Set(["lecture.pptx"]), add, `${weekId} source folder`);
   checkIgnored(projectRoot, sourceDeck, add, "source deck");
 
   const courseDir = path.join(projectRoot, "course", "weeks", weekId);
@@ -165,6 +164,16 @@ function checkForbiddenRoot(root, add) {
 function checkLegacyTools(root, add) {
   for (const entry of safeEntries(path.join(root, "tools"))) {
     if (/^build-week\d+-video\.mjs$/.test(entry.name) || /^week\d+-narration\.mjs$/.test(entry.name)) add(`legacy per-week tool exists: tools/${entry.name}`);
+  }
+}
+
+function checkLectureSources(root, add) {
+  const lectureNotes = path.join(root, "lecture-notes");
+  if (!fs.existsSync(lectureNotes)) return;
+  for (const entry of fs.readdirSync(lectureNotes, { withFileTypes: true })) {
+    if (!entry.isFile() || !/^week-\d{2,}\.pptx$/.test(entry.name)) {
+      add(`lecture-notes contains non-canonical entry: ${entry.name}`);
+    }
   }
 }
 

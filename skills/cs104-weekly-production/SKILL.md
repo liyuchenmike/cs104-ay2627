@@ -31,7 +31,7 @@ This approval gate also applies when:
 ## Required workflow
 
 1. Validate `source`.
-2. Render `lecture-notes/week-NN/lecture.pptx` with Microsoft PowerPoint using the generic builder’s `--render-only` mode.
+2. Render `lecture-notes/week-NN.pptx` with Microsoft PowerPoint using the generic builder’s `--render-only` mode.
 3. Inspect all rendered slides and create only the canonical config, narration, lesson page, and interactive quiz files.
 4. Validate `authoring`.
 5. Build with the generic builder. Use the private voice reference only from `voice-work/private/`; never copy it into public or tracked paths.

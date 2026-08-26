@@ -19,7 +19,7 @@ const configFile = path.join(root, "course", "weeks", weekId, "week.json");
 if (!fs.existsSync(configFile)) deviation(`missing week config: ${configFile}`);
 const config = JSON.parse(fs.readFileSync(configFile, "utf8"));
 const workflow = JSON.parse(fs.readFileSync(path.join(root, "workflow", "week-production.json"), "utf8"));
-const deck = path.join(root, "lecture-notes", weekId, "lecture.pptx");
+const deck = path.join(root, "lecture-notes", `${weekId}.pptx`);
 const work = path.join(root, "video-work", weekId);
 const pdfDir = path.join(work, "pdf");
 const slidesDir = path.join(work, "slides");
@@ -172,7 +172,7 @@ function renderPowerPoint() {
     "-e", "set tries to tries + 1",
     "-e", "end repeat",
     "-e", "if (count of presentations) is 0 then error \"PowerPoint did not open the canonical lecture deck.\"",
-    "-e", "if name of active presentation is not \"lecture.pptx\" then error \"PowerPoint opened a non-canonical presentation.\"",
+    "-e", `if name of active presentation is not \"${weekId}.pptx\" then error \"PowerPoint opened a non-canonical presentation.\"`,
     "-e", `if (count of slides of active presentation) is not ${config.expectedSlides} then error \"PowerPoint slide count differs from week.json.\"`,
     "-e", `save active presentation in POSIX file "${appleEscape(pdf)}" as save as PDF`,
     "-e", "close active presentation saving no",
