@@ -1,12 +1,6 @@
 .DS_Store
-.tts-venv/
 .voice-venv/
 __pycache__/
 lecture-notes/
-/record.m4a
-/voice-recording-script.md
 /voice-work/
-docs/assets/video/*.m4a
-docs/assets/video/*.aiff
 video-work/
-/.tmp-week2/

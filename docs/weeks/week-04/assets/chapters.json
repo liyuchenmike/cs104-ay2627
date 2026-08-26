@@ -1,0 +1,41 @@
+{
+  "duration": 1422.02002,
+  "chapters": [
+    {
+      "title": "Proof by cases",
+      "time": 0
+    },
+    {
+      "title": "Remainders and congruence",
+      "time": 206.3
+    },
+    {
+      "title": "Proof by cases",
+      "time": 463.8
+    },
+    {
+      "title": "Triangle inequality",
+      "time": 539.21
+    },
+    {
+      "title": "Existence proofs",
+      "time": 685.05
+    },
+    {
+      "title": "Uniqueness proofs",
+      "time": 950.36
+    },
+    {
+      "title": "Prime uniqueness",
+      "time": 1128.85
+    },
+    {
+      "title": "Proof writing",
+      "time": 1205.78
+    },
+    {
+      "title": "Summary and next steps",
+      "time": 1369.15
+    }
+  ]
+}

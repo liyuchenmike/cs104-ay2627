@@ -1,0 +1,1905 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.161
+Welcome back to CS104.
+
+2
+00:00:02.161 --> 00:00:08.643
+In Part One, we treated complete statements as single units: p, q,
+
+3
+00:00:08.643 --> 00:00:09.724
+and r.
+
+4
+00:00:09.724 --> 00:00:15.126
+Now we open those statements and examine their internal structure.
+
+5
+00:00:15.126 --> 00:00:20.528
+That shift lets us reason about objects, properties, and quantities.
+
+6
+00:00:20.528 --> 00:00:27.010
+We will begin with predicates and single quantifiers, learn how to negate
+
+7
+00:00:27.010 --> 00:00:33.493
+quantified claims precisely, compare statements containing two quantifiers, and finish with quantified
+
+8
+00:00:33.493 --> 00:00:34.033
+arguments.
+
+9
+00:00:34.033 --> 00:00:39.975
+Listen especially for the domain and the order of the quantifiers.
+
+10
+00:00:39.975 --> 00:00:46.457
+Those two details often decide whether a mathematical sentence is true, false,
+
+11
+00:00:46.457 --> 00:00:48.078
+or even meaningful.
+
+12
+00:00:48.078 --> 00:00:50.276
+Here is our route.
+
+13
+00:00:50.276 --> 00:00:56.871
+First, we turn expressions with variables into statements by attaching universal or
+
+14
+00:00:56.871 --> 00:00:57.970
+existential quantifiers.
+
+15
+00:00:57.970 --> 00:01:04.564
+Next, we study universal conditional statements, their negations, and the familiar contrapositive,
+
+16
+00:01:04.564 --> 00:01:06.213
+converse, and inverse.
+
+17
+00:01:06.213 --> 00:01:12.258
+Then we move to two variables, where quantifier order becomes crucial.
+
+18
+00:01:12.258 --> 00:01:18.852
+Finally, we use rules of inference and diagrams to test quantified arguments.
+
+19
+00:01:18.852 --> 00:01:25.447
+The ideas build in sequence: a quantified argument is only as clear
+
+20
+00:01:25.447 --> 00:01:28.744
+as the quantified statements inside it.
+
+21
+00:01:28.744 --> 00:01:35.338
+Keep asking three questions: what is the domain, which variables are bound,
+
+22
+00:01:35.338 --> 00:01:40.284
+and what evidence would establish or refute the claim?
+
+23
+00:01:40.284 --> 00:01:45.126
+Section two point one introduces predicates and quantified statements.
+
+24
+00:01:45.126 --> 00:01:51.583
+A predicate is not yet a complete assertion because it contains one
+
+25
+00:01:51.583 --> 00:01:53.197
+or more variables.
+
+26
+00:01:53.197 --> 00:01:58.578
+A quantifier tells us how broadly the predicate must hold.
+
+27
+00:01:58.578 --> 00:02:03.958
+Universal claims say the predicate holds for every allowed value.
+
+28
+00:02:03.958 --> 00:02:08.801
+Existential claims say at least one allowed value works.
+
+29
+00:02:08.801 --> 00:02:14.181
+This distinction is the foundation for definitions, specifications, and proofs.
+
+30
+00:02:14.181 --> 00:02:20.638
+When a theorem begins with “for every integer” or a program requirement
+
+31
+00:02:20.638 --> 00:02:26.557
+says “there exists an input,” it is using exactly this language.
+
+32
+00:02:26.557 --> 00:02:29.732
+A predicate is a sentence containing variables.
+
+33
+00:02:29.732 --> 00:02:35.176
+Before substitution, it is an open sentence rather than a true-or-false statement.
+
+34
+00:02:35.176 --> 00:02:38.805
+Consider two x plus five y equals seven.
+
+35
+00:02:38.805 --> 00:02:44.249
+If x is one and y is one, the equation becomes seven
+
+36
+00:02:44.249 --> 00:02:46.517
+equals seven, which is true.
+
+37
+00:02:46.517 --> 00:02:51.961
+If x is two and y is four, it becomes twenty-four equals
+
+38
+00:02:51.961 --> 00:02:53.776
+seven, which is false.
+
+39
+00:02:53.776 --> 00:02:58.312
+The predicate itself did not change; the substituted values did.
+
+40
+00:02:58.312 --> 00:03:03.756
+This is why we write a predicate as a function-like expression such
+
+41
+00:03:03.756 --> 00:03:06.478
+as p of x and y.
+
+42
+00:03:06.478 --> 00:03:11.922
+It records a rule that produces a truth value once suitable values
+
+43
+00:03:11.922 --> 00:03:12.829
+are supplied.
+
+44
+00:03:12.829 --> 00:03:17.250
+We name predicates with letters and display their variables explicitly.
+
+45
+00:03:17.250 --> 00:03:22.555
+Let p of n mean “n is an odd number.” Then p
+
+46
+00:03:22.555 --> 00:03:26.976
+of two is a complete statement, and it is false.
+
+47
+00:03:26.976 --> 00:03:32.281
+P of three is also a complete statement, and it is true.
+
+48
+00:03:32.281 --> 00:03:37.586
+Showing the variable prevents us from confusing the rule with one particular
+
+49
+00:03:37.586 --> 00:03:38.028
+instance.
+
+50
+00:03:38.028 --> 00:03:40.681
+It also prepares us to quantify.
+
+51
+00:03:40.681 --> 00:03:45.986
+We may ask whether p of n is true for every integer
+
+52
+00:03:45.986 --> 00:03:51.291
+n, or whether it is true for at least one integer n.
+
+53
+00:03:51.291 --> 00:03:56.596
+Always write down the domain as well: oddness makes sense over integers,
+
+54
+00:03:56.596 --> 00:04:01.901
+while a different predicate may require real numbers, people, or objects on
+
+55
+00:04:01.901 --> 00:04:02.785
+a board.
+
+56
+00:04:02.785 --> 00:04:07.971
+A quantifier states how many values must make a predicate true.
+
+57
+00:04:07.971 --> 00:04:13.628
+“There are integers x and y such that two x plus five
+
+58
+00:04:13.628 --> 00:04:19.286
+y equals seven” is existential: it asks us to find a successful
+
+59
+00:04:19.286 --> 00:04:19.757
+pair.
+
+60
+00:04:19.757 --> 00:04:25.415
+“For all integers x and y” is universal: it makes a much
+
+61
+00:04:25.415 --> 00:04:27.772
+stronger claim about every pair.
+
+62
+00:04:27.772 --> 00:04:33.429
+Attaching a quantifier binds the variables and turns the open predicate into
+
+63
+00:04:33.429 --> 00:04:36.258
+a statement with a truth value.
+
+64
+00:04:36.258 --> 00:04:41.916
+Notice that the same equation can appear in both sentences, but the
+
+65
+00:04:41.916 --> 00:04:45.216
+quantifier changes the burden of proof completely.
+
+66
+00:04:45.216 --> 00:04:48.988
+For an existential claim, one witness is enough.
+
+67
+00:04:48.988 --> 00:04:53.231
+For a universal claim, every allowed case must work.
+
+68
+00:04:53.231 --> 00:04:59.642
+The universal quantifier is written as an upside-down A and read “for
+
+69
+00:04:59.642 --> 00:05:06.054
+all.” Consider: for every real number x, x squared is greater than
+
+70
+00:05:06.054 --> 00:05:06.588
+zero.
+
+71
+00:05:06.588 --> 00:05:13.000
+To make that universal statement true, every real substitution must satisfy the
+
+72
+00:05:13.000 --> 00:05:13.534
+inequality.
+
+73
+00:05:13.534 --> 00:05:19.946
+But x equals zero gives zero squared greater than zero, which is
+
+74
+00:05:19.946 --> 00:05:20.480
+false.
+
+75
+00:05:20.480 --> 00:05:24.754
+One counterexample therefore refutes the entire universal claim.
+
+76
+00:05:24.754 --> 00:05:29.029
+This example also shows why the domain matters.
+
+77
+00:05:29.029 --> 00:05:35.440
+The variable is quantified over the real numbers, not over some convenient
+
+78
+00:05:35.440 --> 00:05:35.974
+subset.
+
+79
+00:05:35.974 --> 00:05:42.386
+Universal statements demand complete coverage, and a single permitted exception is decisive.
+
+80
+00:05:42.386 --> 00:05:47.095
+Universal quantifiers are often hidden in ordinary mathematical language.
+
+81
+00:05:47.095 --> 00:05:53.374
+“The square of every real number is greater than zero” displays the
+
+82
+00:05:53.374 --> 00:05:53.898
+quantifier.
+
+83
+00:05:53.898 --> 00:06:00.177
+“The square of a real number is greater than zero” often intends
+
+84
+00:06:00.177 --> 00:06:05.932
+the same universal reading, even though the word every is absent.
+
+85
+00:06:05.932 --> 00:06:12.211
+Conditional phrasing can hide it too: “If x is real, then x
+
+86
+00:06:12.211 --> 00:06:18.490
+squared is greater than zero” normally means this for every x in
+
+87
+00:06:18.490 --> 00:06:20.060
+the surrounding universe.
+
+88
+00:06:20.060 --> 00:06:23.723
+When translating, make the hidden quantifier explicit.
+
+89
+00:06:23.723 --> 00:06:30.002
+Doing so exposes the counterexample x equals zero and prevents a vague
+
+90
+00:06:30.002 --> 00:06:33.141
+sentence from slipping past careful analysis.
+
+91
+00:06:33.141 --> 00:06:38.982
+The existential quantifier is written as a backwards E and read “there
+
+92
+00:06:38.982 --> 00:06:44.823
+exists.” The sentence here claims that there is an integer x whose
+
+93
+00:06:44.823 --> 00:06:46.283
+square equals two.
+
+94
+00:06:46.283 --> 00:06:52.124
+To establish an existential statement, we must produce at least one witness
+
+95
+00:06:52.124 --> 00:06:54.071
+in the stated domain.
+
+96
+00:06:54.071 --> 00:06:59.912
+No integer works: one squared is one, two squared is four, and
+
+97
+00:06:59.912 --> 00:07:03.319
+negative integers give the same nonnegative squares.
+
+98
+00:07:03.319 --> 00:07:07.700
+So this existential statement is false over the integers.
+
+99
+00:07:07.700 --> 00:07:13.540
+If the domain were real numbers, it would be true because square
+
+100
+00:07:13.540 --> 00:07:18.895
+root of two and negative square root of two are witnesses.
+
+101
+00:07:18.895 --> 00:07:24.249
+The predicate stayed the same; the domain changed the truth value.
+
+102
+00:07:24.249 --> 00:07:30.464
+Existential language also appears in many disguises: “for some integer,” “at least
+
+103
+00:07:30.464 --> 00:07:36.679
+one integer,” “we can find an integer,” or “the equation has an
+
+104
+00:07:36.679 --> 00:07:40.823
+integer solution.” Each phrase asks for a witness.
+
+105
+00:07:40.823 --> 00:07:47.038
+Be careful with the phrase “an integer.” In mathematics, it often means
+
+106
+00:07:47.038 --> 00:07:50.146
+at least one, not exactly one.
+
+107
+00:07:50.146 --> 00:07:56.361
+Also remember that proposing a candidate is not enough; the candidate must
+
+108
+00:07:56.361 --> 00:08:00.505
+belong to the domain and satisfy the predicate.
+
+109
+00:08:00.505 --> 00:08:06.720
+A real number such as square root of two cannot witness a
+
+110
+00:08:06.720 --> 00:08:08.792
+claim quantified over integers.
+
+111
+00:08:08.792 --> 00:08:15.007
+A good solution states the candidate, verifies domain membership, and substitutes it
+
+112
+00:08:15.007 --> 00:08:16.561
+into the predicate.
+
+113
+00:08:16.561 --> 00:08:21.978
+Predicates can be connected by implication or biconditional inside a universal statement.
+
+114
+00:08:21.978 --> 00:08:27.396
+“For every real x, if x is greater than two, then x
+
+115
+00:08:27.396 --> 00:08:32.813
+squared is greater than four” has form: for all x, p of
+
+116
+00:08:32.813 --> 00:08:35.070
+x implies q of x.
+
+117
+00:08:35.070 --> 00:08:40.487
+The universal quantifier says the conditional must hold for every real x.
+
+118
+00:08:40.487 --> 00:08:45.904
+Likewise, “for every real x, x equals zero if and only if
+
+119
+00:08:45.904 --> 00:08:50.418
+two x equals zero” compares two predicates in both directions.
+
+120
+00:08:50.418 --> 00:08:55.836
+In context, authors sometimes omit the quantifier and write only p of
+
+121
+00:08:55.836 --> 00:08:58.093
+x implies q of x.
+
+122
+00:08:58.093 --> 00:09:03.510
+Unless the domain is already clear, expand the sentence before reasoning so
+
+123
+00:09:03.510 --> 00:09:07.573
+you know what every x is allowed to be.
+
+124
+00:09:07.573 --> 00:09:10.940
+This summary separates the two proof patterns.
+
+125
+00:09:10.940 --> 00:09:16.714
+To show that there exists an x with p of x, find
+
+126
+00:09:16.714 --> 00:09:19.601
+one eligible x and verify p.
+
+127
+00:09:19.601 --> 00:09:25.374
+To show that for every x, p of x, take an arbitrary
+
+128
+00:09:25.374 --> 00:09:31.147
+x from the domain and justify p without relying on special features.
+
+129
+00:09:31.147 --> 00:09:33.072
+Refutation reverses those ideas.
+
+130
+00:09:33.072 --> 00:09:37.883
+A universal statement is false when we find one counterexample.
+
+131
+00:09:37.883 --> 00:09:43.657
+An existential statement is false only when we rule out every possible
+
+132
+00:09:43.657 --> 00:09:44.138
+witness.
+
+133
+00:09:44.138 --> 00:09:49.911
+These are not merely truth-table facts; they tell us what a proof
+
+134
+00:09:49.911 --> 00:09:50.873
+must do.
+
+135
+00:09:50.873 --> 00:09:52.317
+Witnesses support existence.
+
+136
+00:09:52.317 --> 00:09:53.760
+Counterexamples defeat universality.
+
+137
+00:09:53.760 --> 00:09:58.191
+Let us apply the notation to a small world.
+
+138
+00:09:58.191 --> 00:10:03.114
+The domain is the collection of objects on the board.
+
+139
+00:10:03.114 --> 00:10:09.022
+Predicates describe shapes and colours, such as Triangle of x and Blue
+
+140
+00:10:09.022 --> 00:10:10.007
+of x.
+
+141
+00:10:10.007 --> 00:10:15.915
+A two-place predicate such as RightOf of x comma y describes a
+
+142
+00:10:15.915 --> 00:10:17.884
+relationship between two objects.
+
+143
+00:10:17.884 --> 00:10:23.792
+This finite model makes quantifiers concrete: “for every object” means inspect each
+
+144
+00:10:23.792 --> 00:10:29.700
+named object, while “there exists an object” means locate at least one
+
+145
+00:10:29.700 --> 00:10:30.685
+matching item.
+
+146
+00:10:30.685 --> 00:10:36.101
+Before answering, read the board carefully and keep the domain fixed.
+
+147
+00:10:36.101 --> 00:10:42.009
+Nothing outside the grid may be used as a witness or counterexample.
+
+148
+00:10:42.009 --> 00:10:44.046
+Now test the statements.
+
+149
+00:10:44.046 --> 00:10:50.157
+A universal such as “for every t, if t is a triangle
+
+150
+00:10:50.157 --> 00:10:56.268
+then t is blue” requires every triangle to be blue; one non-blue
+
+151
+00:10:56.268 --> 00:10:57.796
+triangle refutes it.
+
+152
+00:10:57.796 --> 00:11:03.907
+A biconditional requires both directions, so every blue object must also be
+
+153
+00:11:03.907 --> 00:11:04.925
+a triangle.
+
+154
+00:11:04.925 --> 00:11:11.036
+For an existential relation, identify a specific object and check both properties.
+
+155
+00:11:11.036 --> 00:11:17.147
+For example, “there exists a square y with d to the right
+
+156
+00:11:17.147 --> 00:11:21.731
+of y” needs one square positioned left of d.
+
+157
+00:11:21.731 --> 00:11:23.768
+Work sentence by sentence.
+
+158
+00:11:23.768 --> 00:11:27.333
+For universal claims, search strategically for counterexamples.
+
+159
+00:11:27.333 --> 00:11:30.897
+For existential claims, search strategically for witnesses.
+
+160
+00:11:30.897 --> 00:11:37.137
+Negating a universal statement changes it into an existential statement with the
+
+161
+00:11:37.137 --> 00:11:38.177
+predicate negated.
+
+162
+00:11:38.177 --> 00:11:44.417
+“Not every real x has x squared greater than zero” means “there
+
+163
+00:11:44.417 --> 00:11:50.656
+exists a real x whose square is not greater than zero.” The
+
+164
+00:11:50.656 --> 00:11:54.296
+witness x equals zero proves the negation.
+
+165
+00:11:54.296 --> 00:12:00.536
+In everyday language, the negation of “No politicians are honest” is not
+
+166
+00:12:00.536 --> 00:12:06.776
+“All politicians are honest.” It is the weaker claim “Some politician is
+
+167
+00:12:06.776 --> 00:12:13.016
+honest.” A negation needs only the situation that makes the original sentence
+
+168
+00:12:13.016 --> 00:12:13.536
+false.
+
+169
+00:12:13.536 --> 00:12:18.215
+Avoid swinging from one extreme universal claim to another.
+
+170
+00:12:18.215 --> 00:12:24.316
+Negating an existential statement changes it into a universal statement with the
+
+171
+00:12:24.316 --> 00:12:25.333
+predicate negated.
+
+172
+00:12:25.333 --> 00:12:31.433
+“There does not exist an integer x with x squared equal to
+
+173
+00:12:31.433 --> 00:12:37.534
+two” becomes “for every integer x, x squared is not equal to
+
+174
+00:12:37.534 --> 00:12:43.634
+two.” Similarly, the negation of “Some computer hackers are over forty” is
+
+175
+00:12:43.634 --> 00:12:49.734
+“Every computer hacker is forty or under.” Saying merely “some hackers are
+
+176
+00:12:49.734 --> 00:12:54.818
+forty or under” would not rule out the original witness.
+
+177
+00:12:54.818 --> 00:13:00.919
+The reliable rule is: move the negation through the quantifier, switch exists
+
+178
+00:13:00.919 --> 00:13:04.477
+with for all, and negate the predicate.
+
+179
+00:13:04.477 --> 00:13:07.868
+A universally quantified conditional deserves special care.
+
+180
+00:13:07.868 --> 00:13:13.680
+Start with “for every person p, if p is blond then p
+
+181
+00:13:13.680 --> 00:13:19.493
+has blue eyes.” To make this false, we need a particular person
+
+182
+00:13:19.493 --> 00:13:21.915
+for whom the implication fails.
+
+183
+00:13:21.915 --> 00:13:27.727
+An implication fails when its hypothesis is true and its conclusion false.
+
+184
+00:13:27.727 --> 00:13:33.540
+So the negation is: there exists a blond person who does not
+
+185
+00:13:33.540 --> 00:13:34.993
+have blue eyes.
+
+186
+00:13:34.993 --> 00:13:40.806
+The same pattern applies to software: the negation of “every program over
+
+187
+00:13:40.806 --> 00:13:46.618
+one hundred thousand lines contains a bug” is “there exists a program
+
+188
+00:13:46.618 --> 00:13:52.431
+over one hundred thousand lines that contains no bug.” Switch the quantifier,
+
+189
+00:13:52.431 --> 00:13:56.790
+then negate the conditional as p and not q.
+
+190
+00:13:56.790 --> 00:14:02.117
+Universal conditionals have the same three relatives as ordinary conditionals.
+
+191
+00:14:02.117 --> 00:14:08.509
+The contrapositive reverses and negates the two predicates, and it is equivalent
+
+192
+00:14:08.509 --> 00:14:10.107
+to the original.
+
+193
+00:14:10.107 --> 00:14:16.499
+The converse reverses them without negating, and the inverse negates them without
+
+194
+00:14:16.499 --> 00:14:17.032
+reversing.
+
+195
+00:14:17.032 --> 00:14:23.424
+The converse and inverse are equivalent to each other but not generally
+
+196
+00:14:23.424 --> 00:14:25.022
+to the original.
+
+197
+00:14:25.022 --> 00:14:29.816
+The universal quantifier does not repair an invalid reversal.
+
+198
+00:14:29.816 --> 00:14:36.208
+If every square is a rectangle, it follows that every non-rectangle is
+
+199
+00:14:36.208 --> 00:14:37.274
+a non-square.
+
+200
+00:14:37.274 --> 00:14:43.666
+It does not follow that every rectangle is a square, nor that
+
+201
+00:14:43.666 --> 00:14:46.329
+every non-square is a non-rectangle.
+
+202
+00:14:46.329 --> 00:14:51.600
+Try the displayed example: for every real x, if x is greater
+
+203
+00:14:51.600 --> 00:14:55.553
+than two, then x squared is greater than four.
+
+204
+00:14:55.553 --> 00:15:00.824
+The contrapositive says: for every real x, if x squared is not
+
+205
+00:15:00.824 --> 00:15:05.216
+greater than four, then x is not greater than two.
+
+206
+00:15:05.216 --> 00:15:10.487
+The converse says: if x squared is greater than four, then x
+
+207
+00:15:10.487 --> 00:15:15.758
+is greater than two; negative values such as minus three show that
+
+208
+00:15:15.758 --> 00:15:17.076
+this is false.
+
+209
+00:15:17.076 --> 00:15:22.346
+The inverse says: if x is not greater than two, then x
+
+210
+00:15:22.346 --> 00:15:27.617
+squared is not greater than four; minus three refutes that as well.
+
+211
+00:15:27.617 --> 00:15:32.888
+A good counterexample must satisfy the new hypothesis and falsify the new
+
+212
+00:15:32.888 --> 00:15:33.327
+conclusion.
+
+213
+00:15:33.327 --> 00:15:38.818
+Necessary and sufficient conditions are simply ways of describing the direction of
+
+214
+00:15:38.818 --> 00:15:40.191
+a quantified implication.
+
+215
+00:15:40.191 --> 00:15:45.682
+If p of x implies s of x for every x, then
+
+216
+00:15:45.682 --> 00:15:49.801
+p is sufficient for s: meeting p guarantees s.
+
+217
+00:15:49.801 --> 00:15:55.292
+The same sentence says s is necessary for p: p cannot occur
+
+218
+00:15:55.292 --> 00:15:56.207
+without s.
+
+219
+00:15:56.207 --> 00:16:01.241
+The phrase “p only if s” also means p implies s.
+
+220
+00:16:01.241 --> 00:16:06.732
+Keep the arrow anchored to the guarantee rather than the word order.
+
+221
+00:16:06.732 --> 00:16:11.308
+A useful paraphrase is: whenever p holds, s must hold.
+
+222
+00:16:11.308 --> 00:16:16.799
+That tells you immediately which predicate belongs in the hypothesis and which
+
+223
+00:16:16.799 --> 00:16:18.629
+belongs in the conclusion.
+
+224
+00:16:18.629 --> 00:16:25.145
+Rewrite the statement about presidential age without the words necessary or sufficient.
+
+225
+00:16:25.145 --> 00:16:31.661
+“Being at least thirty-five years old is necessary for being President of
+
+226
+00:16:31.661 --> 00:16:38.177
+the United States” means: for every person x, if x is President
+
+227
+00:16:38.177 --> 00:16:44.693
+of the United States, then x is at least thirty-five years old.
+
+228
+00:16:44.693 --> 00:16:51.209
+The presidency predicate is the hypothesis; the age predicate is the required
+
+229
+00:16:51.209 --> 00:16:51.752
+conclusion.
+
+230
+00:16:51.752 --> 00:16:58.268
+The reverse statement would claim that every person aged thirty-five or older
+
+231
+00:16:58.268 --> 00:17:02.069
+is president, which is obviously not intended.
+
+232
+00:17:02.069 --> 00:17:08.585
+This simple plausibility check is useful after translating only-if and necessary-condition language.
+
+233
+00:17:08.585 --> 00:17:14.020
+We now enter section two point two: statements with multiple quantifiers.
+
+234
+00:17:14.020 --> 00:17:19.949
+With two variables, we must bind both variables to obtain a complete
+
+235
+00:17:19.949 --> 00:17:20.443
+statement.
+
+236
+00:17:20.443 --> 00:17:25.879
+The types of the quantifiers matter, but so does their order.
+
+237
+00:17:25.879 --> 00:17:31.808
+Two universal quantifiers may be exchanged, and two existential quantifiers may be
+
+238
+00:17:31.808 --> 00:17:33.785
+exchanged, without changing meaning.
+
+239
+00:17:33.785 --> 00:17:35.761
+Mixed quantifiers are different.
+
+240
+00:17:35.761 --> 00:17:41.690
+“For every y there exists an x” allows x to depend on
+
+241
+00:17:41.690 --> 00:17:42.184
+y.
+
+242
+00:17:42.184 --> 00:17:48.114
+“There exists an x for every y” demands one fixed x that
+
+243
+00:17:48.114 --> 00:17:50.090
+works for all y.
+
+244
+00:17:50.090 --> 00:17:54.537
+That dependency is the central idea of this section.
+
+245
+00:17:54.537 --> 00:17:59.869
+Let p of x comma y mean x plus y equals zero
+
+246
+00:17:59.869 --> 00:18:01.647
+over the real numbers.
+
+247
+00:18:01.647 --> 00:18:03.868
+Four quantifier patterns are possible.
+
+248
+00:18:03.868 --> 00:18:09.201
+“For all x and all y” is false because most pairs do
+
+249
+00:18:09.201 --> 00:18:10.978
+not sum to zero.
+
+250
+00:18:10.978 --> 00:18:16.310
+“For every y there exists an x” is true: choose x equal
+
+251
+00:18:16.310 --> 00:18:17.643
+to negative y.
+
+252
+00:18:17.643 --> 00:18:22.975
+“There exists an x such that for every y” is false: one
+
+253
+00:18:22.975 --> 00:18:26.085
+fixed x cannot cancel every real y.
+
+254
+00:18:26.085 --> 00:18:31.418
+“There exist x and y” is true; for example, zero and zero.
+
+255
+00:18:31.418 --> 00:18:33.639
+The equation did not change.
+
+256
+00:18:33.639 --> 00:18:37.194
+The quantifier structure changed what counts as success.
+
+257
+00:18:37.194 --> 00:18:42.427
+A double universal statement claims p of x comma y for every
+
+258
+00:18:42.427 --> 00:18:44.607
+pair in the two domains.
+
+259
+00:18:44.607 --> 00:18:49.840
+To prove it, take arbitrary x and arbitrary y and reason generally.
+
+260
+00:18:49.840 --> 00:18:53.329
+To refute it, one bad pair is enough.
+
+261
+00:18:53.329 --> 00:18:58.562
+For example, x plus y equals zero is not true for all
+
+262
+00:18:58.562 --> 00:19:03.795
+real x and y because x equals one and y equals one
+
+263
+00:19:03.795 --> 00:19:04.667
+gives two.
+
+264
+00:19:04.667 --> 00:19:09.900
+By contrast, the algebraic identity x squared minus y squared equals open
+
+265
+00:19:09.900 --> 00:19:15.133
+parenthesis x plus y close parenthesis times open parenthesis x minus y
+
+266
+00:19:15.133 --> 00:19:19.494
+close parenthesis is true for all real x and y.
+
+267
+00:19:19.494 --> 00:19:21.675
+An identity survives every substitution.
+
+268
+00:19:21.675 --> 00:19:26.561
+A double existential statement asks for at least one successful pair.
+
+269
+00:19:26.561 --> 00:19:31.003
+To prove it, present both witnesses and verify the relation.
+
+270
+00:19:31.003 --> 00:19:36.333
+For x plus y equals zero, x equals one and y equals
+
+271
+00:19:36.333 --> 00:19:37.665
+minus one work.
+
+272
+00:19:37.665 --> 00:19:42.996
+For the claim that there exist integers x and y with x
+
+273
+00:19:42.996 --> 00:19:48.326
+less than y and x greater than y, no pair can work
+
+274
+00:19:48.326 --> 00:19:51.435
+because the two inequalities contradict each other.
+
+275
+00:19:51.435 --> 00:19:56.766
+To refute a double existential, we must show the relation is impossible
+
+276
+00:19:56.766 --> 00:19:58.098
+for every pair.
+
+277
+00:19:58.098 --> 00:20:03.428
+That is a much stronger task than failing to find an example
+
+278
+00:20:03.428 --> 00:20:03.873
+quickly.
+
+279
+00:20:03.873 --> 00:20:08.867
+In the first mixed pattern, for every y there exists an x
+
+280
+00:20:08.867 --> 00:20:11.781
+such that p of x comma y.
+
+281
+00:20:11.781 --> 00:20:15.526
+We may choose a different x for each y.
+
+282
+00:20:15.526 --> 00:20:20.521
+For x plus y equals zero, choose x equal to negative y.
+
+283
+00:20:20.521 --> 00:20:25.515
+For y equals x squared over the real numbers, the claim “for
+
+284
+00:20:25.515 --> 00:20:30.510
+every real y there exists a real x with y equals x
+
+285
+00:20:30.510 --> 00:20:35.504
+squared” is false because negative y values have no real square root.
+
+286
+00:20:35.504 --> 00:20:40.498
+To refute this pattern, select one y for which no x can
+
+287
+00:20:40.498 --> 00:20:40.915
+work.
+
+288
+00:20:40.915 --> 00:20:45.909
+The outer universal tells us which value to challenge; the inner existential
+
+289
+00:20:45.909 --> 00:20:49.239
+tells us that every possible response must fail.
+
+290
+00:20:49.239 --> 00:20:54.276
+The other mixed pattern begins with existence: there exists an x such
+
+291
+00:20:54.276 --> 00:20:58.054
+that for every y, p of x comma y.
+
+292
+00:20:58.054 --> 00:21:01.832
+We must choose one fixed x before y varies.
+
+293
+00:21:01.832 --> 00:21:06.869
+For x plus y equals zero over the reals, no fixed x
+
+294
+00:21:06.869 --> 00:21:08.548
+works for every y.
+
+295
+00:21:08.548 --> 00:21:13.586
+For x times y equals zero, x equals zero is a successful
+
+296
+00:21:13.586 --> 00:21:17.784
+universal witness because zero times every real y is zero.
+
+297
+00:21:17.784 --> 00:21:22.821
+To prove the statement, name the fixed x and then verify arbitrary
+
+298
+00:21:22.821 --> 00:21:23.241
+y.
+
+299
+00:21:23.241 --> 00:21:28.278
+Do not quietly choose a new x after seeing y; that would
+
+300
+00:21:28.278 --> 00:21:30.797
+prove the previous quantifier order instead.
+
+301
+00:21:30.797 --> 00:21:34.131
+The everyday example makes the distinction vivid.
+
+302
+00:21:34.131 --> 00:21:39.846
+“For every boy, there is a girl who loves that boy” permits
+
+303
+00:21:39.846 --> 00:21:42.704
+a different girl for each boy.
+
+304
+00:21:42.704 --> 00:21:48.420
+“There is a girl who loves every boy” requires one particular girl
+
+305
+00:21:48.420 --> 00:21:50.325
+connected to all boys.
+
+306
+00:21:50.325 --> 00:21:56.041
+The second statement implies the first, because the same girl can serve
+
+307
+00:21:56.041 --> 00:21:58.899
+as the witness for each boy.
+
+308
+00:21:58.899 --> 00:22:02.233
+The first does not imply the second.
+
+309
+00:22:02.233 --> 00:22:07.949
+This is a dependency question: may the existential witness depend on the
+
+310
+00:22:07.949 --> 00:22:09.377
+universally chosen value?
+
+311
+00:22:09.377 --> 00:22:15.093
+Read quantifiers left to right and imagine a game in which values
+
+312
+00:22:15.093 --> 00:22:17.475
+are selected in that order.
+
+313
+00:22:17.475 --> 00:22:20.355
+This first summary covers matching quantifiers.
+
+314
+00:22:20.355 --> 00:22:26.115
+To show a double universal is true, check arbitrary x and arbitrary
+
+315
+00:22:26.115 --> 00:22:26.595
+y.
+
+316
+00:22:26.595 --> 00:22:30.435
+To show it false, find one counterexample pair.
+
+317
+00:22:30.435 --> 00:22:35.715
+To show a double existential is true, find one witness pair.
+
+318
+00:22:35.715 --> 00:22:39.555
+To show it false, rule out every pair.
+
+319
+00:22:39.555 --> 00:22:42.915
+The proof and refutation patterns are dual.
+
+320
+00:22:42.915 --> 00:22:48.675
+Universal claims are hard to prove but easy to refute; existential claims
+
+321
+00:22:48.675 --> 00:22:54.435
+are easy to prove once a witness is found but harder to
+
+322
+00:22:54.435 --> 00:22:54.915
+refute.
+
+323
+00:22:54.915 --> 00:23:00.675
+Let the quantifier tell you what evidence to seek before you begin
+
+324
+00:23:00.675 --> 00:23:01.635
+manipulating formulas.
+
+325
+00:23:01.635 --> 00:23:04.056
+Now summarize the mixed cases.
+
+326
+00:23:04.056 --> 00:23:09.866
+To prove “for every y there exists an x,” start with arbitrary
+
+327
+00:23:09.866 --> 00:23:13.256
+y and construct a possibly y-dependent x.
+
+328
+00:23:13.256 --> 00:23:18.582
+To refute it, find one y for which every x fails.
+
+329
+00:23:18.582 --> 00:23:24.392
+To prove “there exists an x for every y,” present one fixed
+
+330
+00:23:24.392 --> 00:23:28.265
+x and show it works for arbitrary y.
+
+331
+00:23:28.265 --> 00:23:34.075
+To refute it, show that every proposed x has at least one
+
+332
+00:23:34.075 --> 00:23:35.043
+defeating y.
+
+333
+00:23:35.043 --> 00:23:37.464
+Notice the alternating response pattern.
+
+334
+00:23:37.464 --> 00:23:43.274
+Negation will formalize exactly these proof games by switching each quantifier in
+
+335
+00:23:43.274 --> 00:23:43.759
+place.
+
+336
+00:23:43.759 --> 00:23:49.238
+To negate multiple quantifiers, move the negation inward one quantifier at a
+
+337
+00:23:49.238 --> 00:23:49.695
+time.
+
+338
+00:23:49.695 --> 00:23:55.174
+Each universal becomes existential, each existential becomes universal, and the order stays
+
+339
+00:23:55.174 --> 00:23:56.087
+the same.
+
+340
+00:23:56.087 --> 00:24:01.567
+The negation of “for every y there exists an x with p”
+
+341
+00:24:01.567 --> 00:24:07.046
+is “there exists a y such that for every x, not p.”
+
+342
+00:24:07.046 --> 00:24:11.156
+That says one y defeats all possible x choices.
+
+343
+00:24:11.156 --> 00:24:16.635
+The negation of “there exists an x for every y with p”
+
+344
+00:24:16.635 --> 00:24:22.115
+is “for every x there exists a y with not p.” That
+
+345
+00:24:22.115 --> 00:24:27.138
+says every proposed fixed x can be defeated by some y.
+
+346
+00:24:27.138 --> 00:24:31.247
+These forms match the refutation strategies we just described.
+
+347
+00:24:31.247 --> 00:24:34.158
+Negate the displayed integer statement carefully.
+
+348
+00:24:34.158 --> 00:24:39.978
+The original says: for every integers x and y, if x plus
+
+349
+00:24:39.978 --> 00:24:45.799
+y equals zero, then there exists an integer z such that z
+
+350
+00:24:45.799 --> 00:24:49.195
+squared equals x squared minus y squared.
+
+351
+00:24:49.195 --> 00:24:55.015
+Negation begins by changing the outer universal pair into an existential pair.
+
+352
+00:24:55.015 --> 00:25:00.836
+Then negate the conditional: keep x plus y equals zero true, and
+
+353
+00:25:00.836 --> 00:25:02.291
+negate the conclusion.
+
+354
+00:25:02.291 --> 00:25:08.112
+Negating the inner existence gives “for every integer z, z squared is
+
+355
+00:25:08.112 --> 00:25:13.933
+not equal to x squared minus y squared.” The complete negation therefore
+
+356
+00:25:13.933 --> 00:25:19.754
+asserts a particular pair x and y satisfying the hypothesis for which
+
+357
+00:25:19.754 --> 00:25:22.664
+no integer z satisfies the equation.
+
+358
+00:25:22.664 --> 00:25:27.657
+Section two point three turns quantified statements into arguments.
+
+359
+00:25:27.657 --> 00:25:34.315
+We extend familiar propositional rules by instantiating universal claims at particular objects
+
+360
+00:25:34.315 --> 00:25:38.199
+and, when justified, generalizing from arbitrary objects.
+
+361
+00:25:38.199 --> 00:25:43.748
+We will also use set-style diagrams to search for countermodels.
+
+362
+00:25:43.748 --> 00:25:50.406
+The definition of validity has not changed: an argument is invalid if
+
+363
+00:25:50.406 --> 00:25:57.064
+there is a possible situation in which every premise is true and
+
+364
+00:25:57.064 --> 00:25:59.283
+the conclusion is false.
+
+365
+00:25:59.283 --> 00:26:05.941
+Diagrams are useful because they let us construct or rule out such
+
+366
+00:26:05.941 --> 00:26:09.825
+situations without listing a large truth table.
+
+367
+00:26:09.825 --> 00:26:15.513
+Universal direct implication combines a universal conditional with a fact about one
+
+368
+00:26:15.513 --> 00:26:15.987
+object.
+
+369
+00:26:15.987 --> 00:26:21.674
+From “for every x, if p of x then q of x”
+
+370
+00:26:21.674 --> 00:26:26.414
+and p of a, we may conclude q of a.
+
+371
+00:26:26.414 --> 00:26:31.628
+The ordinary direct-implication pattern appears after we instantiate x with a.
+
+372
+00:26:31.628 --> 00:26:35.420
+For example, all even integers have even squares.
+
+373
+00:26:35.420 --> 00:26:40.634
+If a is an even integer, then a squared is even.
+
+374
+00:26:40.634 --> 00:26:46.322
+The universal premise licenses the substitution, and the second premise activates the
+
+375
+00:26:46.322 --> 00:26:46.796
+conditional.
+
+376
+00:26:46.796 --> 00:26:52.484
+Check both: the object must be in the quantified domain, and it
+
+377
+00:26:52.484 --> 00:26:54.380
+must satisfy the hypothesis.
+
+378
+00:26:54.380 --> 00:26:56.522
+Universal contrapositive implication works similarly.
+
+379
+00:26:56.522 --> 00:27:01.661
+From “for every x, p of x implies q of x” and
+
+380
+00:27:01.661 --> 00:27:05.516
+not q of a, conclude not p of a.
+
+381
+00:27:05.516 --> 00:27:10.656
+If every human being is mortal and Zeus is not mortal, then
+
+382
+00:27:10.656 --> 00:27:12.369
+Zeus is not human.
+
+383
+00:27:12.369 --> 00:27:17.080
+The argument form is valid even if its subject is fictional.
+
+384
+00:27:17.080 --> 00:27:22.220
+What matters is that the same particular object a appears in the
+
+385
+00:27:22.220 --> 00:27:23.933
+second premise and conclusion.
+
+386
+00:27:23.933 --> 00:27:26.931
+This rule is not the inverse error.
+
+387
+00:27:26.931 --> 00:27:32.071
+We deny the conclusion q and infer denial of the hypothesis p;
+
+388
+00:27:32.071 --> 00:27:36.354
+we do not deny p and infer denial of q.
+
+389
+00:27:36.354 --> 00:27:41.224
+Universal transitivity chains two quantified conditionals over a common domain.
+
+390
+00:27:41.224 --> 00:27:47.069
+If every p-object is a q-object, and every q-object is an r-object,
+
+391
+00:27:47.069 --> 00:27:49.991
+then every p-object is an r-object.
+
+392
+00:27:49.991 --> 00:27:55.835
+For an arbitrary x, p of x gives q of x by
+
+393
+00:27:55.835 --> 00:28:01.680
+the first premise, and q of x gives r of x by
+
+394
+00:28:01.680 --> 00:28:02.654
+the second.
+
+395
+00:28:02.654 --> 00:28:06.550
+Because x was arbitrary, the conclusion holds universally.
+
+396
+00:28:06.550 --> 00:28:09.472
+Watch for mismatched domains or variables.
+
+397
+00:28:09.472 --> 00:28:15.317
+A chain is only legitimate when the intermediate predicate refers to the
+
+398
+00:28:15.317 --> 00:28:17.752
+same object under compatible quantification.
+
+399
+00:28:17.752 --> 00:28:22.128
+A diagram can represent a universal categorical statement.
+
+400
+00:28:22.128 --> 00:28:28.692
+“All integers are rational numbers” means the set of integers lies entirely
+
+401
+00:28:28.692 --> 00:28:31.974
+inside the set of rational numbers.
+
+402
+00:28:31.974 --> 00:28:38.537
+Any point inside the integer circle is automatically inside the rational circle.
+
+403
+00:28:38.537 --> 00:28:45.101
+This spatial containment mirrors universal implication: integer of n implies rational of
+
+404
+00:28:45.101 --> 00:28:45.648
+n.
+
+405
+00:28:45.648 --> 00:28:52.212
+Diagrams do not replace definitions, but they make valid moves visible and
+
+406
+00:28:52.212 --> 00:28:54.947
+help us search for counterexamples.
+
+407
+00:28:54.947 --> 00:29:00.417
+When testing an argument, draw only what the premises force.
+
+408
+00:29:00.417 --> 00:29:05.339
+Do not add relationships merely because they seem plausible.
+
+409
+00:29:05.339 --> 00:29:11.167
+Consider the argument: all human beings are mortal; Felix is mortal; therefore
+
+410
+00:29:11.167 --> 00:29:13.595
+Felix is a human being.
+
+411
+00:29:13.595 --> 00:29:18.937
+The first premise places the human set inside the mortal set.
+
+412
+00:29:18.937 --> 00:29:23.308
+The second places Felix somewhere in the mortal set.
+
+413
+00:29:23.308 --> 00:29:28.164
+But it does not force Felix into the human subset.
+
+414
+00:29:28.164 --> 00:29:33.992
+To test validity, we try to satisfy the premises while falsifying the
+
+415
+00:29:33.992 --> 00:29:34.478
+conclusion.
+
+416
+00:29:34.478 --> 00:29:39.820
+Place Felix in the mortal region but outside the human region.
+
+417
+00:29:39.820 --> 00:29:45.647
+If that arrangement is allowed, we have a countermodel and the argument
+
+418
+00:29:45.647 --> 00:29:46.618
+is invalid.
+
+419
+00:29:46.618 --> 00:29:52.446
+This is the quantified form of affirming the conclusion, also called the
+
+420
+00:29:52.446 --> 00:29:53.417
+converse error.
+
+421
+00:29:53.417 --> 00:29:56.420
+The completed diagram shows the countermodel.
+
+422
+00:29:56.420 --> 00:30:02.426
+The human circle remains inside the mortal circle, so the universal premise
+
+423
+00:30:02.426 --> 00:30:03.427
+is true.
+
+424
+00:30:03.427 --> 00:30:09.433
+Felix is inside the mortal circle, so the particular premise is true.
+
+425
+00:30:09.433 --> 00:30:14.437
+Felix is outside the human circle, making the conclusion false.
+
+426
+00:30:14.437 --> 00:30:20.443
+True premises with a false conclusion are possible; therefore the argument is
+
+427
+00:30:20.443 --> 00:30:20.944
+invalid.
+
+428
+00:30:20.944 --> 00:30:26.449
+Notice that we are not claiming Felix really is not human.
+
+429
+00:30:26.449 --> 00:30:32.455
+We are showing that the premises alone do not guarantee that he
+
+430
+00:30:32.455 --> 00:30:33.456
+is human.
+
+431
+00:30:33.456 --> 00:30:39.461
+Validity is about what must follow, not what happens to be true
+
+432
+00:30:39.461 --> 00:30:41.463
+in the intended world.
+
+433
+00:30:41.463 --> 00:30:47.986
+Now consider: no polynomial functions have horizontal asymptotes; this function has a
+
+434
+00:30:47.986 --> 00:30:52.334
+horizontal asymptote; therefore this function is not polynomial.
+
+435
+00:30:52.334 --> 00:30:55.052
+The two categories are disjoint.
+
+436
+00:30:55.052 --> 00:31:01.575
+The particular function lies in the horizontal-asymptote set, so it cannot lie
+
+437
+00:31:01.575 --> 00:31:03.749
+in the polynomial set.
+
+438
+00:31:03.749 --> 00:31:09.728
+No diagram can make both premises true and the conclusion false.
+
+439
+00:31:09.728 --> 00:31:12.989
+This is a valid contrapositive pattern.
+
+440
+00:31:12.989 --> 00:31:19.512
+Translating the first premise helps: if a function is polynomial, then it
+
+441
+00:31:19.512 --> 00:31:22.773
+does not have a horizontal asymptote.
+
+442
+00:31:22.773 --> 00:31:29.296
+The second premise denies that conclusion, so we deny the polynomial hypothesis.
+
+443
+00:31:29.296 --> 00:31:34.677
+The converse error has form: every p is q; a is q;
+
+444
+00:31:34.677 --> 00:31:36.471
+therefore a is p.
+
+445
+00:31:36.471 --> 00:31:41.853
+The SMU example says all SMU students are smart, Sam is smart,
+
+446
+00:31:41.853 --> 00:31:44.543
+therefore Sam is an SMU student.
+
+447
+00:31:44.543 --> 00:31:49.925
+The premises permit many smart people who are not SMU students, so
+
+448
+00:31:49.925 --> 00:31:52.167
+the conclusion does not follow.
+
+449
+00:31:52.167 --> 00:31:57.548
+In a diagram, the SMU set is inside the smart set, and
+
+450
+00:31:57.548 --> 00:32:01.584
+Sam can sit in the smart region outside SMU.
+
+451
+00:32:01.584 --> 00:32:06.966
+Whenever you see the conclusion reverse the original implication, pause and ask
+
+452
+00:32:06.966 --> 00:32:12.347
+whether membership in the larger category really forces membership in the smaller
+
+453
+00:32:12.347 --> 00:32:12.795
+one.
+
+454
+00:32:12.795 --> 00:32:17.777
+The inverse error has form: every p is q; a is not
+
+455
+00:32:17.777 --> 00:32:20.268
+p; therefore a is not q.
+
+456
+00:32:20.268 --> 00:32:25.249
+From all SMU students being smart and Sam not being an SMU
+
+457
+00:32:25.249 --> 00:32:29.400
+student, it does not follow that Sam is not smart.
+
+458
+00:32:29.400 --> 00:32:33.552
+Sam may belong to the smart set for another reason.
+
+459
+00:32:33.552 --> 00:32:38.533
+The valid contrapositive would begin with Sam not being smart and conclude
+
+460
+00:32:38.533 --> 00:32:41.024
+Sam is not an SMU student.
+
+461
+00:32:41.024 --> 00:32:46.006
+Keep the two errors distinct: the converse affirms q to infer p,
+
+462
+00:32:46.006 --> 00:32:49.742
+while the inverse denies p to infer not q.
+
+463
+00:32:49.742 --> 00:32:53.063
+Neither move is guaranteed by p implies q.
+
+464
+00:32:53.063 --> 00:32:56.493
+Let us bring the pieces together.
+
+465
+00:32:56.493 --> 00:33:01.639
+Predicates become statements when variables are assigned or quantified.
+
+466
+00:33:01.639 --> 00:33:08.501
+Universal claims demand every case and fall to one counterexample; existential claims
+
+467
+00:33:08.501 --> 00:33:15.362
+need one witness and fail only when every candidate is ruled out.
+
+468
+00:33:15.362 --> 00:33:20.508
+Negation switches each quantifier and negates the final predicate.
+
+469
+00:33:20.508 --> 00:33:27.369
+With mixed quantifiers, order controls whether a witness may depend on an
+
+470
+00:33:27.369 --> 00:33:28.513
+earlier choice.
+
+471
+00:33:28.513 --> 00:33:35.374
+Quantified inference instantiates universal rules at particular objects, while diagrams expose possible
+
+472
+00:33:35.374 --> 00:33:39.376
+countermodels and familiar converse or inverse errors.
+
+473
+00:33:39.376 --> 00:33:43.379
+Complete the Week Two mastery check now.
+
+474
+00:33:43.379 --> 00:33:50.240
+When an answer surprises you, identify the domain, read the quantifiers from
+
+475
+00:33:50.240 --> 00:33:57.101
+left to right, and state exactly what would count as a witness
+
+476
+00:33:57.101 --> 00:33:58.245
+or counterexample.

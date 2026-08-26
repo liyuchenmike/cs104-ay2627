@@ -25,18 +25,29 @@ Then open `http://localhost:8000`.
 
 In the repository settings, choose **Pages**, select **Deploy from a branch**, then publish the `/docs` folder from the `main` branch.
 
-## Source material
+## Canonical weekly structure
 
-The original PowerPoint files remain local and are excluded from Git. The public repository contains only the derived learning portal and finished media.
+Every week uses the same structure:
+
+```text
+course/weeks/week-NN/        tracked config and narration
+lecture-notes/week-NN/       private original lecture.pptx
+video-work/week-NN/          private build intermediates
+docs/weeks/week-NN/          public lesson and canonical assets
+```
+
+The original PowerPoint decks, private voice reference and build intermediates remain local and are excluded from Git. Each public week contains `index.html` plus `assets/cover.webp`, `lesson.js`, `lecture.mp4`, `captions.vtt` and `chapters.json`.
 
 ## Rebuilding the lecture videos
 
-The media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, local [F5-TTS voice cloning](https://github.com/SWivid/F5-TTS), ImageMagick, Poppler and FFmpeg. The private `record.m4a` reference is excluded from Git; only the finished synthesized narration is published:
+The guarded media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, local [F5-TTS voice cloning](https://github.com/SWivid/F5-TTS), ImageMagick, Poppler and FFmpeg. Only the finished synthesized narration is published:
 
 ```sh
-node tools/build-week1-video.mjs
-node tools/build-week2-video.mjs
-node tools/build-week3-video.mjs
+node skills/cs104-weekly-production/scripts/validate_workflow.mjs --week 04 --phase source
+node tools/build-week.mjs --week 04 --render-only
+node skills/cs104-weekly-production/scripts/validate_workflow.mjs --week 04 --phase authoring
+node tools/build-week.mjs --week 04
+node tools/check-site.mjs
 ```
 
-The generated MP4 is intentionally compact enough to be served directly by GitHub Pages.
+The versioned `cs104-weekly-production` skill and its validator stop on any structural or workflow deviation. A deviation requires user approval before work continues. Generated MP4 files are intentionally compact enough to be served directly by GitHub Pages.
