@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "academicYear": "AY2026–27",
+  "renderer": "Microsoft PowerPoint",
+  "voiceReference": "voice-work/private/reference.m4a",
+  "voiceReferenceTranscript": "voice-work/private/reference-transcript.txt",
+  "workDirectories": ["audio", "clips", "pdf", "slides", "text"],
+  "publicAssets": ["cover.webp", "lesson.js", "lecture.mp4", "captions.vtt", "chapters.json"],
+  "tts": {
+    "nfeStep": 8,
+    "regularSpeed": 1.01,
+    "summarySpeed": 0.99
+  },
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "frameRate": 2,
+    "audioSampleRate": 48000,
+    "integratedLoudness": -18,
+    "truePeak": -2
+  }
+}

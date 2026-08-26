@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 4: proof by cases, congruence, existence, uniqueness and clear proof writing.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 4 · Method of Proof, Part II · CS104</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-lesson="week-04">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2026–27</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../../index.html">Course home</a>
+      <a aria-current="page" href="./">Week 4</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../../index.html">Course home</a> <span aria-hidden="true">/</span> Week 4</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 04 · Method of proof</p>
+          <h1>How do you prove every case, one existence and only one answer?</h1>
+          <p class="lesson-summary">Partition a domain without gaps, construct or guarantee witnesses, and separate existence from the at-most-one argument required for uniqueness.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+          <ul>
+            <li>design an exhaustive proof by cases;</li>
+            <li>use remainders and congruence as cases;</li>
+            <li>prove the triangle inequality by signs;</li>
+            <li>distinguish constructive and non-constructive existence;</li>
+            <li>prove existence and uniqueness separately.</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+        <a href="#lecture">Lecture</a>
+        <a href="#cases">1. Proof by cases</a>
+        <a href="#congruence">2. Congruence</a>
+        <a href="#triangle">3. Triangle inequality</a>
+        <a href="#existence">4. Existence</a>
+        <a href="#uniqueness">5. Uniqueness</a>
+        <a href="#writing">6. Proof writing</a>
+        <a href="#quiz">7. Quiz</a>
+      </nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Method of Proof, Part II</h2>
+          <p>The lecture uses all 35 slides from the original Week 4 PowerPoint, rendered directly by Microsoft PowerPoint. Choose a chapter to revisit a method; five short retrieval questions pause the video at useful transitions.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="assets/cover.webp">
+              <source src="assets/lecture.mp4" type="video/mp4">
+              <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video.
+            </video>
+            <div class="chapters" id="chapter-list" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">00:00 · Proof by cases</button>
+            </div>
+            <div class="video-caption">
+              <span>Includes English captions and five knowledge checks.</span>
+              <span id="video-status">Progress saves in this browser.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="cases">
+          <p class="eyebrow">1 · Exhaustive partitions</p>
+          <h2>Each branch must cover part of the whole</h2>
+          <div class="formula-card">(p ∨ q) → r &nbsp;≡&nbsp; (p → r) ∧ (q → r)</div>
+          <p>A proof by cases replaces one difficult argument with several simpler implications. The partition is valid only when every permitted input belongs to at least one branch.</p>
+
+          <div class="worked-example">
+            <h3>Worked example: n² + n is even</h3>
+            <ol>
+              <li>Let <span class="symbol">n</span> be an arbitrary integer.</li>
+              <li>If <span class="symbol">n = 2k</span>, then <span class="symbol">n²+n = 2k(2k+1)</span>, which is even.</li>
+              <li>If <span class="symbol">n = 2k+1</span>, then <span class="symbol">n²+n = 2(2k²+3k+1)</span>, which is even.</li>
+              <li>Every integer is even or odd, so the conclusion holds for all integers.</li>
+            </ol>
+          </div>
+
+          <div class="law-grid">
+            <div><strong>One integer</strong><code>even or odd</code><span>Two parity cases.</span></div>
+            <div><strong>Two integers</strong><code>EE, OO, OE or EO</code><span>Four ordered parity cases.</span></div>
+            <div><strong>One real number</strong><code>x &gt; 0, x = 0 or x &lt; 0</code><span>Three order cases.</span></div>
+            <div><strong>Two real numbers</strong><code>a &gt; b, a = b or a &lt; b</code><span>Trichotomy.</span></div>
+          </div>
+
+          <div class="misconception">
+            <h3>Common mistake: convenient but incomplete cases</h3>
+            <p>“Both even or both odd” omits mixed parity. Before doing algebra, state why the listed cases exhaust the domain.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="congruence">
+          <p class="eyebrow">2 · Remainders and congruence</p>
+          <h2>Let the divisor choose the cases</h2>
+          <p>When a conclusion concerns divisibility by <span class="symbol">k</span>, classify integers by their possible remainders modulo <span class="symbol">k</span>.</p>
+          <div class="formula-card">n ≡ r (mod k), where r ∈ {0, 1, …, k−1}</div>
+
+          <div class="worked-example">
+            <h3>Worked example: 3 divides n³ − n</h3>
+            <ol>
+              <li>If <span class="symbol">n = 3k</span>, then <span class="symbol">n³−n = 3(9k³−k)</span>.</li>
+              <li>If <span class="symbol">n = 3k+1</span>, then <span class="symbol">n³−n = 3(9k³+9k²+2k)</span>.</li>
+              <li>If <span class="symbol">n = 3k+2</span>, then <span class="symbol">n³−n = 3(9k³+18k²+11k+2)</span>.</li>
+              <li>The three remainder classes are exhaustive; every branch is divisible by three.</li>
+            </ol>
+          </div>
+
+          <div class="concept-box">
+            <h3>Pigeonhole principle</h3>
+            <p>Five integers placed into the four remainder classes modulo four force at least two integers into the same class. Therefore at least two are congruent modulo four.</p>
+          </div>
+
+          <div class="misconception">
+            <h3>Common mistake: using parity for a modulo-three target</h3>
+            <p>Even and odd track remainders modulo two. They do not expose all behaviour relevant to divisibility by three.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="triangle">
+          <p class="eyebrow">3 · A nested case proof</p>
+          <h2>The absolute-value definition controls the branches</h2>
+          <div class="formula-card">|x + y| ≤ |x| + |y|</div>
+          <p>Absolute value changes formula at zero, so begin with the four sign combinations for <span class="symbol">x</span> and <span class="symbol">y</span>. In mixed-sign branches, split again according to the sign of <span class="symbol">x+y</span>.</p>
+
+          <table class="truth-table">
+            <caption>Sign cases in the triangle-inequality proof</caption>
+            <thead><tr><th scope="col">Case</th><th scope="col">Key substitutions</th><th scope="col">Result</th></tr></thead>
+            <tbody>
+              <tr><td>x ≥ 0, y ≥ 0</td><td>|x| = x, |y| = y, |x+y| = x+y</td><td>Equality</td></tr>
+              <tr><td>x ≥ 0, y &lt; 0</td><td>|x| = x, |y| = −y; split on x+y</td><td>|x+y| ≤ x−y</td></tr>
+              <tr><td>x &lt; 0, y ≥ 0</td><td>Symmetric mixed-sign argument</td><td>|x+y| ≤ −x+y</td></tr>
+              <tr><td>x &lt; 0, y &lt; 0</td><td>|x+y| = −x−y</td><td>Equality</td></tr>
+            </tbody>
+          </table>
+
+          <div class="concept-box">
+            <h3>A reusable pattern</h3>
+            <p>When a function is defined piecewise, use the boundaries in its definition to design cases. If another piecewise expression appears inside a branch, a justified subcase may be necessary.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="existence">
+          <p class="eyebrow">4 · Proving existence</p>
+          <h2>A witness may be constructed or guaranteed</h2>
+          <div class="inference-list">
+            <article><h3>Constructive</h3><code>Choose a candidate<br>Check its domain<br>Verify every condition</code></article>
+            <article><h3>Non-constructive</h3><code>Assume no witness<br>or invoke a theorem<br>Conclude one must exist</code></article>
+            <article><h3>Quantifier order</h3><code>∃x∀y differs from ∀y∃x<br>one witness vs dependent witnesses</code></article>
+          </div>
+
+          <div class="worked-example">
+            <h3>Constructive witness on the unit circle</h3>
+            <ol>
+              <li>Choose <span class="symbol">x = y = 1/√2</span>.</li>
+              <li>Both values are real and nonzero.</li>
+              <li><span class="symbol">x²+y² = 1/2+1/2 = 1</span>.</li>
+              <li>The candidate satisfies every condition, so the objects exist.</li>
+            </ol>
+          </div>
+
+          <div class="worked-example">
+            <h3>Non-constructive root from continuity</h3>
+            <ol>
+              <li>Let <span class="symbol">f(x)=x⁴−3x+1</span>, a continuous polynomial.</li>
+              <li><span class="symbol">f(0)=1</span> and <span class="symbol">f(1)=−1</span>.</li>
+              <li>The intermediate value theorem guarantees some <span class="symbol">c∈(0,1)</span> with <span class="symbol">f(c)=0</span>.</li>
+              <li>The proof guarantees a root without calculating its exact value.</li>
+            </ol>
+          </div>
+
+          <div class="worked-example">
+            <h3>At least one value reaches the average</h3>
+            <p>If every <span class="symbol">sᵢ</span> were less than the average <span class="symbol">A</span>, adding the inequalities would give <span class="symbol">s₁+···+sₙ &lt; nA</span>, contradicting the definition of <span class="symbol">A</span>. Therefore some <span class="symbol">sᵢ ≥ A</span>.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="uniqueness">
+          <p class="eyebrow">5 · Proving uniqueness</p>
+          <h2>Exactly one means existence plus at-most-one</h2>
+          <div class="formula-card">∃!x p(x) &nbsp;means&nbsp; [∃x p(x)] ∧ [∀a∀b, (p(a) ∧ p(b)) → a=b]</div>
+          <p>Label both parts. A candidate proves only existence. Comparing two arbitrary candidates proves at-most-one.</p>
+
+          <div class="worked-example">
+            <h3>Unique real solution of x³ + 1 = 0</h3>
+            <ol>
+              <li><strong>Existence:</strong> <span class="symbol">x=−1</span> satisfies the equation.</li>
+              <li><strong>Uniqueness:</strong> let <span class="symbol">a</span> and <span class="symbol">b</span> be real solutions; then <span class="symbol">a³=b³</span>.</li>
+              <li><span class="symbol">(a−b)(a²+ab+b²)=0</span>. The second factor is positive for the negative roots.</li>
+              <li>Therefore <span class="symbol">a−b=0</span>, so <span class="symbol">a=b</span>.</li>
+            </ol>
+          </div>
+
+          <div class="worked-example">
+            <h3>The only prime of the form n³ − 1 is 7</h3>
+            <ol>
+              <li><strong>Existence:</strong> <span class="symbol">2³−1=7</span>, which is prime.</li>
+              <li>Factor <span class="symbol">n³−1=(n−1)(n²+n+1)</span>.</li>
+              <li>For <span class="symbol">n&gt;2</span>, both factors exceed one, so the result is composite.</li>
+              <li>Values <span class="symbol">n≤1</span> do not produce a positive prime; hence only <span class="symbol">n=2</span> remains.</li>
+            </ol>
+          </div>
+
+          <div class="law-grid">
+            <div><strong>Direct uniqueness</strong><code>p(a) ∧ p(b) ⇒ a=b</code></div>
+            <div><strong>Contrapositive</strong><code>a≠b ⇒ ¬p(a) ∨ ¬p(b)</code></div>
+            <div><strong>Contradiction</strong><code>p(a) ∧ p(b) ∧ a≠b ⇒ ⊥</code></div>
+            <div><strong>Required finish</strong><code>therefore at most one</code></div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="writing">
+          <p class="eyebrow">6 · Proof-writing discipline</p>
+          <h2>Complete reasoning can still be concise</h2>
+          <p>State the method, identify the domain and symbols, and justify the steps that carry the argument. Previously proved results may be cited without repeating their proofs.</p>
+
+          <table class="truth-table">
+            <caption>Examples have different logical force</caption>
+            <thead><tr><th scope="col">Statement</th><th scope="col">Supporting example</th><th scope="col">Violating example</th></tr></thead>
+            <tbody>
+              <tr><td>Universal</td><td>Does not prove it</td><td>Disproves it</td></tr>
+              <tr><td>Existential</td><td>Proves it</td><td>Does not disprove it</td></tr>
+            </tbody>
+          </table>
+
+          <div class="misconception">
+            <h3>Common errors to check before submission</h3>
+            <p>Misreading the statement, proving a converse, treating examples as universal proof, changing what a symbol means, skipping a necessary case, jumping over a key step, or assuming the conclusion all break the logical chain.</p>
+          </div>
+
+          <div class="concept-box">
+            <h3>A practical final check</h3>
+            <p>Underline the hypothesis and target. Circle every witness. Number the cases and verify coverage. Name the exact contradiction. For uniqueness, locate both the existence and at-most-one paragraphs.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">7 · Retrieval practice</p>
+          <h2>Week 4 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer for an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 4</strong></p>
+    <p><a href="../../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="assets/lesson.js?v=1"></script>
+</body>
+</html>

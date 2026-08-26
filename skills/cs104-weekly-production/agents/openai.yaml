@@ -1,0 +1,4 @@
+interface:
+  display_name: "CS104 Weekly Production"
+  short_description: "Build guarded, consistent CS104 weekly lessons"
+  default_prompt: "Use $cs104-weekly-production to build the next CS104 week through the approved PowerPoint workflow."
