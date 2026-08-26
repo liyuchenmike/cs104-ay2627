@@ -16,7 +16,8 @@ for (const file of htmlFiles) {
   const references = [...html.matchAll(/\s(?:href|src)="([^"]+)"/g)].map(match => match[1]);
   for (const reference of references) {
     if (/^(?:https?:|mailto:|tel:|data:)/.test(reference)) continue;
-    const [resource, fragment] = reference.split("#");
+    const [resourceWithQuery, fragment] = reference.split("#");
+    const resource = resourceWithQuery.split("?")[0];
     const target = resource ? path.resolve(path.dirname(file), resource) : file;
     if (resource && !fs.existsSync(target)) {
       errors.push(`${relative}: missing local resource ${reference}`);
@@ -33,7 +34,8 @@ for (const file of htmlFiles) {
 
 const media = [
   { week: "Week 1", video: "week-01-logical-reasoning-v3.mp4", captions: "week-01-logical-reasoning.vtt" },
-  { week: "Week 2", video: "week-02-logical-reasoning.mp4", captions: "week-02-logical-reasoning.vtt" }
+  { week: "Week 2", video: "week-02-logical-reasoning.mp4", captions: "week-02-logical-reasoning.vtt" },
+  { week: "Week 3", video: "week-03-method-of-proof.mp4", captions: "week-03-method-of-proof.vtt" }
 ];
 for (const item of media) {
   const video = path.join(root, "assets", "video", item.video);

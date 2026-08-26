@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 3: direct proof, counterexamples, contraposition, congruence, contradiction and irrationality.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 3 · Method of Proof, Part I · CS104</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body data-lesson="week-03">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2026–27</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../index.html">Course home</a>
+      <a aria-current="page" href="week-03.html">Week 3</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../index.html">Course home</a> <span aria-hidden="true">/</span> Week 3</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 03 · Method of proof</p>
+          <h1>How do you turn a true idea into a convincing proof?</h1>
+          <p class="lesson-summary">Translate definitions into algebra, choose a proof method that exposes useful structure and make every assumption, witness and contradiction explicit.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+          <ul>
+            <li>write direct proofs from definitions;</li>
+            <li>disprove universal claims with counterexamples;</li>
+            <li>form and prove a contrapositive;</li>
+            <li>use congruence precisely;</li>
+            <li>construct and diagnose contradiction proofs.</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+        <a href="#lecture">Lecture</a>
+        <a href="#foundations">1. Foundations</a>
+        <a href="#direct">2. Direct proof</a>
+        <a href="#contrapositive">3. Contrapositive</a>
+        <a href="#contradiction">4. Contradiction</a>
+        <a href="#irrationality">5. Irrationality</a>
+        <a href="#quiz">6. Quiz</a>
+      </nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Method of Proof, Part I</h2>
+          <p>The lecture uses all 38 slides from the original Week 3 PowerPoint, rendered directly by PowerPoint. Choose a chapter to revisit a method; five short retrieval questions pause the video at useful transitions.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="../assets/images/week-03-cover.webp">
+              <source src="../assets/video/week-03-method-of-proof.mp4" type="video/mp4">
+              <track kind="captions" src="../assets/video/week-03-method-of-proof.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video.
+            </video>
+            <div class="chapters" id="chapter-list" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">00:00 · Proof foundations</button>
+            </div>
+            <div class="video-caption">
+              <span>Includes English captions and five knowledge checks.</span>
+              <span id="video-status">Progress saves in this browser.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="foundations">
+          <p class="eyebrow">1 · The language of proof</p>
+          <h2>Definitions are working tools</h2>
+          <p>A proof connects its hypothesis to its conclusion through statements that are already known, accepted or justified. Definitions turn descriptive words into algebraic forms that can be manipulated.</p>
+
+          <table class="truth-table">
+            <caption>Roles played by mathematical statements</caption>
+            <thead><tr><th scope="col">Kind</th><th scope="col">Role</th><th scope="col">What you do with it</th></tr></thead>
+            <tbody>
+              <tr><td>Proposition or theorem</td><td>A claim with a truth value</td><td>Prove it from accepted facts</td></tr>
+              <tr><td>Lemma</td><td>A supporting result</td><td>Prove it, then reuse it</td></tr>
+              <tr><td>Definition</td><td>Fixes the meaning of a term</td><td>Unpack it exactly</td></tr>
+              <tr><td>Axiom</td><td>An accepted starting rule</td><td>Use it within its conditions</td></tr>
+            </tbody>
+          </table>
+
+          <div class="law-grid">
+            <div><strong>Even integer</strong><code>a = 2k for some k ∈ ℤ</code></div>
+            <div><strong>Odd integer</strong><code>a = 2k + 1 for some k ∈ ℤ</code></div>
+            <div><strong>Divisibility</strong><code>m | n ⇔ n = mq for some q ∈ ℤ</code></div>
+            <div><strong>Congruence</strong><code>a ≡ b (mod m) ⇔ m | (a − b)</code></div>
+          </div>
+
+          <div class="concept-box">
+            <h3>Closure keeps a proof inside its domain</h3>
+            <p>The integers are closed under addition and multiplication, so expressions such as <span class="symbol">k + 1</span> and <span class="symbol">k²</span> remain integers. They are not closed under division: <span class="symbol">1 ÷ 2</span> is not an integer.</p>
+          </div>
+
+          <div class="misconception">
+            <h3>Common mistake: treating familiar algebra as unconditional</h3>
+            <p>Cancellation by <span class="symbol">a</span> requires <span class="symbol">a ≠ 0</span>. A proof must establish that an inverse exists before it divides by a variable.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="direct">
+          <p class="eyebrow">2 · Direct proof and counterexample</p>
+          <h2>Follow the implication forward</h2>
+          <div class="formula-card">Assume p &nbsp;→&nbsp; unpack definitions &nbsp;→&nbsp; apply known facts &nbsp;→&nbsp; reach q</div>
+          <p>For a universal proposition, take an arbitrary object from the stated domain. A final line should match the definition of the conclusion—not merely resemble it.</p>
+
+          <div class="worked-example">
+            <h3>Worked example: an even square is divisible by four</h3>
+            <ol>
+              <li>Let <span class="symbol">x</span> be an arbitrary even integer.</li>
+              <li>Then <span class="symbol">x = 2k</span> for some <span class="symbol">k ∈ ℤ</span>.</li>
+              <li><span class="symbol">x² = (2k)² = 4k²</span>.</li>
+              <li>Because <span class="symbol">k² ∈ ℤ</span>, this is four times an integer; therefore <span class="symbol">4 | x²</span>.</li>
+            </ol>
+          </div>
+
+          <h3>Counterexample: the fastest valid disproof</h3>
+          <p>To disprove <span class="symbol">∀x ∈ S: p(x)</span>, find one permitted value <span class="symbol">c ∈ S</span> for which <span class="symbol">p(c)</span> is false. For a conditional, the example must make its hypothesis true and its conclusion false.</p>
+
+          <div class="worked-example">
+            <h3>Disprove: if a² = b², then a = b</h3>
+            <ol>
+              <li>Choose real numbers <span class="symbol">a = 1</span> and <span class="symbol">b = −1</span>.</li>
+              <li>The hypothesis is true because <span class="symbol">a² = b² = 1</span>.</li>
+              <li>The conclusion is false because <span class="symbol">1 ≠ −1</span>.</li>
+              <li>The pair is a counterexample, so the universal claim is false.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="contrapositive">
+          <p class="eyebrow">3 · Proof by contrapositive</p>
+          <h2>Use an equivalent direction when the direct route hides structure</h2>
+          <div class="formula-card">p → q &nbsp;≡&nbsp; ¬q → ¬p</div>
+          <p>The contrapositive reverses and negates both parts. It is equivalent to the original implication; the converse <span class="symbol">q → p</span> and inverse <span class="symbol">¬p → ¬q</span> are not generally equivalent.</p>
+
+          <div class="worked-example">
+            <h3>Worked example: if n² is even, then n is even</h3>
+            <ol>
+              <li>Prove the contrapositive: if <span class="symbol">n</span> is odd, then <span class="symbol">n²</span> is odd.</li>
+              <li>Write <span class="symbol">n = 2k + 1</span> for some <span class="symbol">k ∈ ℤ</span>.</li>
+              <li><span class="symbol">n² = 4k² + 4k + 1 = 2(2k² + 2k) + 1</span>.</li>
+              <li>The expression has odd form, so <span class="symbol">n²</span> is odd. The original proposition follows by equivalence.</li>
+            </ol>
+          </div>
+
+          <div class="concept-box">
+            <h3>Read negated divisibility accurately</h3>
+            <p>The original slide proposition says <span class="symbol">3 ∤ mn → (3 ∤ m ∧ 3 ∤ n)</span>. Its contrapositive is <span class="symbol">(3 | m ∨ 3 | n) → 3 | mn</span>, which is proved by considering the divisible factor.</p>
+          </div>
+
+          <div class="concept-box">
+            <h3>A disjunction can be reshaped</h3>
+            <p><span class="symbol">p → (q ∨ r)</span> is equivalent to <span class="symbol">(p ∧ ¬q) → r</span>. Thus the zero-product property can be approached as: if <span class="symbol">ab = 0</span> and <span class="symbol">a ≠ 0</span>, then <span class="symbol">b = 0</span>. The nonzero assumption guarantees that <span class="symbol">1/a</span> exists.</p>
+          </div>
+
+          <div class="misconception">
+            <h3>Common mistake: reversing without negating</h3>
+            <p>The contrapositive of “if <span class="symbol">n²</span> is even, then <span class="symbol">n</span> is even” is “if <span class="symbol">n</span> is odd, then <span class="symbol">n²</span> is odd.”</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="contradiction">
+          <p class="eyebrow">4 · Congruence and proof by contradiction</p>
+          <h2>Assume the failed case and make its conflict visible</h2>
+          <p>To prove <span class="symbol">p → q</span> by contradiction, assume <span class="symbol">p ∧ ¬q</span>. Derive an impossibility and identify the exact pair of incompatible statements.</p>
+
+          <h3>Congruence translates into divisibility</h3>
+          <div class="formula-card">a ≡ b (mod m) ⇔ m | (a − b) ⇔ a = b + mk for some k ∈ ℤ</div>
+          <p>For a fixed positive modulus, congruence is reflexive, symmetric and transitive. Adding the same integer to both sides also preserves congruence.</p>
+
+          <div class="worked-example">
+            <h3>No integer n satisfies 2n ≡ 1 (mod 4)</h3>
+            <ol>
+              <li>Assume for contradiction that <span class="symbol">2n ≡ 1 (mod 4)</span>.</li>
+              <li>Then <span class="symbol">2n = 1 + 4k</span> for some integer <span class="symbol">k</span>.</li>
+              <li>The left side is even, while the right side is odd.</li>
+              <li>An integer cannot be both even and odd, so the assumption is impossible.</li>
+            </ol>
+          </div>
+
+          <div class="worked-example">
+            <h3>For positive x ≠ y, prove x/y + y/x &gt; 2</h3>
+            <ol>
+              <li>Assume instead that <span class="symbol">x/y + y/x ≤ 2</span>.</li>
+              <li>Since <span class="symbol">xy &gt; 0</span>, multiply without reversing the inequality: <span class="symbol">x² + y² ≤ 2xy</span>.</li>
+              <li>Rearrange to <span class="symbol">(x − y)² ≤ 0</span>. Nonnegativity forces <span class="symbol">(x − y)² = 0</span>.</li>
+              <li>Then <span class="symbol">x = y</span>, contradicting the hypothesis <span class="symbol">x ≠ y</span>.</li>
+            </ol>
+          </div>
+
+          <div class="law-grid">
+            <div><strong>False claim</strong><code>ab ≡ 0 (mod 6) ⇒ a ≡ 0 or b ≡ 0</code><span>Counterexample: a = 2, b = 3.</span></div>
+            <div><strong>False claim</strong><code>For every positive n, 1 ≢ 0 (mod n)</code><span>Counterexample: n = 1.</span></div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="irrationality">
+          <p class="eyebrow">5 · Irrationality and proof synthesis</p>
+          <h2>The √2 proof connects every idea</h2>
+          <p>A rational number can be written as <span class="symbol">m/n</span> for integers <span class="symbol">m,n</span> with <span class="symbol">n &gt; 0</span>. We may choose the fraction in lowest terms, where numerator and denominator have no common factor greater than one.</p>
+
+          <div class="worked-example">
+            <h3>Prove √2 is irrational</h3>
+            <ol>
+              <li>Assume for contradiction that a positive <span class="symbol">r</span> with <span class="symbol">r² = 2</span> is rational. Write <span class="symbol">r = m/n</span> in lowest terms.</li>
+              <li><span class="symbol">m²/n² = 2</span>, so <span class="symbol">m² = 2n²</span>. Thus <span class="symbol">m²</span> is even, and the earlier contrapositive result gives that <span class="symbol">m</span> is even.</li>
+              <li>Write <span class="symbol">m = 2k</span>. Substitution gives <span class="symbol">n² = 2k²</span>, so <span class="symbol">n</span> is also even.</li>
+              <li>Then 2 is a common factor of <span class="symbol">m</span> and <span class="symbol">n</span>, contradicting the choice of lowest terms. Therefore <span class="symbol">√2</span> is irrational.</li>
+            </ol>
+          </div>
+
+          <div class="concept-box">
+            <h3>Interpret the contradiction correctly</h3>
+            <p>A quotient with a common factor can still be rational; <span class="symbol">4/6</span> is rational. The contradiction is that a fraction chosen in lowest terms was forced to have a common factor.</p>
+          </div>
+
+          <div class="inference-list">
+            <article><h3>Contrapositive</h3><code>Assume ¬q<br>Derive ¬p<br>Conclude p → q</code></article>
+            <article><h3>Contradiction</h3><code>Assume p ∧ ¬q<br>Derive ⊥<br>Conclude p → q</code></article>
+            <article><h3>Final application</h3><code>r ∈ ℚ, s ∉ ℚ<br>Assume r+s ∈ ℚ<br>s = (r+s)−r ∈ ℚ: contradiction</code></article>
+          </div>
+
+          <div class="misconception">
+            <h3>Common mistake: writing “contradiction” without naming it</h3>
+            <p>Point to the incompatible facts: <span class="symbol">x = y</span> and <span class="symbol">x ≠ y</span>; an integer is even and odd; or a lowest-terms pair shares factor 2.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">6 · Retrieval practice</p>
+          <h2>Week 3 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer for an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 3</strong></p>
+    <p><a href="../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="../assets/js/week-03.js?v=1"></script>
+</body>
+</html>

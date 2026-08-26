@@ -5,7 +5,7 @@ A static, accessible course companion with weekly explanations, narrated lecture
 ## Current content
 
 - Course portal covering the six uploaded lecture topics
-- Complete Week 1 and Week 2 lessons: Logical Reasoning, Parts I and II
+- Complete Week 1–3 lessons: Logical Reasoning, Parts I and II, and Method of Proof, Part I
 - Chaptered narrated lecture videos with captions
 - Detailed explanations, worked examples and misconceptions
 - Ten-question mastery checks with immediate feedback and browser-local progress
@@ -36,6 +36,7 @@ The media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, 
 ```sh
 node tools/build-week1-video.mjs
 node tools/build-week2-video.mjs
+node tools/build-week3-video.mjs
 ```
 
 The generated MP4 is intentionally compact enough to be served directly by GitHub Pages.
