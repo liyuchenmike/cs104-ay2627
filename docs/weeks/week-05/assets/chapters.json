@@ -1,0 +1,37 @@
+{
+  "duration": 1832.02002,
+  "chapters": [
+    {
+      "title": "Sets and membership",
+      "time": 0
+    },
+    {
+      "title": "Subsets and equality",
+      "time": 237.5
+    },
+    {
+      "title": "Set operations",
+      "time": 504
+    },
+    {
+      "title": "Cartesian products",
+      "time": 723.5
+    },
+    {
+      "title": "Functions and their domains",
+      "time": 1027
+    },
+    {
+      "title": "Images, preimages and range",
+      "time": 1183
+    },
+    {
+      "title": "Injection",
+      "time": 1422.5
+    },
+    {
+      "title": "Surjection and bijection",
+      "time": 1623
+    }
+  ]
+}

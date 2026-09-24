@@ -1,0 +1,41 @@
+{
+  "duration": 1458.02002,
+  "chapters": [
+    {
+      "title": "Relations and representations",
+      "time": 0
+    },
+    {
+      "title": "Domain and range",
+      "time": 320
+    },
+    {
+      "title": "Testing relation properties",
+      "time": 406.5
+    },
+    {
+      "title": "Equivalence relations",
+      "time": 619
+    },
+    {
+      "title": "Equivalence classes",
+      "time": 756.5
+    },
+    {
+      "title": "Why classes partition a set",
+      "time": 915
+    },
+    {
+      "title": "Partitions",
+      "time": 1078.5
+    },
+    {
+      "title": "Congruence classes and operations",
+      "time": 1213.5
+    },
+    {
+      "title": "Divisibility by nine",
+      "time": 1354.5
+    }
+  ]
+}

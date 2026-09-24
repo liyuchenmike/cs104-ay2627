@@ -5,10 +5,10 @@ A static, accessible course companion with weekly explanations, narrated lecture
 ## Current content
 
 - Course portal covering the six uploaded lecture topics
-- Complete Week 1–3 lessons: Logical Reasoning, Parts I and II, and Method of Proof, Part I
+- Complete Week 1–6 lessons: Logical Reasoning, Parts I and II; Method of Proof, Parts I and II; Sets and Functions; and Relations
 - Chaptered narrated lecture videos with captions
 - Detailed explanations, worked examples and misconceptions
-- Ten-question mastery checks with immediate feedback and browser-local progress
+- Sixty mastery questions with immediate feedback and browser-local progress
 - Optional knowledge checks embedded in each video timeline
 
 ## Local preview
