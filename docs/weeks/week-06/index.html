@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 6: relations, domain and range, equivalence relations, classes, partitions and congruence arithmetic.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 6 · Relations · CS104</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css?v=2">
+</head>
+<body data-lesson="week-06">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2026–27</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../../index.html">Course home</a>
+      <a aria-current="page" href="./">Week 6</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../../index.html">Course home</a> <span aria-hidden="true">/</span> Week 6</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 06 · Relations</p>
+          <h1>When do relationships divide a set into classes?</h1>
+          <p class="lesson-summary">Represent relations precisely, test their properties, and use equivalence classes to explain partitions and modular arithmetic.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+<ul><li>represent relations as pairs, predicates and arrows;</li><li>find a relation’s domain and range;</li><li>prove or refute reflexivity, symmetry and transitivity;</li><li>connect equivalence classes with partitions;</li><li>justify congruence operations and the digit-sum test.</li></ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+<a href="#lecture">Lecture</a>
+<a href="#relations">1. Relations</a>
+<a href="#domain">2. Domain and range</a>
+<a href="#properties">3. Relation properties</a>
+<a href="#equivalence">4. Equivalence classes</a>
+<a href="#partitions">5. Partitions</a>
+<a href="#congruence">6. Congruence arithmetic</a>
+<a href="#quiz">7. Quiz</a>
+</nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Relations</h2>
+          <p>The lecture uses all 34 original Week 6 slides. Choose a chapter to revisit a concept; five short retrieval questions pause the video at useful transitions.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="assets/cover.webp">
+              <source src="assets/lecture.mp4" type="video/mp4">
+              <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video.
+            </video>
+            <div class="chapters" id="chapter-list" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">00:00 · Relations and representations</button>
+            </div>
+            <div class="video-caption">
+              <span>Includes English captions and five knowledge checks.</span>
+              <span id="video-status">Progress saves in this browser.</span>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="lesson-section" id="relations">
+          <p class="eyebrow">1 · Pairs that satisfy a condition</p><h2>A relation is a subset of a Cartesian product</h2>
+          <div class="formula-card formula-text">R ⊆ A × B &nbsp; · &nbsp; a R b means (a, b) ∈ R</div>
+          <p>A relation from A to B records selected ordered pairs. A <strong>relation on A</strong> is a subset of A × A. Some source elements may have no partner, while others may have several. A function is a special relation in which every source element has exactly one output.</p>
+          <div class="worked-example"><h3>Divisibility as nine ordered pairs</h3><p>Let A = {0, 1, 2}, B = {0, 1, 2, 3, 4}, and a R b mean a divides b. Then</p><p>R = {(0, 0), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (2, 0), (2, 2), (2, 4)}.</p><p>In an arrow diagram, draw one arrow for each pair. Zero points only to zero, one points to every member of B, and two points to zero, two and four.</p></div>
+          <div class="concept-box"><h3>Why the course includes 0 | 0</h3><p>The definition is a | b ⇔ b = ak for some integer k. Since 0 = 0k, zero divides zero under this definition. It divides no nonzero integer. This uses multiplication and does not define division by zero.</p></div>
+          <p>Other examples are {(x, y) ∈ ℝ² | x &lt; y}, equality on ℝ, and {(a, b) ∈ ℤ² | n divides a − b} for a fixed positive modulus n. A verbal relation such as “is the father of” also gives ordered pairs; reversing a pair generally changes its meaning.</p>
+          <div class="misconception"><h3>A relation need not be a function</h3><p>The presence of (1, a) and (1, b), with a ≠ b, is valid for a relation. It violates the unique-output requirement for a function from the same source set.</p></div>
+        </section>
+        <section class="lesson-section" id="domain">
+          <p class="eyebrow">2 · Coordinates that actually occur</p><h2>Domain and range are projections</h2>
+          <div class="formula-card formula-text">dom(R) = {a ∈ A | ∃b ∈ B, (a, b) ∈ R}<br>range(R) = {b ∈ B | ∃a ∈ A, (a, b) ∈ R}</div>
+          <p>For R = {(1, a), (1, b), (3, a)} from {1, 2, 3} to {a, b, c}, dom(R) = {1, 3} and range(R) = {a, b}. The unused source element 2 and unused target c do not appear in these projections.</p>
+          <div class="worked-example"><h3>Find both projections of an ellipse</h3><p>Let S = {(x, y) ∈ ℝ² | 4x² + y² = 16}.</p><ol><li>A real y exists only if y² = 16 − 4x² ≥ 0, so −2 ≤ x ≤ 2. Conversely, every x in this interval has the real partner y = √(16 − 4x²). Thus dom(S) = [−2, 2].</li><li>A real x exists only if 4x² = 16 − y² ≥ 0, so −4 ≤ y ≤ 4. Conversely, every such y has a partner x = √(16 − y²)/2. Thus range(S) = [−4, 4].</li></ol><p>The endpoints belong because the other coordinate can be zero. For many x values there are two y partners, so the entire ellipse is not a function of x.</p></div>
+          <div class="misconception"><h3>The ambient source set can be larger than dom(R)</h3><p>For an arbitrary relation R ⊆ A × B, dom(R) may be a proper subset of A. For a function declared on A, every element of A must occur as an input.</p></div>
+        </section>
+        <section class="lesson-section" id="properties">
+          <p class="eyebrow">3 · Three universal conditions</p><h2>Test each property separately</h2>
+          <div class="table-scroll" role="region" aria-label="Scrollable table: Properties of R on A" tabindex="0"><table class="truth-table"><caption>Properties of R on A</caption><thead><tr><th scope="col">Property</th><th scope="col">Required statement</th><th scope="col">Counterexample</th></tr></thead><tbody>
+            <tr><td>Reflexive</td><td>∀x ∈ A, (x, x) ∈ R</td><td>One x ∈ A with a missing loop.</td></tr>
+            <tr><td>Symmetric</td><td>(x, y) ∈ R implies (y, x) ∈ R</td><td>A pair present whose reverse is absent.</td></tr>
+            <tr><td>Transitive</td><td>(x, y), (y, z) ∈ R imply (x, z) ∈ R</td><td>A two-step path with no required direct pair.</td></tr>
+          </tbody></table></div>
+          <p>In the last two rows the variables range over all of A. They need not be distinct. For example, (a, b) and (b, a) form a two-step path that requires (a, a) under transitivity.</p>
+          <div class="worked-example"><h3>Divisibility on ℤ</h3><p><strong>Reflexive:</strong> a = a · 1, so a | a, including a = 0.</p><p><strong>Not symmetric:</strong> 1 | 2 but 2 ∤ 1.</p><p><strong>Transitive:</strong> if b = ak and c = bℓ for integers k, ℓ, then c = a(kℓ), so a | c. No division by a is needed.</p></div>
+          <div class="worked-example"><h3>Integer difference on ℚ</h3><p>Define a T b ⇔ a − b ∈ ℤ for rational a, b. Reflexivity follows from a − a = 0. Symmetry follows from b − a = −(a − b). Transitivity follows from a − c = (a − b) + (b − c). Integers are closed under negation and addition.</p></div>
+          <div class="misconception"><h3>Symmetry and transitivity do not imply reflexivity</h3><p>The tempting proof starts with x R y, reverses it, then chains the two pairs to obtain x R x. The gap is the assumption that every x has such a y.</p><p>Take A = {1, 2} and R = {(1, 1)}. Every pair has its reverse, and every available two-step path has its direct pair. Yet (2, 2) is missing. The empty relation on a nonempty set is another counterexample: symmetry and transitivity hold vacuously.</p></div>
+        </section>
+        <section class="lesson-section" id="equivalence">
+          <p class="eyebrow">4 · Equivalence and its classes</p><h2>Equivalence means agreement under a chosen relation</h2>
+          <p>An <strong>equivalence relation</strong> is reflexive, symmetric and transitive. Related elements may be different objects: 1 and 4 are distinct but equivalent modulo 3.</p>
+          <div class="table-scroll" role="region" aria-label="Scrollable table: Familiar relations on their stated domains" tabindex="0"><table class="truth-table"><caption>Familiar relations on their stated domains</caption><thead><tr><th scope="col">Relation</th><th scope="col">Reflexive</th><th scope="col">Symmetric</th><th scope="col">Transitive</th><th scope="col">Equivalence</th></tr></thead><tbody>
+            <tr><td>&lt; on ℝ</td><td>No</td><td>No</td><td>Yes</td><td>No</td></tr><tr><td>= on ℝ</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr><tr><td>Divisibility on ℤ</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td></tr><tr><td>Congruence modulo n &gt; 0 on ℤ</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+          </tbody></table></div>
+          <p>When each student has one recorded midterm grade, “has the same grade as” is an equivalence relation: equality of grades is reflexive, symmetric and transitive.</p>
+          <div class="formula-card formula-text">[a]<sub>R</sub> = {x ∈ A | (x, a) ∈ R}</div>
+          <p>The <strong>equivalence class</strong> of a collects all elements related to a. The subscript identifies the relation; we omit it when the relation is clear. A class contains elements of A, while the relation contains ordered pairs.</p>
+          <div class="worked-example"><h3>Five representatives, two classes</h3><p>For S = {a, b, c, d, e}, let R contain every ordered pair within {a, b} and every ordered pair within {c, d, e}, with no pairs between the groups. Then [a] = [b] = {a, b} and [c] = [d] = [e] = {c, d, e}. There are two distinct classes.</p><p>Likewise, if David and Mary both have grade A, their classes under the same-grade relation are equal: each is the set of all students with grade A. This does not assert David = Mary.</p></div>
+          <div class="misconception"><h3>Do not assume class properties for an arbitrary relation</h3><p>You can collect the neighbours of an element for any relation. To call these equivalence classes with the properties below, first establish that the relation is an equivalence relation.</p></div>
+        </section>
+        <section class="lesson-section" id="partitions">
+          <p class="eyebrow">5 · Classes and partitions</p><h2>Classes are equal or disjoint</h2>
+          <div class="formula-card formula-text">a ∈ [a] &nbsp; · &nbsp; a R b ⇔ [a] = [b]<br>not a R b ⇔ [a] ∩ [b] = ∅</div>
+          <div class="worked-example"><h3>Why related elements have equal classes</h3><ol><li>Suppose a R b and take x ∈ [a]. Then x R a and a R b, so transitivity gives x R b. Thus [a] ⊆ [b].</li><li>Symmetry gives b R a. The same argument proves [b] ⊆ [a], so the classes are equal.</li><li>Conversely, if [a] = [b], reflexivity gives a ∈ [a], hence a ∈ [b], which means a R b.</li></ol></div>
+          <div class="worked-example"><h3>Why one shared element forces equality</h3><p>If x belongs to both [a] and [b], then x R a and x R b. Symmetry gives a R x; transitivity yields a R b. The previous result gives [a] = [b]. Therefore distinct classes have empty intersection.</p><p>Conversely, disjoint classes cannot have related representatives: related representatives would give equal classes, and each class is nonempty because it contains its representative.</p></div>
+          <p>A <strong>partition</strong> of A is a collection of nonempty, pairwise disjoint subsets whose union is A. Equivalence classes give a partition: reflexivity ensures coverage and nonemptiness, and the argument above ensures disjointness. Conversely, a partition defines an equivalence relation by placing a R b exactly when a and b lie in the same block.</p>
+          <div class="worked-example"><h3>Count equivalence relations on {a, b, c}</h3><p>The five partitions are:</p><ol><li>{{a}, {b}, {c}}</li><li>{{a, b}, {c}}</li><li>{{a, c}, {b}}</li><li>{{b, c}, {a}}</li><li>{{a, b, c}}</li></ol><p>Each gives one equivalence relation, so there are five. For a block C, include every pair in C × C. Reordering the blocks does not create another partition.</p></div>
+          <div class="misconception"><h3>Finitely many classes can each be infinite</h3><p>Congruence modulo 3 has three classes, each containing infinitely many integers. Other equivalence relations can have infinitely many classes; equality on ℤ has one singleton class for each integer.</p></div>
+        </section>
+        <section class="lesson-section" id="congruence">
+          <p class="eyebrow">6 · Arithmetic with classes</p><h2>Calculate without depending on the representative</h2>
+          <p>For a positive integer n, define [a]ₙ = {x ∈ ℤ | n divides x − a}. Modulo 3, the three distinct classes are</p><ul><li>[0]₃ = {…, −6, −3, 0, 3, 6, …};</li><li>[1]₃ = {…, −5, −2, 1, 4, 7, …};</li><li>[2]₃ = {…, −4, −1, 2, 5, 8, …}.</li></ul>
+          <p>For example, [−1]₃ = [2]₃. Every integer has exactly one remainder in {0, 1, 2} upon division by 3, so these classes cover ℤ without overlap.</p>
+          <div class="formula-card formula-text">[a]ₙ ⊕ [b]ₙ = [a + b]ₙ &nbsp; · &nbsp; [a]ₙ ⊗ [b]ₙ = [ab]ₙ</div>
+          <div class="worked-example"><h3>Different representatives, the same answer</h3><p>Modulo 5, [1]₅ = [6]₅ and [3]₅ = [8]₅. Using 1 and 3 gives sum [4]₅ and product [3]₅. Using 6 and 8 gives sum [14]₅ = [4]₅ and product [48]₅ = [3]₅.</p><p><strong>Why this always works:</strong> if a ≡ b and c ≡ d (mod n), then n divides (a − b) + (c − d), so a + c ≡ b + d. Also ac − bd = a(c − d) + d(a − b), a sum of multiples of n. Hence ac ≡ bd. Repeated multiplication gives aᵐ ≡ bᵐ for every positive integer m.</p></div>
+          <p>These proofs establish that the class operations are <strong>well-defined</strong>: changing representatives never changes the resulting class. Agreement in one numerical example alone would not prove this universal claim.</p>
+          <div class="worked-example"><h3>Derive the divisibility test for nine</h3><p>Since 10 ≡ 1 (mod 9), every decimal place value 10ᵏ is congruent to 1. If N = dₖ10ᵏ + … + d₁10 + d₀, then N ≡ dₖ + … + d₁ + d₀ (mod 9). Thus N and its digit sum have the same remainder modulo 9.</p><p>For 7319, the sum is 7 + 3 + 1 + 9 = 20 ≡ 2 (mod 9). Therefore 7319 is not divisible by 9, and its remainder is 2. For comparison, 729 has digit sum 18, so 9 divides 729.</p></div>
+          <div class="misconception"><h3>Equal classes are not equal integers</h3><p>[7319]₉ = [20]₉ is true, while 7319 = 20 is false. Keep the brackets or the congruence symbol when reducing a number modulo n.</p></div>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">7 · Retrieval practice</p>
+          <h2>Week 6 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer for an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+      <button class="button button-secondary" id="checkpoint-skip" type="button">Skip checkpoint</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 6</strong></p>
+    <p><a href="../../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="assets/lesson.js?v=2"></script>
+</body>
+</html>

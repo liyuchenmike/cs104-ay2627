@@ -102,7 +102,7 @@ for (let index = 0; index < narration.length; index += 1) {
   const audioFile = path.join(audioDir, `${name}.wav`);
   const clipFile = path.join(clipsDir, `${name}.mp4`);
   fs.writeFileSync(textFile, segment.narration.replace(/\s+/g, " ").trim() + "\n");
-  const duration = probeDuration(audioFile) + 0.35;
+  const requestedDuration = probeDuration(audioFile) + 0.35;
 
   if (segment.chapter !== previousChapter) {
     chapterStarts.push({ title: segment.chapter, time: Number(timeline.toFixed(2)) });
@@ -117,9 +117,11 @@ for (let index = 0; index < narration.length; index += 1) {
     "-af", "loudnorm=I=-16:LRA=11:TP=-1.5,alimiter=limit=0.84:level=false",
     "-c:v", "libx264", "-preset", "medium", "-crf", "29", "-tune", "stillimage",
     "-c:a", "aac", "-b:a", "112k", "-ar", String(workflow.video.audioSampleRate),
-    "-t", duration.toFixed(3), "-movflags", "+faststart", clipFile
+    "-t", requestedDuration.toFixed(3), "-movflags", "+faststart", clipFile
   ]);
 
+  // Encoding rounds to frame boundaries; use the duration the concat demuxer sees.
+  const duration = probeDuration(clipFile);
   const start = timeline;
   timeline += duration;
   const captionText = segment.narration.replace(/\s+/g, " ").trim();

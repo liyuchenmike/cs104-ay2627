@@ -1,0 +1,1377 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.776
+Welcome to Week Six of CS104: Relations.
+
+2
+00:00:03.776 --> 00:00:10.250
+Last week, Cartesian products gave us ordered pairs, and functions assigned exactly
+
+3
+00:00:10.250 --> 00:00:12.947
+one output to each input.
+
+4
+00:00:12.947 --> 00:00:19.421
+A relation is more general: it records whichever pairs satisfy a chosen
+
+5
+00:00:19.421 --> 00:00:19.961
+condition.
+
+6
+00:00:19.961 --> 00:00:26.434
+We will describe relations, test their properties, and study equivalence relations that
+
+7
+00:00:26.434 --> 00:00:28.592
+group objects into classes.
+
+8
+00:00:28.592 --> 00:00:35.066
+We finish by using congruence classes to justify modular arithmetic and the
+
+9
+00:00:35.066 --> 00:00:41.000
+familiar divisibility test based on the sum of a number's digits.
+
+10
+00:00:41.000 --> 00:00:43.945
+Our route has three sections.
+
+11
+00:00:43.945 --> 00:00:51.014
+First, we represent relations with statements, ordered pairs, and arrow diagrams, and
+
+12
+00:00:51.014 --> 00:00:53.959
+identify their domains and ranges.
+
+13
+00:00:53.959 --> 00:01:00.438
+Second, we test reflexivity, symmetry, and transitivity, using proofs and counterexamples.
+
+14
+00:01:00.438 --> 00:01:06.329
+A relation with all three properties is an equivalence relation.
+
+15
+00:01:06.329 --> 00:01:11.630
+Third, we show how equivalence classes partition a set.
+
+16
+00:01:11.630 --> 00:01:18.699
+Congruence modulo a positive integer supplies a central example, where infinitely many
+
+17
+00:01:18.699 --> 00:01:24.000
+integers can be handled through finitely many remainder classes.
+
+18
+00:01:24.000 --> 00:01:28.203
+We begin with the definition of a relation.
+
+19
+00:01:28.203 --> 00:01:34.508
+Think of two sets of possible objects and a condition that connects
+
+20
+00:01:34.508 --> 00:01:36.085
+certain ordered pairs.
+
+21
+00:01:36.085 --> 00:01:42.390
+Unlike a function, a relation may leave some objects unconnected or connect
+
+22
+00:01:42.390 --> 00:01:45.017
+one object to several others.
+
+23
+00:01:45.017 --> 00:01:51.322
+Our job is to specify exactly which pairs occur, without accidentally imposing
+
+24
+00:01:51.322 --> 00:01:55.000
+the extra requirements that belong to functions.
+
+25
+00:01:55.000 --> 00:02:00.806
+The first example relates zero, one, and two to numbers from zero
+
+26
+00:02:00.806 --> 00:02:02.742
+through four by divisibility.
+
+27
+00:02:02.742 --> 00:02:08.548
+Under our definition, a divides b when b equals a times an
+
+28
+00:02:08.548 --> 00:02:09.032
+integer.
+
+29
+00:02:09.032 --> 00:02:14.839
+Thus zero divides zero, because zero equals zero times an integer, but
+
+30
+00:02:14.839 --> 00:02:17.258
+zero divides no nonzero integer.
+
+31
+00:02:17.258 --> 00:02:23.065
+One divides every integer, and two divides zero, two, and four in
+
+32
+00:02:23.065 --> 00:02:24.516
+the target set.
+
+33
+00:02:24.516 --> 00:02:28.387
+Divisibility here does not require dividing by zero.
+
+34
+00:02:28.387 --> 00:02:34.194
+The second example records father and son pairs: Tom is paired with
+
+35
+00:02:34.194 --> 00:02:40.000
+Alan and Bob, Dick with Carl, and Harry has no listed connection.
+
+36
+00:02:40.000 --> 00:02:44.966
+If R is a relation from A to B, we write a
+
+37
+00:02:44.966 --> 00:02:49.103
+R b to mean that a is related to b.
+
+38
+00:02:49.103 --> 00:02:54.069
+This is another way to write that the ordered pair a, b
+
+39
+00:02:54.069 --> 00:02:55.310
+belongs to R.
+
+40
+00:02:55.310 --> 00:03:00.276
+The order carries meaning: Tom is the father of Alan does not
+
+41
+00:03:00.276 --> 00:03:03.586
+assert that Alan is the father of Tom.
+
+42
+00:03:03.586 --> 00:03:06.069
+Familiar relations often have familiar symbols.
+
+43
+00:03:06.069 --> 00:03:11.034
+For divisibility we use the vertical bar instead of R, so two
+
+44
+00:03:11.034 --> 00:03:16.000
+divides four is a relation statement about the ordered pair two, four.
+
+45
+00:03:16.000 --> 00:03:20.770
+An arrow diagram draws one arrow for every related pair.
+
+46
+00:03:20.770 --> 00:03:26.017
+For the divisibility example, zero has an arrow only to zero.
+
+47
+00:03:26.017 --> 00:03:29.833
+One has arrows to all five target values.
+
+48
+00:03:29.833 --> 00:03:33.649
+Two has arrows to zero, two, and four.
+
+49
+00:03:33.649 --> 00:03:36.511
+That gives nine arrows in total.
+
+50
+00:03:36.511 --> 00:03:42.236
+Multiple arrows may leave one source, and several sources may point to
+
+51
+00:03:42.236 --> 00:03:43.667
+the same target.
+
+52
+00:03:43.667 --> 00:03:47.483
+Neither feature is a problem for a relation.
+
+53
+00:03:47.483 --> 00:03:53.207
+To check that the diagram is complete, test each candidate pair against
+
+54
+00:03:53.207 --> 00:03:57.500
+the condition rather than guessing arrows from the picture.
+
+55
+00:03:57.500 --> 00:04:02.700
+Formally, a relation from A to B is any subset of the
+
+56
+00:04:02.700 --> 00:04:04.867
+Cartesian product A times B.
+
+57
+00:04:04.867 --> 00:04:10.067
+Each pair must have its first coordinate in A and second in
+
+58
+00:04:10.067 --> 00:04:10.500
+B.
+
+59
+00:04:10.500 --> 00:04:15.700
+The displayed relation contains a, zero; b, two; c, four; and a,
+
+60
+00:04:15.700 --> 00:04:16.133
+two.
+
+61
+00:04:16.133 --> 00:04:19.167
+Repeating the first coordinate a is allowed.
+
+62
+00:04:19.167 --> 00:04:24.367
+If both coordinates are chosen from the same set, we call it
+
+63
+00:04:24.367 --> 00:04:26.533
+a relation on that set.
+
+64
+00:04:26.533 --> 00:04:31.733
+The example T is a relation on B because all its coordinates
+
+65
+00:04:31.733 --> 00:04:36.500
+belong to B, even though some elements of B never appear.
+
+66
+00:04:36.500 --> 00:04:39.185
+Many mathematical statements define relations.
+
+67
+00:04:39.185 --> 00:04:45.630
+Less than and equality give subsets of the real plane by selecting
+
+68
+00:04:45.630 --> 00:04:51.000
+pairs satisfying x less than y or x equals y.
+
+69
+00:04:51.000 --> 00:04:56.907
+Divisibility selects integer pairs m, n for which m divides n.
+
+70
+00:04:56.907 --> 00:05:03.352
+Congruence modulo a fixed positive integer selects integer pairs whose difference is
+
+71
+00:05:03.352 --> 00:05:05.500
+divisible by that modulus.
+
+72
+00:05:05.500 --> 00:05:10.870
+Each description combines an underlying Cartesian product with a predicate.
+
+73
+00:05:10.870 --> 00:05:17.315
+Keep the domains and any fixed parameter visible; changing them can change
+
+74
+00:05:17.315 --> 00:05:20.000
+the properties of the relation.
+
+75
+00:05:20.000 --> 00:05:25.586
+The domain of a relation contains the first coordinates that actually occur,
+
+76
+00:05:25.586 --> 00:05:30.241
+and the range contains the second coordinates that actually occur.
+
+77
+00:05:30.241 --> 00:05:35.828
+In the example R contains one, a; one, b; and three, a.
+
+78
+00:05:35.828 --> 00:05:41.414
+Its domain is one and three, and its range is a and
+
+79
+00:05:41.414 --> 00:05:41.879
+b.
+
+80
+00:05:41.879 --> 00:05:47.466
+The ambient source set also contains two, but two has no outgoing
+
+81
+00:05:47.466 --> 00:05:51.190
+arrow and is absent from the relation's domain.
+
+82
+00:05:51.190 --> 00:05:54.448
+Similarly c is absent from the range.
+
+83
+00:05:54.448 --> 00:06:00.034
+Membership in either projection requires at least one partner in the other
+
+84
+00:06:00.034 --> 00:06:00.500
+set.
+
+85
+00:06:00.500 --> 00:06:06.191
+Consider the relation defined by four x squared plus y squared equals
+
+86
+00:06:06.191 --> 00:06:06.665
+sixteen.
+
+87
+00:06:06.665 --> 00:06:09.036
+Its graph is an ellipse.
+
+88
+00:06:09.036 --> 00:06:14.727
+For a real y to exist, sixteen minus four x squared must
+
+89
+00:06:14.727 --> 00:06:19.469
+be nonnegative, so x lies between negative two and two.
+
+90
+00:06:19.469 --> 00:06:25.160
+Every such x has a real y, for example the nonnegative square
+
+91
+00:06:25.160 --> 00:06:28.479
+root of sixteen minus four x squared.
+
+92
+00:06:28.479 --> 00:06:34.170
+Therefore the domain is the full closed interval from negative two to
+
+93
+00:06:34.170 --> 00:06:34.644
+two.
+
+94
+00:06:34.644 --> 00:06:39.861
+Similarly the range is negative four through four, including the endpoints.
+
+95
+00:06:39.861 --> 00:06:45.552
+A relation's domain and range are projections of its graph onto the
+
+96
+00:06:45.552 --> 00:06:46.500
+coordinate axes.
+
+97
+00:06:46.500 --> 00:06:53.271
+Section six point two studies properties of a relation on one set
+
+98
+00:06:53.271 --> 00:06:53.836
+A.
+
+99
+00:06:53.836 --> 00:07:00.607
+We ask whether every element relates to itself, whether every connection can
+
+100
+00:07:00.607 --> 00:07:06.814
+be reversed, and whether two successive connections require a direct one.
+
+101
+00:07:06.814 --> 00:07:09.071
+These are universal conditions.
+
+102
+00:07:09.071 --> 00:07:15.843
+A proof must address arbitrary elements, while a disproof needs one carefully
+
+103
+00:07:15.843 --> 00:07:16.971
+chosen violation.
+
+104
+00:07:16.971 --> 00:07:23.743
+The underlying set matters especially for reflexivity, because every member must be
+
+105
+00:07:23.743 --> 00:07:26.000
+checked, including isolated elements.
+
+106
+00:07:26.000 --> 00:07:31.327
+Reflexive means x is related to itself for every x in A.
+
+107
+00:07:31.327 --> 00:07:35.321
+In an arrow diagram, every vertex needs a loop.
+
+108
+00:07:35.321 --> 00:07:40.648
+Symmetric means that whenever x is related to y, y is related
+
+109
+00:07:40.648 --> 00:07:41.536
+to x.
+
+110
+00:07:41.536 --> 00:07:44.199
+Every arrow therefore needs its reverse.
+
+111
+00:07:44.199 --> 00:07:49.526
+Transitive means that whenever x is related to y and y to
+
+112
+00:07:49.526 --> 00:07:52.189
+z, x is related to z.
+
+113
+00:07:52.189 --> 00:07:55.740
+Every two-step path needs the corresponding direct connection.
+
+114
+00:07:55.740 --> 00:07:58.847
+The quantified variables need not be distinct.
+
+115
+00:07:58.847 --> 00:08:04.173
+In particular, a path from x to y and back to x
+
+116
+00:08:04.173 --> 00:08:09.500
+requires the loop from x to itself if the relation is transitive.
+
+117
+00:08:09.500 --> 00:08:14.758
+Divisibility on the integers is reflexive because a equals a times one,
+
+118
+00:08:14.758 --> 00:08:16.949
+so every a divides itself.
+
+119
+00:08:16.949 --> 00:08:22.208
+It is not symmetric: one divides two, but two does not divide
+
+120
+00:08:22.208 --> 00:08:22.646
+one.
+
+121
+00:08:22.646 --> 00:08:27.028
+For transitivity, suppose a divides b and b divides c.
+
+122
+00:08:27.028 --> 00:08:32.287
+Write b equals a k and c equals b l for integers
+
+123
+00:08:32.287 --> 00:08:33.601
+k and l.
+
+124
+00:08:33.601 --> 00:08:37.107
+Substituting gives c equals a times k l.
+
+125
+00:08:37.107 --> 00:08:41.051
+Since k l is an integer, a divides c.
+
+126
+00:08:41.051 --> 00:08:46.309
+This argument also handles zero because it uses multiplication rather than division
+
+127
+00:08:46.309 --> 00:08:48.500
+by a possibly zero number.
+
+128
+00:08:48.500 --> 00:08:54.053
+Define a relation on the rational numbers by declaring a related to
+
+129
+00:08:54.053 --> 00:08:57.755
+b when a minus b is an integer.
+
+130
+00:08:57.755 --> 00:09:02.383
+Reflexivity follows because a minus a equals zero, an integer.
+
+131
+00:09:02.383 --> 00:09:07.936
+For symmetry, if a minus b is an integer, its negative b
+
+132
+00:09:07.936 --> 00:09:10.713
+minus a is also an integer.
+
+133
+00:09:10.713 --> 00:09:16.266
+For transitivity, if a minus b and b minus c are integers,
+
+134
+00:09:16.266 --> 00:09:19.968
+their sum a minus c is an integer.
+
+135
+00:09:19.968 --> 00:09:25.521
+Notice the repeated pattern: translate the relation into its defining condition, use
+
+136
+00:09:25.521 --> 00:09:31.074
+a closure property of the integers, and translate back to the required
+
+137
+00:09:31.074 --> 00:09:32.000
+relation statement.
+
+138
+00:09:32.000 --> 00:09:37.500
+The claimed proof that symmetry and transitivity imply reflexivity is wrong.
+
+139
+00:09:37.500 --> 00:09:43.500
+It begins by assuming that x is related to some y, but
+
+140
+00:09:43.500 --> 00:09:47.500
+an arbitrary x may have no related partner.
+
+141
+00:09:47.500 --> 00:09:52.000
+Symmetry and transitivity do not provide that missing existence.
+
+142
+00:09:52.000 --> 00:09:58.000
+For a counterexample, take A containing one and two, and R containing
+
+143
+00:09:58.000 --> 00:10:00.500
+only the pair one, one.
+
+144
+00:10:00.500 --> 00:10:06.500
+It is symmetric and transitive, but it lacks the pair two, two,
+
+145
+00:10:06.500 --> 00:10:10.000
+so it is not reflexive on A.
+
+146
+00:10:10.000 --> 00:10:16.000
+The empty relation on a nonempty set is another counterexample: the conditional
+
+147
+00:10:16.000 --> 00:10:19.000
+properties hold vacuously, while reflexivity fails.
+
+148
+00:10:19.000 --> 00:10:24.765
+The table summarises familiar relations on their stated number systems.
+
+149
+00:10:24.765 --> 00:10:29.953
+Less than is transitive, but not reflexive or symmetric.
+
+150
+00:10:29.953 --> 00:10:32.835
+Equality has all three properties.
+
+151
+00:10:32.835 --> 00:10:37.447
+Divisibility is reflexive and transitive, but not symmetric.
+
+152
+00:10:37.447 --> 00:10:42.059
+Congruence modulo a positive integer has all three.
+
+153
+00:10:42.059 --> 00:10:48.976
+For congruence, reflexivity uses a minus a equal to zero; symmetry uses
+
+154
+00:10:48.976 --> 00:10:55.894
+the negative of a divisible difference; transitivity uses the sum of two
+
+155
+00:10:55.894 --> 00:10:57.047
+divisible differences.
+
+156
+00:10:57.047 --> 00:11:03.965
+A summary table should be supported by these definitions and short proofs,
+
+157
+00:11:03.965 --> 00:11:08.000
+rather than memorised without the underlying reason.
+
+158
+00:11:08.000 --> 00:11:14.072
+An equivalence relation is a relation on A that is reflexive, symmetric,
+
+159
+00:11:14.072 --> 00:11:15.084
+and transitive.
+
+160
+00:11:15.084 --> 00:11:17.108
+All three are required.
+
+161
+00:11:17.108 --> 00:11:21.157
+Equality and congruence are examples from the table.
+
+162
+00:11:21.157 --> 00:11:24.193
+Less than and divisibility are not.
+
+163
+00:11:24.193 --> 00:11:30.265
+When a and b are related by an equivalence relation, we say
+
+164
+00:11:30.265 --> 00:11:34.313
+they are equivalent with respect to that relation.
+
+165
+00:11:34.313 --> 00:11:39.880
+This need not mean that they are literally the same object.
+
+166
+00:11:39.880 --> 00:11:45.952
+For instance, one and four are different integers but are equivalent modulo
+
+167
+00:11:45.952 --> 00:11:50.000
+three because their difference is divisible by three.
+
+168
+00:11:50.000 --> 00:11:54.756
+Suppose each CS104 student has one recorded midterm grade.
+
+169
+00:11:54.756 --> 00:11:59.511
+Relate two students when those grades are the same.
+
+170
+00:11:59.511 --> 00:12:04.795
+Each student has the same grade as themself, proving reflexivity.
+
+171
+00:12:04.795 --> 00:12:10.608
+If one student's grade equals another's, the equality reverses, proving symmetry.
+
+172
+00:12:10.608 --> 00:12:16.949
+If the first and second grades agree and the second and third
+
+173
+00:12:16.949 --> 00:12:21.176
+agree, the first and third agree, proving transitivity.
+
+174
+00:12:21.176 --> 00:12:24.347
+Therefore this is an equivalence relation.
+
+175
+00:12:24.347 --> 00:12:30.688
+The example groups students by the chosen attribute only; it makes no
+
+176
+00:12:30.688 --> 00:12:36.500
+claim that students sharing a grade are identical in other respects.
+
+177
+00:12:36.500 --> 00:12:42.193
+Section six point three asks what structure an equivalence relation creates.
+
+178
+00:12:42.193 --> 00:12:48.404
+For any element a, collect all the elements related to a into
+
+179
+00:12:48.404 --> 00:12:49.956
+its equivalence class.
+
+180
+00:12:49.956 --> 00:12:54.096
+We will show that classes cannot overlap partially.
+
+181
+00:12:54.096 --> 00:12:58.754
+They are either the same set or completely disjoint.
+
+182
+00:12:58.754 --> 00:13:04.965
+This is what makes them suitable for grouping every element into exactly
+
+183
+00:13:04.965 --> 00:13:06.000
+one block.
+
+184
+00:13:06.000 --> 00:13:11.242
+For an equivalence relation R on S, the class of a is
+
+185
+00:13:11.242 --> 00:13:16.484
+the set of all x in S for which x is related
+
+186
+00:13:16.484 --> 00:13:17.358
+to a.
+
+187
+00:13:17.358 --> 00:13:21.289
+The subscript R indicates which relation determines the class.
+
+188
+00:13:21.289 --> 00:13:26.532
+In the displayed five-element example, look for pairs whose second coordinate is
+
+189
+00:13:26.532 --> 00:13:26.968
+a.
+
+190
+00:13:26.968 --> 00:13:32.211
+These are a, a and b, a, so the class of a
+
+191
+00:13:32.211 --> 00:13:33.958
+contains a and b.
+
+192
+00:13:33.958 --> 00:13:39.200
+Symmetry would let us inspect the first coordinate instead, but using the
+
+193
+00:13:39.200 --> 00:13:41.821
+definition directly makes the reasoning explicit.
+
+194
+00:13:41.821 --> 00:13:47.063
+The class is a set of elements, not a set of ordered
+
+195
+00:13:47.063 --> 00:13:47.500
+pairs.
+
+196
+00:13:47.500 --> 00:13:53.567
+The full calculation gives the same class for a and b, namely
+
+197
+00:13:53.567 --> 00:13:56.600
+the set containing a and b.
+
+198
+00:13:56.600 --> 00:14:02.667
+The classes of c, d, and e are all the set containing
+
+199
+00:14:02.667 --> 00:14:04.689
+c, d, and e.
+
+200
+00:14:04.689 --> 00:14:09.744
+There are five possible representatives but only two distinct classes.
+
+201
+00:14:09.744 --> 00:14:15.811
+Do not count a class again just because it has a different
+
+202
+00:14:15.811 --> 00:14:16.317
+representative.
+
+203
+00:14:16.317 --> 00:14:20.361
+The phrase equivalence class presupposes an equivalence relation.
+
+204
+00:14:20.361 --> 00:14:26.428
+For an arbitrary relation we can still collect related neighbours, but these
+
+205
+00:14:26.428 --> 00:14:32.494
+sets need not have the equality-or-disjointness properties that justify the class terminology
+
+206
+00:14:32.494 --> 00:14:33.000
+here.
+
+207
+00:14:33.000 --> 00:14:35.442
+Return to the same-grade relation.
+
+208
+00:14:35.442 --> 00:14:41.302
+The class of David contains every student whose grade equals David's grade.
+
+209
+00:14:41.302 --> 00:14:47.163
+If David and Mary both have grade A, the class of David
+
+210
+00:14:47.163 --> 00:14:53.023
+is the set of all students with grade A, and it is
+
+211
+00:14:53.023 --> 00:14:55.465
+also the class of Mary.
+
+212
+00:14:55.465 --> 00:15:01.326
+This is equality of two sets, not equality of the two people.
+
+213
+00:15:01.326 --> 00:15:07.186
+Choosing another representative from a class changes its name but not its
+
+214
+00:15:07.186 --> 00:15:07.674
+members.
+
+215
+00:15:07.674 --> 00:15:13.535
+This distinction will be central when we calculate with congruence classes using
+
+216
+00:15:13.535 --> 00:15:15.000
+different integer representatives.
+
+217
+00:15:15.000 --> 00:15:17.389
+There are three basic properties.
+
+218
+00:15:17.389 --> 00:15:21.689
+Every a belongs to its own class, by reflexivity.
+
+219
+00:15:21.689 --> 00:15:26.467
+Two elements are related exactly when their classes are equal.
+
+220
+00:15:26.467 --> 00:15:28.856
+Unrelated elements have disjoint classes.
+
+221
+00:15:28.856 --> 00:15:34.589
+Begin with one direction of the second property: suppose the class of
+
+222
+00:15:34.589 --> 00:15:37.456
+a equals the class of b.
+
+223
+00:15:37.456 --> 00:15:43.189
+Since a belongs to its own class, it also belongs to the
+
+224
+00:15:43.189 --> 00:15:44.622
+class of b.
+
+225
+00:15:44.622 --> 00:15:47.967
+By definition, a is related to b.
+
+226
+00:15:47.967 --> 00:15:53.700
+Notice that the starting point a belongs to its class depends on
+
+227
+00:15:53.700 --> 00:15:58.000
+reflexivity; it is not automatic for an arbitrary relation.
+
+228
+00:15:58.000 --> 00:16:02.402
+For the reverse direction, suppose a is related to b.
+
+229
+00:16:02.402 --> 00:16:06.364
+Take an arbitrary x in the class of a.
+
+230
+00:16:06.364 --> 00:16:11.647
+Then x is related to a, and transitivity with a related to
+
+231
+00:16:11.647 --> 00:16:14.288
+b gives x related to b.
+
+232
+00:16:14.288 --> 00:16:19.571
+Thus the class of a is a subset of the class of
+
+233
+00:16:19.571 --> 00:16:20.011
+b.
+
+234
+00:16:20.011 --> 00:16:25.293
+Symmetry gives b related to a, so the same argument proves the
+
+235
+00:16:25.293 --> 00:16:26.174
+reverse inclusion.
+
+236
+00:16:26.174 --> 00:16:27.935
+The classes are equal.
+
+237
+00:16:27.935 --> 00:16:33.217
+This proof combines Week Five's two-inclusion method with the exact relation properties
+
+238
+00:16:33.217 --> 00:16:38.500
+needed to move an arbitrary element from one class to the other.
+
+239
+00:16:38.500 --> 00:16:43.500
+Now suppose the classes of a and b are disjoint.
+
+240
+00:16:43.500 --> 00:16:49.500
+If a were related to b, the property just proved would make
+
+241
+00:16:49.500 --> 00:16:51.000
+their classes equal.
+
+242
+00:16:51.000 --> 00:16:56.500
+But the class of a is nonempty because it contains a.
+
+243
+00:16:56.500 --> 00:17:00.500
+Two equal nonempty sets cannot have empty intersection.
+
+244
+00:17:00.500 --> 00:17:05.000
+This contradiction proves that a and b are unrelated.
+
+245
+00:17:05.000 --> 00:17:11.000
+The nonempty condition is essential: equality alone would not contradict disjointness if
+
+246
+00:17:11.000 --> 00:17:13.000
+both sets were empty.
+
+247
+00:17:13.000 --> 00:17:17.500
+Reflexivity is again doing important work in the background.
+
+248
+00:17:17.500 --> 00:17:23.028
+For the other direction, prove the contrapositive: if the two classes share
+
+249
+00:17:23.028 --> 00:17:26.713
+an element, then a is related to b.
+
+250
+00:17:26.713 --> 00:17:29.017
+Choose x in their intersection.
+
+251
+00:17:29.017 --> 00:17:34.084
+We have x related to a and x related to b.
+
+252
+00:17:34.084 --> 00:17:38.691
+Symmetry turns the first relation into a related to x.
+
+253
+00:17:38.691 --> 00:17:44.219
+Transitivity with x related to b then gives a related to b.
+
+254
+00:17:44.219 --> 00:17:49.747
+Therefore, if a and b are unrelated, their classes must be disjoint.
+
+255
+00:17:49.747 --> 00:17:55.275
+Combining the two directions shows that even one shared element forces two
+
+256
+00:17:55.275 --> 00:17:58.500
+equivalence classes to be the same class.
+
+257
+00:17:58.500 --> 00:18:03.529
+The distinct equivalence classes form a partition of A.
+
+258
+00:18:03.529 --> 00:18:10.235
+A partition is a collection of nonempty subsets that cover A and
+
+259
+00:18:10.235 --> 00:18:11.912
+are pairwise disjoint.
+
+260
+00:18:11.912 --> 00:18:18.059
+Reflexivity supplies coverage because each element belongs to its own class.
+
+261
+00:18:18.059 --> 00:18:21.971
+It also guarantees each class is nonempty.
+
+262
+00:18:21.971 --> 00:18:26.441
+The previous properties guarantee disjointness of distinct classes.
+
+263
+00:18:26.441 --> 00:18:33.147
+Conversely, any partition defines an equivalence relation by relating elements exactly when
+
+264
+00:18:33.147 --> 00:18:36.500
+they lie in the same block.
+
+265
+00:18:36.500 --> 00:18:43.206
+This connection lets us switch between a relation described by pairs and
+
+266
+00:18:43.206 --> 00:18:46.000
+a grouping described by sets.
+
+267
+00:18:46.000 --> 00:18:51.931
+How many equivalence relations exist on a set containing a, b, and
+
+268
+00:18:51.931 --> 00:18:52.425
+c?
+
+269
+00:18:52.425 --> 00:18:53.908
+Count its partitions.
+
+270
+00:18:53.908 --> 00:18:56.874
+One partition has three singleton blocks.
+
+271
+00:18:56.874 --> 00:19:02.805
+Three partitions have a pair and a singleton: a with b, a
+
+272
+00:19:02.805 --> 00:19:05.770
+with c, or b with c.
+
+273
+00:19:05.770 --> 00:19:10.713
+The final partition puts all three elements into one block.
+
+274
+00:19:10.713 --> 00:19:13.184
+That gives five equivalence relations.
+
+275
+00:19:13.184 --> 00:19:19.115
+For each partition, include every ordered pair whose two entries lie in
+
+276
+00:19:19.115 --> 00:19:22.575
+the same block, including all diagonal pairs.
+
+277
+00:19:22.575 --> 00:19:28.506
+Reordering the blocks or changing the representative does not create a new
+
+278
+00:19:28.506 --> 00:19:29.000
+partition.
+
+279
+00:19:29.000 --> 00:19:35.357
+Equivalence relations let us work with groups of objects that behave the
+
+280
+00:19:35.357 --> 00:19:38.006
+same for a chosen purpose.
+
+281
+00:19:38.006 --> 00:19:44.363
+An infinite set can sometimes be replaced by finitely many classes, as
+
+282
+00:19:44.363 --> 00:19:48.601
+happens with remainders modulo a fixed positive integer.
+
+283
+00:19:48.601 --> 00:19:52.839
+This is a possibility, not a universal guarantee.
+
+284
+00:19:52.839 --> 00:19:58.667
+Equality on the integers, for example, has infinitely many singleton classes.
+
+285
+00:19:58.667 --> 00:20:05.024
+Also distinguish the number of classes from the number of elements in
+
+286
+00:20:05.024 --> 00:20:11.381
+a class: congruence modulo three has only three classes, but each class
+
+287
+00:20:11.381 --> 00:20:13.500
+contains infinitely many integers.
+
+288
+00:20:13.500 --> 00:20:19.375
+For a positive modulus n, the congruence class of a contains all
+
+289
+00:20:19.375 --> 00:20:23.781
+integers whose difference from a is divisible by n.
+
+290
+00:20:23.781 --> 00:20:27.698
+Modulo three there are exactly three distinct classes.
+
+291
+00:20:27.698 --> 00:20:32.104
+The class of zero contains all multiples of three.
+
+292
+00:20:32.104 --> 00:20:37.979
+The class of one contains integers such as negative five, negative two,
+
+293
+00:20:37.979 --> 00:20:39.938
+one, four, and seven.
+
+294
+00:20:39.938 --> 00:20:45.813
+The class of two contains negative four, negative one, two, five, and
+
+295
+00:20:45.813 --> 00:20:46.302
+eight.
+
+296
+00:20:46.302 --> 00:20:50.708
+Every integer belongs to exactly one of these classes.
+
+297
+00:20:50.708 --> 00:20:56.583
+In particular, negative one is in the class of two because their
+
+298
+00:20:56.583 --> 00:21:00.500
+difference is negative three, a multiple of three.
+
+299
+00:21:00.500 --> 00:21:06.764
+Define addition of classes by adding representatives, and multiplication by multiplying representatives.
+
+300
+00:21:06.764 --> 00:21:13.027
+Modulo five, the class of one plus the class of three is
+
+301
+00:21:13.027 --> 00:21:15.115
+the class of four.
+
+302
+00:21:15.115 --> 00:21:21.379
+Replacing the representatives by six and eight gives the class of fourteen,
+
+303
+00:21:21.379 --> 00:21:25.033
+which is the same class as four.
+
+304
+00:21:25.033 --> 00:21:31.297
+For multiplication, one times three gives the class of three, while six
+
+305
+00:21:31.297 --> 00:21:37.560
+times eight gives the class of forty-eight, again the same class as
+
+306
+00:21:37.560 --> 00:21:38.082
+three.
+
+307
+00:21:38.082 --> 00:21:41.736
+We must prove this agreement always happens.
+
+308
+00:21:41.736 --> 00:21:48.000
+A well-defined operation cannot depend on which representative we happened to choose.
+
+309
+00:21:48.000 --> 00:21:53.580
+Suppose a is congruent to b and c to d modulo n.
+
+310
+00:21:53.580 --> 00:21:59.160
+Then a minus b and c minus d are multiples of n.
+
+311
+00:21:59.160 --> 00:22:04.740
+Their sum shows that a plus c is congruent to b plus
+
+312
+00:22:04.740 --> 00:22:05.205
+d.
+
+313
+00:22:05.205 --> 00:22:10.785
+For products, write a c minus b d as a times c
+
+314
+00:22:10.785 --> 00:22:14.505
+minus d, plus d times a minus b.
+
+315
+00:22:14.505 --> 00:22:20.085
+Each term is divisible by n, so the whole difference is too.
+
+316
+00:22:20.085 --> 00:22:23.340
+This proves multiplication is independent of representatives.
+
+317
+00:22:23.340 --> 00:22:27.990
+Repeated multiplication also preserves congruence for every positive integer exponent.
+
+318
+00:22:27.990 --> 00:22:33.570
+These results justify reducing representatives during a calculation instead of carrying large
+
+319
+00:22:33.570 --> 00:22:34.500
+integers throughout.
+
+320
+00:22:34.500 --> 00:22:40.500
+Let S of a positive integer mean the sum of its decimal
+
+321
+00:22:40.500 --> 00:22:41.000
+digits.
+
+322
+00:22:41.000 --> 00:22:47.000
+The proposition says the number and its digit sum are congruent modulo
+
+323
+00:22:47.000 --> 00:22:47.500
+nine.
+
+324
+00:22:47.500 --> 00:22:53.500
+Consequently, the number is divisible by nine exactly when its digit sum
+
+325
+00:22:53.500 --> 00:22:54.000
+is.
+
+326
+00:22:54.000 --> 00:22:59.500
+For seven thousand three hundred nineteen, the digits sum to twenty.
+
+327
+00:22:59.500 --> 00:23:05.500
+Since twenty is not divisible by nine, neither is the original number.
+
+328
+00:23:05.500 --> 00:23:07.500
+Both have remainder two.
+
+329
+00:23:07.500 --> 00:23:13.500
+The statement is stronger than a yes-or-no divisibility test because it identifies
+
+330
+00:23:13.500 --> 00:23:15.500
+the same residue class.
+
+331
+00:23:15.500 --> 00:23:21.500
+Next we explain why decimal place values preserve the digit sum modulo
+
+332
+00:23:21.500 --> 00:23:22.000
+nine.
+
+333
+00:23:22.000 --> 00:23:28.109
+Expand seven thousand three hundred nineteen as seven times ten cubed, plus
+
+334
+00:23:28.109 --> 00:23:33.200
+three times ten squared, plus one times ten, plus nine.
+
+335
+00:23:33.200 --> 00:23:39.309
+Since ten is congruent to one modulo nine, every nonnegative power of
+
+336
+00:23:39.309 --> 00:23:41.855
+ten is congruent to one.
+
+337
+00:23:41.855 --> 00:23:47.964
+Using the addition and multiplication rules, the expansion is congruent to seven
+
+338
+00:23:47.964 --> 00:23:52.545
+plus three plus one plus nine, which is twenty.
+
+339
+00:23:52.545 --> 00:23:58.655
+The same reasoning works for any decimal expansion, so it proves the
+
+340
+00:23:58.655 --> 00:24:02.727
+general digit-sum rule rather than just one example.
+
+341
+00:24:02.727 --> 00:24:08.836
+We have moved from pairs to equivalence classes and then to useful
+
+342
+00:24:08.836 --> 00:24:09.345
+arithmetic.
+
+343
+00:24:09.345 --> 00:24:15.455
+In your review, justify each relation property separately and distinguish a representative
+
+344
+00:24:15.455 --> 00:24:18.000
+from the class it names.

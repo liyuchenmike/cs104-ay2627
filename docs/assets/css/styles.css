@@ -153,6 +153,10 @@ h1 span { color: var(--blue); }
 .truth-table th, .truth-table td { padding: .65rem; text-align: center; border: 1px solid var(--line); }
 .truth-table th { color: white; background: var(--navy); }
 .truth-table .critical { background: #fff0b8; font-weight: 800; }
+.table-scroll { max-width: 100%; margin: 1.5rem 0; overflow-x: auto; }
+.table-scroll .truth-table { margin: 0; }
+.table-scroll:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.formula-card.formula-text { display: block; text-align: center; overflow-wrap: anywhere; }
 .law-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; margin: 1.5rem 0; }
 .law-grid div { padding: 1rem; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
 .law-grid strong { display: block; color: var(--blue); }

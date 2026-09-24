@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 5: sets, subset proofs, set operations, Cartesian products, functions, injection, surjection and bijection.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 5 · Sets and Functions · CS104</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css?v=2">
+</head>
+<body data-lesson="week-05">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2026–27</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../../index.html">Course home</a>
+      <a aria-current="page" href="./">Week 5</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../../index.html">Course home</a> <span aria-hidden="true">/</span> Week 5</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 05 · Sets and functions</p>
+          <h1>How do sets describe objects and functions connect them?</h1>
+          <p class="lesson-summary">Prove set relationships, reason with ordered pairs, and use precise domain and codomain choices to classify functions.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+<ul><li>translate set notation into membership conditions;</li><li>prove containment, equality and set identities;</li><li>interpret and manipulate Cartesian products;</li><li>find images, preimages, floor, ceiling and range;</li><li>prove or refute injection, surjection and bijection.</li></ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+<a href="#lecture">Lecture</a>
+<a href="#sets">1. Sets and notation</a>
+<a href="#subsets">2. Subsets and equality</a>
+<a href="#operations">3. Set operations</a>
+<a href="#products">4. Cartesian products</a>
+<a href="#functions">5. Functions</a>
+<a href="#classification">6. Classification</a>
+<a href="#quiz">7. Quiz</a>
+</nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Sets and Functions</h2>
+          <p>The lecture uses all 45 original Week 5 slides. Choose a chapter to revisit a method; five short retrieval questions pause the video at useful transitions.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="assets/cover.webp">
+              <source src="assets/lecture.mp4" type="video/mp4">
+              <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video.
+            </video>
+            <div class="chapters" id="chapter-list" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">00:00 · Sets and membership</button>
+            </div>
+            <div class="video-caption">
+              <span>Includes English captions and five knowledge checks.</span>
+              <span id="video-status">Progress saves in this browser.</span>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="lesson-section" id="sets">
+          <p class="eyebrow">1 · Membership and representation</p>
+          <h2>A set needs a precise membership test</h2>
+          <p>A <strong>set</strong> is a well-defined collection of objects. Roster notation lists its elements, as in {−2, 2}. Set-builder notation specifies a domain and a condition. Repeated elements and the order of a roster do not change a set.</p>
+          <div class="formula-card formula-text">{x ∈ U | p(x)} = the objects x in U for which p(x) is true</div>
+          <div class="worked-example"><h3>Three descriptions, three membership tests</h3><ul>
+            <li><strong>Integer solutions of x² = 4:</strong> {x ∈ ℤ | x² = 4} = {−2, 2}.</li>
+            <li><strong>Reciprocals of positive integers:</strong> {1/n | n ∈ ℤ⁺} = {1, 1/2, 1/3, …}. Zero is not a member, although these numbers approach zero.</li>
+            <li><strong>Positive real numbers below 10:</strong> {x ∈ ℝ | 0 &lt; x &lt; 10} = (0, 10). Both endpoints are excluded.</li>
+          </ul></div>
+          <p>The odd integers can be written {2k + 1 | k ∈ ℤ}. Letting k range over all integers includes negative odd numbers. Restricting k to nonnegative integers would change the set.</p>
+          <div class="misconception"><h3>Membership is not containment</h3><p>For A = {1, 2}, write 1 ∈ A and {1} ⊆ A. The first compares an element with a set; the second compares two sets. The empty set ∅ has zero elements, while {∅} and {0} each have one.</p></div>
+        </section>
+        <section class="lesson-section" id="subsets">
+          <p class="eyebrow">2 · Containment and equality</p><h2>Translate containment into an implication</h2>
+          <div class="formula-card formula-text">A ⊆ B ⇔ ∀x ∈ U, (x ∈ A → x ∈ B)<br>A ⊈ B ⇔ ∃x ∈ U, (x ∈ A ∧ x ∉ B)</div>
+          <p>To prove a subset claim, take an arbitrary element of the left set and show that it satisfies the right set’s definition. To refute it, exhibit one element on the left that is missing on the right.</p>
+          <div class="worked-example"><h3>Multiples of six are even</h3><p>Let A = {x ∈ ℤ | 6 | x} and B = {x ∈ ℤ | x is even}. For arbitrary x ∈ A, write x = 6m = 2(3m) with m ∈ ℤ. Since 3m is an integer, x is even. Therefore A ⊆ B.</p></div>
+          <div class="worked-example"><h3>Divisibility of a square does not transfer unchanged</h3><p>Let C = {x ∈ ℤ | 4 | x²} and D = {x ∈ ℤ | 4 | x}. The witness 2 belongs to C because 4 | 2², but 2 ∉ D because 4 ∤ 2. Thus C ⊈ D.</p><p>In fact C is exactly the even integers. If x = 2k, then x² = 4k². Conversely, an odd x = 2k + 1 has square 4(k² + k) + 1, which is not divisible by four. This proves both inclusions needed for equality.</p></div>
+          <p><strong>A = B</strong> requires A ⊆ B and B ⊆ A. A <strong>proper subset</strong>, written A ⊂ B in this course, additionally requires A ≠ B. For example, D ⊂ C: every multiple of four belongs to C, while 2 ∈ C − D.</p>
+          <div class="concept-box"><h3>Why ∅ ⊆ A for every set A</h3><p>A counterexample would have to belong to ∅ and lie outside A. No object belongs to ∅, so none exists. Equivalently, the membership implication is vacuously true. Also, A ⊆ A always holds; ordinary containment does not require two different sets.</p></div>
+        </section>
+        <section class="lesson-section" id="operations">
+          <p class="eyebrow">3 · Set operations and identities</p><h2>Use logic to calculate and prove</h2>
+          <div class="table-scroll" role="region" aria-label="Scrollable table: Operations for A, B ⊆ U" tabindex="0"><table class="truth-table"><caption>Operations for A, B ⊆ U</caption><thead><tr><th scope="col">Set</th><th scope="col">Membership condition</th></tr></thead><tbody>
+            <tr><td>A ∩ B</td><td>x ∈ A and x ∈ B</td></tr><tr><td>A ∪ B</td><td>x ∈ A or x ∈ B, including both</td></tr><tr><td>Aᶜ</td><td>x ∈ U and x ∉ A</td></tr><tr><td>A − B</td><td>x ∈ A and x ∉ B</td></tr>
+          </tbody></table></div>
+          <div class="worked-example"><h3>Compute within a stated universe</h3><p>Let U = {1, 2, 3, 4, 5}, A = {1, 2, 3}, and B = {3, 4}. Then A ∩ B = {3}, A ∪ B = {1, 2, 3, 4}, Aᶜ = {4, 5}, A − B = {1, 2}, and B − A = {4}.</p></div>
+          <p>The laws mirror propositional logic: union and intersection are idempotent, commutative, and associative; each distributes over the other. Double complementation gives (Aᶜ)ᶜ = A.</p>
+          <div class="formula-card formula-text">(A ∩ B)ᶜ = Aᶜ ∪ Bᶜ &nbsp; · &nbsp; (A ∪ B)ᶜ = Aᶜ ∩ Bᶜ</div>
+          <div class="worked-example"><h3>Prove A − B = A ∩ Bᶜ by membership</h3><p>For arbitrary x ∈ U, x ∈ A − B exactly when x ∈ A and x ∉ B; this is equivalent to x ∈ A and x ∈ Bᶜ, or x ∈ A ∩ Bᶜ. The equivalences establish both inclusions.</p></div>
+          <div class="worked-example"><h3>Prove an identity using set algebra</h3><p>(A ∪ B) − C = (A ∪ B) ∩ Cᶜ = (A ∩ Cᶜ) ∪ (B ∩ Cᶜ) = (A − C) ∪ (B − C).</p><p>The steps use the difference identity, distribution, and the difference identity again.</p></div>
+          <div class="misconception"><h3>Check the universe and the order</h3><p>A complement changes when U changes. Difference is generally not commutative: A − B and B − A select different regions. A Venn diagram helps discover a law, but a proof should justify membership or cite valid identities.</p></div>
+        </section>
+        <section class="lesson-section" id="products">
+          <p class="eyebrow">4 · Ordered pairs</p><h2>A Cartesian product creates pairs</h2>
+          <div class="formula-card formula-text">A × B = {(a, b) | a ∈ A and b ∈ B}</div>
+          <p>For A = {1, 2, 3} and B = {u, v}, A × B has six elements: (1, u), (1, v), (2, u), (2, v), (3, u), and (3, v). For finite sets, |A × B| = |A||B|. The notation A² means A × A.</p>
+          <p>Order matters: (a, b) = (c, d) requires a = c and b = d. Products are not commutative in general, although A × B can equal B × A in special cases such as A = B. Similarly, (a, b) differs from (b, a) when a ≠ b.</p>
+          <div class="worked-example"><h3>Interpret subsets of the plane</h3><p>[1, 3] × [2, 5] is the closed rectangle with 1 ≤ x ≤ 3 and 2 ≤ y ≤ 5. By contrast, x² + y² = 1 defines the unit circle, while x² + y² ≤ 1 defines the closed disk. The origin is in the disk but outside the circle.</p></div>
+          <div class="formula-card formula-text">A × (B ∪ C) = (A × B) ∪ (A × C)</div>
+          <div class="worked-example"><h3>Prove distribution with an arbitrary pair</h3><ol><li>Take (x, y) ∈ A × (B ∪ C). Then x ∈ A and either y ∈ B or y ∈ C. Hence the pair belongs to (A × B) ∪ (A × C).</li><li>Conversely, a pair in that union belongs to one of the two products. Its first coordinate is in A, and its second lies in B or C, so it belongs to A × (B ∪ C).</li></ol></div>
+          <p>The same pattern holds for intersection and difference, and for a fixed factor on the right: (A − B) × C = (A × C) − (B × C). Keep each coordinate in its original position.</p>
+        </section>
+        <section class="lesson-section" id="functions">
+          <p class="eyebrow">5 · A rule with a domain and codomain</p><h2>Every input must have exactly one output</h2>
+          <p>A function f: A → B assigns every a ∈ A exactly one element f(a) ∈ B. A is the <strong>domain</strong>; B is the <strong>codomain</strong>. Several inputs may share an output, and some codomain elements may remain unused.</p>
+          <div class="table-scroll" role="region" aria-label="Scrollable table: Does the proposed rule define a function?" tabindex="0"><table class="truth-table"><caption>Does the proposed rule define a function?</caption><thead><tr><th scope="col">Rule and declared sets</th><th scope="col">Decision</th></tr></thead><tbody>
+            <tr><td>sin x, ℝ → ℝ</td><td>Yes: every real input has one real output.</td></tr><tr><td>1/x, ℝ → ℝ</td><td>No: zero has no output. Restricting the domain to ℝ − {0} repairs this.</td></tr><tr><td>Both ±√x, ℝ⁺ → ℝ</td><td>No: each positive input has two proposed outputs.</td></tr><tr><td>x², ℝ → ℝ</td><td>Yes: shared outputs such as f(2) = f(−2) are allowed.</td></tr>
+          </tbody></table></div>
+          <p>The <strong>image</strong> of a is f(a). A <strong>preimage</strong> of b is an a in the domain satisfying f(a) = b. For squaring on ℝ, the preimage set of 4 is {−2, 2}, while the preimage set of −1 is empty. For sine on ℝ, the preimages of 0 are {kπ | k ∈ ℤ}.</p>
+          <div class="worked-example"><h3>Floor and ceiling, including negative inputs</h3><p>⌊x⌋ is the greatest integer at most x; ⌈x⌉ is the least integer at least x. Thus ⌊2.74⌋ = 2, ⌈2.74⌉ = 3, ⌊−1.9⌋ = −2, and ⌈−1.9⌉ = −1. Both send 3 to 3.</p><p>Useful tests: ⌊x⌋ = n ⇔ n ≤ x &lt; n + 1, and ⌈x⌉ = n ⇔ n − 1 &lt; x ≤ n. Floor is not truncation toward zero.</p></div>
+          <div class="concept-box"><h3>Range versus codomain</h3><p>range(f) = {f(x) | x ∈ A} consists of outputs actually reached. It is always a subset of B. For x²: ℝ → ℝ, the range is [0, ∞); for sin: ℝ → ℝ, it is [−1, 1]. To prove an exact range, show outputs cannot leave it and every element of it is reached.</p></div>
+        </section>
+        <section class="lesson-section" id="classification">
+          <p class="eyebrow">6 · Injection, surjection and bijection</p><h2>Separate uniqueness from coverage</h2>
+          <div class="table-scroll" role="region" aria-label="Scrollable table: Proof obligations for f: A → B" tabindex="0"><table class="truth-table"><caption>Proof obligations for f: A → B</caption><thead><tr><th scope="col">Property</th><th scope="col">What to prove</th><th scope="col">How to refute it</th></tr></thead><tbody>
+            <tr><td>Injective</td><td>For x, y ∈ A, f(x) = f(y) implies x = y.</td><td>Find distinct x, y ∈ A with equal outputs.</td></tr><tr><td>Surjective</td><td>For every b ∈ B, find a ∈ A with f(a) = b.</td><td>Find b ∈ B that no input reaches.</td></tr><tr><td>Bijective</td><td>Prove both injection and surjection.</td><td>Refute either requirement.</td></tr>
+          </tbody></table></div>
+          <div class="worked-example"><h3>f(x) = 5x + 3 is a bijection ℝ → ℝ</h3><p><strong>Injection:</strong> if 5x + 3 = 5y + 3, subtract 3 and divide by 5 to obtain x = y.</p><p><strong>Surjection:</strong> choose arbitrary b ∈ ℝ. Let a = (b − 3)/5. Then a ∈ ℝ and f(a) = 5(b − 3)/5 + 3 = b. Every target is reached.</p></div>
+          <div class="worked-example"><h3>Change the sets, change the classification</h3><p>g(x) = x² + 1 is neither injective nor surjective as a function ℝ → ℝ: g(2) = g(−2) = 5, and −2 has no preimage.</p><p>As a function ℝ⁺ → (1, ∞), the same formula is bijective. Equal squares of positive inputs force equal inputs. For every b &gt; 1, the positive input a = √(b − 1) satisfies g(a) = b.</p></div>
+          <div class="misconception"><h3>A solved equation is only a candidate</h3><p>In a surjection proof, the constructed preimage must belong to the domain and must map to the arbitrary target. For example, 5x + 3 is not onto ℤ as a function ℤ → ℤ: the target 4 would require x = 1/5, outside the domain.</p></div>
+          <p>In terms of preimages, injective means <strong>at most one</strong>, surjective means <strong>at least one</strong>, and bijective means <strong>exactly one</strong> for every element of the codomain. These are separate from the function requirement of exactly one image per input.</p>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">7 · Retrieval practice</p>
+          <h2>Week 5 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer for an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+      <button class="button button-secondary" id="checkpoint-skip" type="button">Skip checkpoint</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 5</strong></p>
+    <p><a href="../../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="assets/lesson.js?v=2"></script>
+</body>
+</html>
