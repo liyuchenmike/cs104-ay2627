@@ -40,7 +40,7 @@ The original PowerPoint decks, private voice reference and build intermediates r
 
 ## Rebuilding the lecture videos
 
-The guarded media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, local [F5-TTS voice cloning](https://github.com/SWivid/F5-TTS), ImageMagick, Poppler and FFmpeg. Only the finished synthesized narration is published:
+The guarded media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, local [F5-TTS voice cloning](https://github.com/SWivid/F5-TTS), ImageMagick, Poppler and FFmpeg. Only the finished synthesized narration is published.
 
 For a new week, run the source gate first, create its canonical `week.json` from the original deck's title and slide count, and rerun the source gate before rendering. The example below uses an already configured week.
 
