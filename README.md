@@ -4,11 +4,11 @@ A static, accessible course companion with weekly explanations, narrated lecture
 
 ## Current content
 
-- Course portal covering the six uploaded lecture topics
-- Complete Week 1–6 lessons: Logical Reasoning, Parts I and II; Method of Proof, Parts I and II; Sets and Functions; and Relations
+- Source lecture decks available for Weeks 1–6 and 9–12
+- Complete Week 1–6 and Week 9 lessons: Logical Reasoning, Parts I and II; Method of Proof, Parts I and II; Sets and Functions; Relations; and Mathematical Induction
 - Chaptered narrated lecture videos with captions
 - Detailed explanations, worked examples and misconceptions
-- Sixty mastery questions with immediate feedback and browser-local progress
+- Seventy mastery questions with immediate feedback and browser-local progress
 - Optional knowledge checks embedded in each video timeline
 
 ## Local preview
@@ -41,6 +41,8 @@ The original PowerPoint decks, private voice reference and build intermediates r
 ## Rebuilding the lecture videos
 
 The guarded media builder uses Microsoft PowerPoint for accurate 1080p slide rendering, local [F5-TTS voice cloning](https://github.com/SWivid/F5-TTS), ImageMagick, Poppler and FFmpeg. Only the finished synthesized narration is published:
+
+For a new week, run the source gate first, create its canonical `week.json` from the original deck's title and slide count, and rerun the source gate before rendering. The example below uses an already configured week.
 
 ```sh
 node skills/cs104-weekly-production/scripts/validate_workflow.mjs --week 04 --phase source

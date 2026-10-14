@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 9: mathematical induction, strong induction, proof fallacies, continued fractions and recurrence proofs.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 9 · Mathematical Induction · CS104</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css?v=2">
+</head>
+<body data-lesson="week-09">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2026–27</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../../index.html">Course home</a>
+      <a aria-current="page" href="./">Week 9</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../../index.html">Course home</a> <span aria-hidden="true">/</span> Week 9</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 09 · Mathematical induction</p>
+          <h1>How can a base case and a valid step prove infinitely many claims?</h1>
+          <p class="lesson-summary">Prove formulas and divisibility with induction, diagnose flawed arguments, and handle statements that depend on several earlier cases.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+<ul><li>state the base and step for ordinary induction;</li><li>prove arithmetic, geometric and square-sum identities;</li><li>find the precise flaw in an induction argument;</li><li>use strong induction for binary sums and continued fractions;</li><li>choose sufficient bases for recursive sequences.</li></ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+<a href="#lecture">Lecture</a>
+<a href="#principle">1. Induction principle</a>
+<a href="#sums">2. Sum formulas</a>
+<a href="#squares">3. Sum of squares</a>
+<a href="#applications">4. Divisibility and growth</a>
+<a href="#fallacies">5. Faulty proofs</a>
+<a href="#strong">6. Strong induction</a>
+<a href="#fractions">7. Continued fractions</a>
+<a href="#recurrences">8. Recurrences</a>
+<a href="#quiz">9. Quiz</a>
+</nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Mathematical Induction</h2>
+          <p>The lecture uses all 31 original Week 9 slides. Choose a chapter to revisit a proof method; five short retrieval questions pause the video at useful transitions.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="assets/cover.webp">
+              <source src="assets/lecture.mp4" type="video/mp4">
+              <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video.
+            </video>
+            <div class="chapters" id="chapter-list" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">00:00 · The induction principle</button>
+            </div>
+            <div class="video-caption">
+              <span>Includes English captions and five knowledge checks.</span>
+              <span id="video-status">Progress saves in this browser.</span>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="lesson-section" id="principle">
+          <p class="eyebrow">1 · The base and the link</p><h2>Induction proves a whole chain of statements</h2>
+          <p>For each positive integer n, let P(n) be a precise statement. Ordinary mathematical induction needs two separate proofs: <strong>P(1) is true</strong>, and for every k ≥ 1, <strong>P(k) implies P(k + 1)</strong>. The first establishes a starting point; the second links each reachable integer to its successor.</p>
+          <div class="formula-card formula-text">P(1) &nbsp; · &nbsp; ∀k ≥ 1, P(k) ⇒ P(k + 1)<br>Therefore ∀n ≥ 1, P(n).</div>
+          <div class="worked-example"><h3>The ladder analogy</h3><p>Knowing how to step from rung k to rung k + 1 does not put you on the ladder. You must first reach rung 1. Then the step rule takes you to 2, 3, and every later rung. In a written proof, state the target P(n), verify its first allowed value, assume P(k) for an arbitrary allowed k, and derive P(k + 1).</p></div>
+          <p>If the theorem begins at n = 0 or n = 3, use that value as the base and apply the step only for k at or above it. The induction hypothesis is a temporary assumption in the conditional step, not a claim that has already been proved for every k.</p>
+          <div class="misconception"><h3>One half of induction is never enough</h3><p>The base alone proves one case. The step alone can be true even when every P(n) is false. Check both, and check that the step reaches the very next integer in the claimed range.</p></div>
+        </section>
+        <section class="lesson-section" id="sums">
+          <p class="eyebrow">2 · Follow the extra term</p><h2>Prove sum formulas by extending the list</h2>
+          <p>To prove the arithmetic sum, set P(n): 1 + 2 + ⋯ + n = n(n + 1)/2 for n ≥ 1. At n = 1, both sides equal 1. If the formula holds through k, append the one new term k + 1:</p>
+          <div class="formula-card formula-text">1 + ⋯ + k + (k + 1) = k(k + 1)/2 + (k + 1)<br>= (k + 1)(k + 2)/2.</div>
+          <p>That last expression is exactly the claimed formula with n replaced by k + 1. The move is reusable: separate the old sum from its new term, substitute the induction hypothesis once, then simplify to the target.</p>
+          <div class="worked-example"><h3>Geometric sum starts at zero</h3><p>For n ≥ 0 and r ≠ 1, let G(n): 1 + r + ⋯ + rⁿ = (rⁿ⁺¹ − 1)/(r − 1). At n = 0, both sides are 1. Assuming G(k), append rᵏ⁺¹:</p><p>(rᵏ⁺¹ − 1)/(r − 1) + rᵏ⁺¹ = (rᵏ⁺² − 1)/(r − 1), which is G(k + 1).</p><p>When r = 1, the fraction is undefined. The sum itself still exists and has n + 1 terms, so its value is n + 1. This condition must be stated before using the displayed fraction.</p></div>
+          <div class="misconception"><h3>Match the base to the index</h3><p>The geometric sum begins at n = 0, while the arithmetic sum begins at n = 1. Copying the other proof's base would leave the first claimed case unchecked.</p></div>
+        </section>
+        <section class="lesson-section" id="squares">
+          <p class="eyebrow">3 · A longer algebra step</p><h2>Sum the first n squares</h2>
+          <div class="formula-card formula-text">1² + 2² + ⋯ + n² = n(n + 1)(2n + 1)/6 &nbsp; (n ≥ 1)</div>
+          <p>The base n = 1 gives 1 on both sides. For the induction step, do not replace the new square with the hypothesis: the hypothesis covers only 1² through k². Add (k + 1)² after substituting that old part.</p>
+          <div class="worked-example"><h3>Factor toward the target</h3><p>Assume 1² + ⋯ + k² = k(k + 1)(2k + 1)/6. Then</p><p>1² + ⋯ + k² + (k + 1)² = k(k + 1)(2k + 1)/6 + (k + 1)²</p><p>= (k + 1)[k(2k + 1) + 6(k + 1)]/6</p><p>= (k + 1)(2k² + 7k + 6)/6 = (k + 1)(k + 2)(2k + 3)/6.</p><p>The final line is the original formula at n = k + 1. Factoring k + 1 early makes the remaining quadratic easier to recognize.</p></div>
+          <div class="misconception"><h3>Prove the exact successor</h3><p>An induction proof is not finished when the expression merely looks simpler. Write the target P(k + 1) beside the algebra and check that its factors match.</p></div>
+        </section>
+        <section class="lesson-section" id="applications">
+          <p class="eyebrow">4 · Divisibility and growth</p><h2>Choose a useful form of the hypothesis</h2>
+          <p>For every n ≥ 1, the lecture proves that 3 divides 2²ⁿ − 1. The base n = 1 is 2² − 1 = 3. In the step, write the hypothesis as an integer equation: 2²ᵏ − 1 = 3m for some integer m.</p>
+          <div class="worked-example"><h3>Expose the multiple of three</h3><p>2²⁽ᵏ⁺¹⁾ − 1 = 4·2²ᵏ − 1 = 4(2²ᵏ − 1) + 3 = 4(3m) + 3 = 3(4m + 1). Since 4m + 1 is an integer, the next expression is divisible by 3.</p></div>
+          <p>The inequality example starts later: P(n) is 2n + 1 &lt; 2ⁿ for n ≥ 3. At n = 3, 7 &lt; 8. If 2k + 1 &lt; 2ᵏ, then</p>
+          <div class="formula-card formula-text">2(k + 1) + 1 = (2k + 1) + 2 &lt; 2ᵏ + 2 &lt; 2ᵏ + 2ᵏ = 2ᵏ⁺¹,</div>
+          <p>because k ≥ 3 makes 2 &lt; 2ᵏ. State that extra comparison; it is part of the step, not a consequence of the induction hypothesis alone.</p>
+          <div class="misconception"><h3>Divisibility is about an integer witness</h3><p>To show 3 | x, express x = 3s for an integer s. Stopping at a numerical pattern such as several divisible cases does not prove the claim for every positive integer.</p></div>
+        </section>
+        <section class="lesson-section" id="fallacies">
+          <p class="eyebrow">5 · Find the broken link</p><h2>Why plausible induction proofs fail</h2>
+          <div class="worked-example"><h3>A false sum with a valid-looking step</h3><p>The slide proposes the false statement 1 + ⋯ + n = (n² + n + 1)/2. Its induction step can be manipulated into the successor expression because the incorrect right side carries the same extra constant at every n. But at n = 1, the left side is 1 and the right side is 3/2. There is no valid base case, so the step has nothing true from which to start.</p></div>
+          <div class="worked-example"><h3>The same-color cows argument</h3><p>In a group of k + 1 cows, the argument takes the first k and last k cows, assumes each group has one color, and claims a shared cow connects their colors. For k = 1, the two one-cow groups are disjoint. There is no shared cow, so the argument fails exactly when trying to pass from one cow to two.</p></div>
+          <div class="misconception"><h3>Locate the first invalid case</h3><p>A picture or a convincing algebraic pattern cannot replace the logical checks. For an induction proof, test the base and the smallest use of the step before accepting the general claim.</p></div>
+        </section>
+        <section class="lesson-section" id="strong">
+          <p class="eyebrow">6 · Use every earlier case</p><h2>Strong induction and binary sums</h2>
+          <p>Strong induction assumes P(1), P(2), …, P(k) together to prove P(k + 1), after a valid base. It reaches the same positive integers as ordinary induction, but its stronger-looking hypothesis is convenient when the next object depends on a smaller value other than k.</p>
+          <div class="formula-card formula-text">P(1) &nbsp; · &nbsp; ∀k ≥ 1, [P(1) ∧ ⋯ ∧ P(k)] ⇒ P(k + 1)</div>
+          <div class="worked-example"><h3>Every positive integer is a sum of distinct powers of two</h3><p>The base is 1 = 2⁰. For a target N = k + 1, either N itself is a power of two, or choose the largest 2ʲ &lt; N and write N = 2ʲ + m. Then 1 ≤ m &lt; 2ʲ and m ≤ k, so the strong induction hypothesis represents m with distinct powers below 2ʲ. Adding 2ʲ cannot repeat one of them.</p><p>For example, 54 = 32 + 16 + 4 + 2 = 2⁵ + 2⁴ + 2² + 2¹. Simply adding 1 to a representation of k may duplicate 2⁰, so the slide's first ordinary-induction attempt needs more work.</p></div>
+          <div class="misconception"><h3>The remainder must be smaller</h3><p>The proof invokes the hypothesis for m, so establish 1 ≤ m ≤ k first. Strong induction does not permit assuming the target case itself.</p></div>
+        </section>
+        <section class="lesson-section" id="fractions">
+          <p class="eyebrow">7 · A smaller denominator</p><h2>Continued fractions use strong induction too</h2>
+          <p>A finite continued fraction is built from an integer and repeated steps of the form q + 1/F, where q is an integer and F is a nonzero continued fraction. The lecture proves that every rational number has such a representation by inducting on a positive denominator.</p>
+          <div class="worked-example"><h3>Reduce the denominator</h3><p>Write a rational number as a/d with d &gt; 0. Integer division gives a = qd + r with 0 ≤ r &lt; d. If r = 0, then a/d = q, already an integer continued fraction. If r &gt; 0, then a/d = q + r/d = q + 1/(d/r). The rational d/r has the smaller positive denominator r, so the strong induction hypothesis supplies a continued fraction for it.</p><p>For example, 13/11 = 1 + 1/(11/2) = 1 + 1/(5 + 1/2). Each division step replaces the denominator by a smaller positive remainder until the process ends.</p></div>
+          <div class="misconception"><h3>Induct on a well-founded quantity</h3><p>The numerator need not shrink. The denominator does: 1 ≤ r &lt; d. That strict decrease is what makes the recursive appeal valid.</p></div>
+        </section>
+        <section class="lesson-section" id="recurrences">
+          <p class="eyebrow">8 · Match bases to dependencies</p><h2>Recurrences need multiple starting cases</h2>
+          <p>If the step for P(k + 1) uses P(k) and P(k − 1), prove two consecutive bases first. If it uses three preceding terms, prove three bases. More generally, a recurrence that reaches back d positions needs enough initial cases to make its first step legal.</p>
+          <div class="worked-example"><h3>A three-term sequence bound</h3><p>The slides define a₁ = 1, a₂ = 1, a₃ = 3, and aₙ₊₃ = aₙ₊₂ + aₙ₊₁ + aₙ. They claim aₙ ≤ 2ⁿ⁻¹ for n ≥ 1. The first three values satisfy 1 ≤ 1, 1 ≤ 2, and 3 ≤ 4.</p><p>Assume the bound for indices k − 2, k − 1, and k. Then aₖ₊₁ ≤ 2ᵏ⁻³ + 2ᵏ⁻² + 2ᵏ⁻¹ = 7·2ᵏ⁻³ &lt; 2ᵏ. This proves the next bound. The recurrence explains why one hypothesis alone would not suffice.</p></div>
+          <div class="worked-example"><h3>A two-term exact formula</h3><p>Let s₀ = 0, s₁ = 4, and sₖ = 6sₖ₋₁ − 5sₖ₋₂ for k ≥ 2. The claimed formula is sₙ = 5ⁿ − 1. Both bases hold: 0 = 5⁰ − 1 and 4 = 5¹ − 1.</p><p>Assuming the formula at k − 1 and k gives sₖ₊₁ = 6(5ᵏ − 1) − 5(5ᵏ⁻¹ − 1) = 5ᵏ⁺¹ − 1. The step genuinely uses both preceding claims.</p></div>
+          <div class="misconception"><h3>One base cannot start a two-term step</h3><p>Checking s₀ alone leaves s₁ unavailable when the first recurrence step needs both s₀ and s₁. The number of bases follows from the dependencies in the recurrence.</p></div>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">9 · Retrieval practice</p>
+          <h2>Week 9 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer for an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+      <button class="button button-secondary" id="checkpoint-skip" type="button">Skip checkpoint</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 9</strong></p>
+    <p><a href="../../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="assets/lesson.js?v=2"></script>
+</body>
+</html>
