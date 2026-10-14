@@ -1,0 +1,1505 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.030
+Welcome to Week Nine of CS104.
+
+2
+00:00:03.030 --> 00:00:09.090
+This lecture is about mathematical induction: a way to prove a statement
+
+3
+00:00:09.090 --> 00:00:15.150
+for every integer in a specified range without checking the integers one
+
+4
+00:00:15.150 --> 00:00:17.170
+at a time forever.
+
+5
+00:00:17.170 --> 00:00:23.230
+We will learn how a base case and an inductive step work
+
+6
+00:00:23.230 --> 00:00:29.290
+together, apply the method to sums, divisibility, and inequalities, and diagnose two
+
+7
+00:00:29.290 --> 00:00:31.310
+convincing but faulty proofs.
+
+8
+00:00:31.310 --> 00:00:37.370
+Then we will use strong induction and multiple base cases when the
+
+9
+00:00:37.370 --> 00:00:41.915
+next result depends on more than one earlier result.
+
+10
+00:00:41.915 --> 00:00:47.975
+Throughout, pay attention to exactly where the statement starts and what the
+
+11
+00:00:47.975 --> 00:00:50.500
+induction hypothesis actually gives us.
+
+12
+00:00:50.500 --> 00:00:54.376
+Here is the route through the lecture.
+
+13
+00:00:54.376 --> 00:01:01.022
+Section seven point one introduces the ordinary principle of mathematical induction and
+
+14
+00:01:01.022 --> 00:01:04.344
+then tests our understanding with fallacies.
+
+15
+00:01:04.344 --> 00:01:10.989
+A calculation in the inductive step can look impeccable while the overall
+
+16
+00:01:10.989 --> 00:01:12.651
+proof still fails.
+
+17
+00:01:12.651 --> 00:01:16.527
+Section seven point two develops other variants.
+
+18
+00:01:16.527 --> 00:01:23.172
+Strong induction lets us assume all earlier cases when proving the next
+
+19
+00:01:23.172 --> 00:01:23.726
+one.
+
+20
+00:01:23.726 --> 00:01:30.371
+Multiple base cases handle statements that depend on several preceding terms, especially
+
+21
+00:01:30.371 --> 00:01:31.478
+recursive sequences.
+
+22
+00:01:31.478 --> 00:01:38.124
+These methods share the same logic: establish a starting foothold, then show
+
+23
+00:01:38.124 --> 00:01:42.000
+that the property cannot stop being true.
+
+24
+00:01:42.000 --> 00:01:45.299
+We start with the ordinary induction principle.
+
+25
+00:01:45.299 --> 00:01:49.540
+Suppose a statement depends on a positive integer n.
+
+26
+00:01:49.540 --> 00:01:55.195
+A few successful examples do not prove it for every positive integer,
+
+27
+00:01:55.195 --> 00:01:59.908
+because there is always another value we have not checked.
+
+28
+00:01:59.908 --> 00:02:05.563
+Induction replaces that endless list with two finite tasks: verify the first
+
+29
+00:02:05.563 --> 00:02:11.218
+value, and prove that any true case leads to the next one.
+
+30
+00:02:11.218 --> 00:02:13.103
+The word any matters.
+
+31
+00:02:13.103 --> 00:02:18.759
+We prove the step for an arbitrary integer in the range, not
+
+32
+00:02:18.759 --> 00:02:23.000
+just for the first few values on the slide.
+
+33
+00:02:23.000 --> 00:02:26.520
+Imagine a ladder with any number of steps.
+
+34
+00:02:26.520 --> 00:02:29.160
+First, we can reach step one.
+
+35
+00:02:29.160 --> 00:02:34.440
+Second, whenever we stand on step k, we can reach step k
+
+36
+00:02:34.440 --> 00:02:35.320
+plus one.
+
+37
+00:02:35.320 --> 00:02:40.600
+For a four-step ladder, start at one and apply the second rule
+
+38
+00:02:40.600 --> 00:02:44.560
+successively for k equal to one, two, and three.
+
+39
+00:02:44.560 --> 00:02:49.840
+The same pair of rules works no matter how tall the ladder
+
+40
+00:02:49.840 --> 00:02:50.280
+is.
+
+41
+00:02:50.280 --> 00:02:55.560
+The first rule is the base case; the second is the inductive
+
+42
+00:02:55.560 --> 00:02:56.000
+step.
+
+43
+00:02:56.000 --> 00:02:57.760
+Neither rule alone suffices.
+
+44
+00:02:57.760 --> 00:03:03.040
+A way to move upward is useless without a starting step, while
+
+45
+00:03:03.040 --> 00:03:07.000
+reaching step one tells us nothing about higher steps.
+
+46
+00:03:07.000 --> 00:03:09.652
+The theorem makes the ladder precise.
+
+47
+00:03:09.652 --> 00:03:14.071
+Let p of n be a statement for positive integers.
+
+48
+00:03:14.071 --> 00:03:15.839
+Prove p of one.
+
+49
+00:03:15.839 --> 00:03:21.143
+Then take an arbitrary positive integer k, assume p of k, and
+
+50
+00:03:21.143 --> 00:03:25.121
+under that assumption prove p of k plus one.
+
+51
+00:03:25.121 --> 00:03:30.424
+We may then conclude that p of n holds for every positive
+
+52
+00:03:30.424 --> 00:03:31.308
+integer n.
+
+53
+00:03:31.308 --> 00:03:35.728
+The assumption p of k is called the induction hypothesis.
+
+54
+00:03:35.728 --> 00:03:41.031
+We do not assume the entire claim we are trying to prove;
+
+55
+00:03:41.031 --> 00:03:46.335
+we use one conditional step to connect each case to the next.
+
+56
+00:03:46.335 --> 00:03:51.638
+If the intended range begins at a number other than one, move
+
+57
+00:03:51.638 --> 00:03:56.500
+the base case and the step range to that starting number.
+
+58
+00:03:56.500 --> 00:03:59.317
+Try induction on two familiar finite sums.
+
+59
+00:03:59.317 --> 00:04:04.146
+The first says one plus two through n equals the product of
+
+60
+00:04:04.146 --> 00:04:08.573
+n and n plus one, divided by two, for positive n.
+
+61
+00:04:08.573 --> 00:04:13.402
+The second says one plus r through r to the power n
+
+62
+00:04:13.402 --> 00:04:18.232
+equals the quantity r raised to the exponent n plus one, minus
+
+63
+00:04:18.232 --> 00:04:23.061
+one, all divided by r minus one, for integers n at least
+
+64
+00:04:23.061 --> 00:04:23.463
+zero.
+
+65
+00:04:23.463 --> 00:04:27.085
+That displayed fraction requires r not equal to one.
+
+66
+00:04:27.085 --> 00:04:31.915
+If r equals one, there are n plus one terms, each equal
+
+67
+00:04:31.915 --> 00:04:35.939
+to one, so the sum is simply n plus one.
+
+68
+00:04:35.939 --> 00:04:40.768
+Notice also that the geometric sum starts at n equal to zero,
+
+69
+00:04:40.768 --> 00:04:45.598
+so its base case is p of zero rather than p of
+
+70
+00:04:45.598 --> 00:04:46.000
+one.
+
+71
+00:04:46.000 --> 00:04:50.811
+For the arithmetic sum, the base case n equals one reads one
+
+72
+00:04:50.811 --> 00:04:53.617
+equals one times two divided by two.
+
+73
+00:04:53.617 --> 00:04:58.428
+Now assume that the sum through k is the product of k
+
+74
+00:04:58.428 --> 00:05:01.234
+and k plus one, divided by two.
+
+75
+00:05:01.234 --> 00:05:06.045
+To obtain the sum through k plus one, append the new term
+
+76
+00:05:06.045 --> 00:05:07.248
+k plus one.
+
+77
+00:05:07.248 --> 00:05:09.252
+Factor out k plus one.
+
+78
+00:05:09.252 --> 00:05:14.063
+The other factor is k divided by two, plus one, which equals
+
+79
+00:05:14.063 --> 00:05:16.468
+k plus two divided by two.
+
+80
+00:05:16.468 --> 00:05:21.279
+So the result is the product of k plus one and k
+
+81
+00:05:21.279 --> 00:05:23.284
+plus two, divided by two.
+
+82
+00:05:23.284 --> 00:05:28.095
+That is exactly the formula with n replaced by k plus one.
+
+83
+00:05:28.095 --> 00:05:30.500
+We have proved both required parts.
+
+84
+00:05:30.500 --> 00:05:35.438
+For the geometric sum, assume r is not one and define p
+
+85
+00:05:35.438 --> 00:05:38.319
+of n for n at least zero.
+
+86
+00:05:38.319 --> 00:05:43.258
+At n equals zero, the left side is one, and the formula
+
+87
+00:05:43.258 --> 00:05:47.373
+gives r minus one over r minus one, also one.
+
+88
+00:05:47.373 --> 00:05:52.312
+Assume the sum through r to the power k equals the quantity
+
+89
+00:05:52.312 --> 00:05:57.250
+r raised to the exponent k plus one, minus one, all divided
+
+90
+00:05:57.250 --> 00:05:58.896
+by r minus one.
+
+91
+00:05:58.896 --> 00:06:03.835
+Add the next term, r raised to the exponent k plus one.
+
+92
+00:06:03.835 --> 00:06:08.773
+After putting both terms over the common denominator r minus one, the
+
+93
+00:06:08.773 --> 00:06:13.712
+numerator simplifies to r raised to the exponent k plus two, minus
+
+94
+00:06:13.712 --> 00:06:14.123
+one.
+
+95
+00:06:14.123 --> 00:06:17.827
+This is the required formula at k plus one.
+
+96
+00:06:17.827 --> 00:06:22.765
+The case r equals one remains true by the separate direct expression,
+
+97
+00:06:22.765 --> 00:06:24.000
+n plus one.
+
+98
+00:06:24.000 --> 00:06:29.287
+Our next proposition sums squares: one squared plus two squared through n
+
+99
+00:06:29.287 --> 00:06:34.574
+squared equals the product of n, n plus one, and two n
+
+100
+00:06:34.574 --> 00:06:37.218
+plus one, all divided by six.
+
+101
+00:06:37.218 --> 00:06:42.505
+It may be hard to guess this formula, but once given, induction
+
+102
+00:06:42.505 --> 00:06:43.827
+checks it systematically.
+
+103
+00:06:43.827 --> 00:06:46.030
+Start at n equals one.
+
+104
+00:06:46.030 --> 00:06:51.317
+The left side has the single term one squared, which is one.
+
+105
+00:06:51.317 --> 00:06:56.604
+The right side becomes one times two times three divided by six,
+
+106
+00:06:56.604 --> 00:06:57.485
+again one.
+
+107
+00:06:57.485 --> 00:06:59.688
+That establishes the first case.
+
+108
+00:06:59.688 --> 00:07:04.975
+The real work is now to show that the formula for k
+
+109
+00:07:04.975 --> 00:07:08.500
+leads to the formula for k plus one.
+
+110
+00:07:08.500 --> 00:07:13.711
+The slide puts the induction hypothesis and the target side by side.
+
+111
+00:07:13.711 --> 00:07:18.921
+Assume the sum of the first k squares is the product of
+
+112
+00:07:18.921 --> 00:07:24.132
+k, k plus one, and two k plus one, divided by six.
+
+113
+00:07:24.132 --> 00:07:29.342
+The target contains k plus one terms and should equal the product
+
+114
+00:07:29.342 --> 00:07:34.553
+of k plus one, k plus two, and two k plus three,
+
+115
+00:07:34.553 --> 00:07:35.855
+divided by six.
+
+116
+00:07:35.855 --> 00:07:41.066
+The bridge is the one new term, the square of k plus
+
+117
+00:07:41.066 --> 00:07:41.500
+one.
+
+118
+00:07:41.500 --> 00:07:46.711
+Write the sum through k plus one as the known sum through
+
+119
+00:07:46.711 --> 00:07:48.447
+k plus that square.
+
+120
+00:07:48.447 --> 00:07:52.789
+This identifies precisely where we may substitute the induction hypothesis.
+
+121
+00:07:52.789 --> 00:07:58.000
+We still have to simplify the resulting expression to match the target.
+
+122
+00:07:58.000 --> 00:08:01.042
+Substitute the induction hypothesis into that bridge.
+
+123
+00:08:01.042 --> 00:08:06.257
+We have k times k plus one times two k plus one
+
+124
+00:08:06.257 --> 00:08:09.299
+over six, plus k plus one squared.
+
+125
+00:08:09.299 --> 00:08:14.514
+Factor out k plus one and use a common denominator of six.
+
+126
+00:08:14.514 --> 00:08:19.729
+The remaining numerator is k times two k plus one, plus six
+
+127
+00:08:19.729 --> 00:08:21.467
+times k plus one.
+
+128
+00:08:21.467 --> 00:08:25.813
+Expanding gives two k squared plus seven k plus six.
+
+129
+00:08:25.813 --> 00:08:30.593
+That factors as k plus two times two k plus three.
+
+130
+00:08:30.593 --> 00:08:35.808
+Therefore the whole expression is k plus one times k plus two
+
+131
+00:08:35.808 --> 00:08:41.023
+times two k plus three over six, exactly the formula at k
+
+132
+00:08:41.023 --> 00:08:41.893
+plus one.
+
+133
+00:08:41.893 --> 00:08:44.500
+This factorisation completes the inductive step.
+
+134
+00:08:44.500 --> 00:08:46.890
+Induction also proves divisibility statements.
+
+135
+00:08:46.890 --> 00:08:52.626
+The proposition says that, for every positive integer n, two to the
+
+136
+00:08:52.626 --> 00:08:56.929
+power two n minus one is divisible by three.
+
+137
+00:08:56.929 --> 00:09:02.665
+We will use the definition: an integer is divisible by three if
+
+138
+00:09:02.665 --> 00:09:05.533
+it equals three times another integer.
+
+139
+00:09:05.533 --> 00:09:11.269
+For the base case n equals one, two squared minus one equals
+
+140
+00:09:11.269 --> 00:09:11.747
+three.
+
+141
+00:09:11.747 --> 00:09:16.049
+Thus the required multiple of three is visible immediately.
+
+142
+00:09:16.049 --> 00:09:21.786
+In the step, the challenge is to relate the exponent two k
+
+143
+00:09:21.786 --> 00:09:27.522
+plus two to the exponent two k that appears in the induction
+
+144
+00:09:27.522 --> 00:09:28.000
+hypothesis.
+
+145
+00:09:28.000 --> 00:09:29.922
+Make the hypothesis concrete.
+
+146
+00:09:29.922 --> 00:09:35.686
+Assume that two raised to the exponent two k, minus one, equals
+
+147
+00:09:35.686 --> 00:09:38.569
+three m for some integer m.
+
+148
+00:09:38.569 --> 00:09:44.333
+Our goal is to find an integer s such that two raised
+
+149
+00:09:44.333 --> 00:09:50.098
+to the exponent two times the quantity k plus one, minus one,
+
+150
+00:09:50.098 --> 00:09:51.539
+equals three s.
+
+151
+00:09:51.539 --> 00:09:57.304
+Naming the integer multiplier prevents us from treating divisibility as a vague
+
+152
+00:09:57.304 --> 00:09:57.784
+claim.
+
+153
+00:09:57.784 --> 00:10:03.549
+Since raising the exponent by two multiplies the power by four, we
+
+154
+00:10:03.549 --> 00:10:06.912
+should rewrite four as three plus one.
+
+155
+00:10:06.912 --> 00:10:12.676
+That will leave a copy of two raised to the exponent two
+
+156
+00:10:12.676 --> 00:10:17.000
+k, minus one, exactly the expression the hypothesis controls.
+
+157
+00:10:17.000 --> 00:10:18.838
+Here is the calculation.
+
+158
+00:10:18.838 --> 00:10:24.354
+The expression for k plus one equals four times two raised to
+
+159
+00:10:24.354 --> 00:10:27.111
+the exponent two k, minus one.
+
+160
+00:10:27.111 --> 00:10:29.869
+Replace four by three plus one.
+
+161
+00:10:29.869 --> 00:10:35.384
+The result is three times two raised to two k, plus the
+
+162
+00:10:35.384 --> 00:10:39.061
+quantity two raised to two k minus one.
+
+163
+00:10:39.061 --> 00:10:43.657
+By the induction hypothesis, that last quantity is three m.
+
+164
+00:10:43.657 --> 00:10:49.172
+Hence the whole expression equals three times the integer given by two
+
+165
+00:10:49.172 --> 00:10:51.929
+raised to two k plus m.
+
+166
+00:10:51.929 --> 00:10:56.985
+This supplies the required multiplier s and proves the next case.
+
+167
+00:10:56.985 --> 00:11:02.500
+Together with the base case, it establishes divisibility for every positive n.
+
+168
+00:11:02.500 --> 00:11:07.395
+The next practice problem is an inequality: prove that two n plus
+
+169
+00:11:07.395 --> 00:11:12.289
+one is less than two to the power n for every integer
+
+170
+00:11:12.289 --> 00:11:13.921
+n at least three.
+
+171
+00:11:13.921 --> 00:11:16.776
+The threshold is part of the claim.
+
+172
+00:11:16.776 --> 00:11:21.671
+At n equal to two, both sides are five and four respectively,
+
+173
+00:11:21.671 --> 00:11:25.342
+so the inequality is false; starting at three matters.
+
+174
+00:11:25.342 --> 00:11:29.013
+Check n equals three: seven is less than eight.
+
+175
+00:11:29.013 --> 00:11:33.908
+For the step, add two to the left side to move from
+
+176
+00:11:33.908 --> 00:11:38.803
+two k plus one to two times k plus one, plus one.
+
+177
+00:11:38.803 --> 00:11:43.697
+On the right, moving from two to the k to two to
+
+178
+00:11:43.697 --> 00:11:48.592
+the k plus one doubles the quantity, leaving room for the added
+
+179
+00:11:48.592 --> 00:11:49.000
+two.
+
+180
+00:11:49.000 --> 00:11:53.696
+The proof begins at n equals three, where seven is less than
+
+181
+00:11:53.696 --> 00:11:54.087
+eight.
+
+182
+00:11:54.087 --> 00:11:58.783
+Now take k at least three and assume two k plus one
+
+183
+00:11:58.783 --> 00:12:01.913
+is less than two to the power k.
+
+184
+00:12:01.913 --> 00:12:06.609
+The next left side is two k plus three, which is two
+
+185
+00:12:06.609 --> 00:12:08.957
+more than the current left side.
+
+186
+00:12:08.957 --> 00:12:13.652
+Therefore two k plus three is less than two to the power
+
+187
+00:12:13.652 --> 00:12:14.826
+k plus two.
+
+188
+00:12:14.826 --> 00:12:19.522
+Since k is at least three, two is less than two to
+
+189
+00:12:19.522 --> 00:12:20.696
+the power k.
+
+190
+00:12:20.696 --> 00:12:25.391
+So this is less than two to the power k plus two
+
+191
+00:12:25.391 --> 00:12:30.087
+to the power k, or two to the power k plus one.
+
+192
+00:12:30.087 --> 00:12:34.000
+We have reached the next case with strict inequalities throughout.
+
+193
+00:12:34.000 --> 00:12:39.568
+This slide deliberately offers a false formula: one plus two through n
+
+194
+00:12:39.568 --> 00:12:44.671
+supposedly equals n squared plus n plus one, divided by two.
+
+195
+00:12:44.671 --> 00:12:46.991
+Its inductive calculation works conditionally.
+
+196
+00:12:46.991 --> 00:12:52.559
+If the false formula held at k, adding k plus one would
+
+197
+00:12:52.559 --> 00:12:56.734
+produce the same false formula at k plus one.
+
+198
+00:12:56.734 --> 00:12:59.982
+But there is no true starting case.
+
+199
+00:12:59.982 --> 00:13:05.550
+At n equals one, the left side is one while the proposed
+
+200
+00:13:05.550 --> 00:13:07.869
+right side is three halves.
+
+201
+00:13:07.869 --> 00:13:13.437
+An implication from a false hypothesis can still be valid; it does
+
+202
+00:13:13.437 --> 00:13:16.685
+not establish that the hypothesis ever holds.
+
+203
+00:13:16.685 --> 00:13:22.252
+This is why we must verify the base case separately, even when
+
+204
+00:13:22.252 --> 00:13:25.500
+the algebra in the step looks flawless.
+
+205
+00:13:25.500 --> 00:13:29.036
+The famous cows argument has the opposite problem.
+
+206
+00:13:29.036 --> 00:13:34.339
+A one-cow group certainly has one colour, so the base case is
+
+207
+00:13:34.339 --> 00:13:34.781
+true.
+
+208
+00:13:34.781 --> 00:13:40.085
+For a group of k plus one cows, the argument looks at
+
+209
+00:13:40.085 --> 00:13:45.388
+the first k and last k cows, then says they share cows
+
+210
+00:13:45.388 --> 00:13:49.808
+in the middle and must therefore have the same colour.
+
+211
+00:13:49.808 --> 00:13:54.228
+That overlap exists only when k is at least two.
+
+212
+00:13:54.228 --> 00:13:59.531
+At the crucial first step, k equals one, the two one-cow groups
+
+213
+00:13:59.531 --> 00:14:00.415
+are disjoint.
+
+214
+00:14:00.415 --> 00:14:05.719
+Nothing connects their colours, so p of one does not imply p
+
+215
+00:14:05.719 --> 00:14:06.603
+of two.
+
+216
+00:14:06.603 --> 00:14:08.813
+The induction chain breaks immediately.
+
+217
+00:14:08.813 --> 00:14:14.116
+When checking a step, test it at the first value where it
+
+218
+00:14:14.116 --> 00:14:15.000
+must operate.
+
+219
+00:14:15.000 --> 00:14:19.093
+Section seven point two introduces variants of induction.
+
+220
+00:14:19.093 --> 00:14:24.721
+The central question is how much earlier information a step needs.
+
+221
+00:14:24.721 --> 00:14:30.860
+Ordinary induction presents p of k when proving p of k plus
+
+222
+00:14:30.860 --> 00:14:31.372
+one.
+
+223
+00:14:31.372 --> 00:14:37.512
+Strong induction presents all the statements from the base case through p
+
+224
+00:14:37.512 --> 00:14:38.535
+of k.
+
+225
+00:14:38.535 --> 00:14:44.674
+Later, if a recurrence uses two or three preceding terms, we will
+
+226
+00:14:44.674 --> 00:14:49.279
+give the argument the appropriate number of starting cases.
+
+227
+00:14:49.279 --> 00:14:54.395
+These are different proof formats for making the dependency explicit.
+
+228
+00:14:54.395 --> 00:14:59.000
+We begin with the binary representation of positive integers.
+
+229
+00:14:59.000 --> 00:15:04.543
+Every positive integer can be written as a sum of distinct powers
+
+230
+00:15:04.543 --> 00:15:05.467
+of two.
+
+231
+00:15:05.467 --> 00:15:07.315
+Four is two squared.
+
+232
+00:15:07.315 --> 00:15:11.011
+Eleven is two cubed plus two plus one.
+
+233
+00:15:11.011 --> 00:15:15.168
+Fifty-four is thirty-two plus sixteen plus four plus two.
+
+234
+00:15:15.168 --> 00:15:20.712
+Distinct means no power appears twice in the sum; each power is
+
+235
+00:15:20.712 --> 00:15:24.870
+either present or absent, just like a binary digit.
+
+236
+00:15:24.870 --> 00:15:29.951
+The base case is one equals two to the power zero.
+
+237
+00:15:29.951 --> 00:15:35.495
+To prove this for all positive integers, we need a reliable way
+
+238
+00:15:35.495 --> 00:15:41.038
+to construct a representation for the next integer while keeping the powers
+
+239
+00:15:41.038 --> 00:15:41.500
+distinct.
+
+240
+00:15:41.500 --> 00:15:44.413
+A first attempt uses ordinary induction.
+
+241
+00:15:44.413 --> 00:15:50.240
+Assume k is already a sum of distinct powers of two and
+
+242
+00:15:50.240 --> 00:15:54.611
+add one, which is two to the power zero.
+
+243
+00:15:54.611 --> 00:16:00.438
+That does not automatically give distinct powers: if the representation of k
+
+244
+00:16:00.438 --> 00:16:04.322
+already contains one, the power zero appears twice.
+
+245
+00:16:04.322 --> 00:16:10.149
+We could develop a carrying argument, as in binary arithmetic, but the
+
+246
+00:16:10.149 --> 00:16:15.490
+simple line on the slide does not prove the next case.
+
+247
+00:16:15.490 --> 00:16:21.317
+This is a gap in that attempted proof, not a failure of
+
+248
+00:16:21.317 --> 00:16:24.231
+ordinary induction as a logical principle.
+
+249
+00:16:24.231 --> 00:16:30.058
+The lecture now chooses strong induction, which gives a particularly clean argument
+
+250
+00:16:30.058 --> 00:16:32.000
+using a smaller remainder.
+
+251
+00:16:32.000 --> 00:16:35.995
+Strong induction begins with p of one as before.
+
+252
+00:16:35.995 --> 00:16:41.321
+For an arbitrary k, assume every case p of one through p
+
+253
+00:16:41.321 --> 00:16:46.648
+of k is true, and use all of them as needed to
+
+254
+00:16:46.648 --> 00:16:49.311
+prove p of k plus one.
+
+255
+00:16:49.311 --> 00:16:54.638
+The diagram shows the growing stock of established cases feeding each next
+
+256
+00:16:54.638 --> 00:16:55.082
+case.
+
+257
+00:16:55.082 --> 00:17:00.408
+This is a valid induction principle, not permission to assume the conclusion.
+
+258
+00:17:00.408 --> 00:17:05.735
+The hypotheses stop at k; the claim to be proved is k
+
+259
+00:17:05.735 --> 00:17:06.622
+plus one.
+
+260
+00:17:06.622 --> 00:17:11.949
+One can justify the principle by applying ordinary induction to the combined
+
+261
+00:17:11.949 --> 00:17:15.500
+statement that all cases through k are true.
+
+262
+00:17:15.500 --> 00:17:21.184
+For the binary-sum proposition, the strong induction hypothesis says that each positive
+
+263
+00:17:21.184 --> 00:17:26.868
+integer from one through k has a representation using distinct powers of
+
+264
+00:17:26.868 --> 00:17:27.342
+two.
+
+265
+00:17:27.342 --> 00:17:30.184
+We must represent k plus one.
+
+266
+00:17:30.184 --> 00:17:35.868
+A useful move is to choose the largest power of two no
+
+267
+00:17:35.868 --> 00:17:38.237
+greater than k plus one.
+
+268
+00:17:38.237 --> 00:17:43.447
+If k plus one is exactly that power, we are done.
+
+269
+00:17:43.447 --> 00:17:44.868
+Otherwise, subtract it.
+
+270
+00:17:44.868 --> 00:17:50.553
+The remainder is positive and smaller than k plus one, so it
+
+271
+00:17:50.553 --> 00:17:52.921
+falls within the strong hypothesis.
+
+272
+00:17:52.921 --> 00:17:58.605
+We then need to check that the remainder's powers cannot repeat the
+
+273
+00:17:58.605 --> 00:18:00.500
+large power we selected.
+
+274
+00:18:00.500 --> 00:18:06.104
+Let two to the power j be the largest power of two
+
+275
+00:18:06.104 --> 00:18:08.906
+no greater than k plus one.
+
+276
+00:18:08.906 --> 00:18:13.108
+If equality holds, that single power is the representation.
+
+277
+00:18:13.108 --> 00:18:18.712
+Otherwise write k plus one as two to the j plus a
+
+278
+00:18:18.712 --> 00:18:20.113
+positive remainder m.
+
+279
+00:18:20.113 --> 00:18:25.717
+Maximality of j implies m is less than two to the j,
+
+280
+00:18:25.717 --> 00:18:28.986
+and certainly m is at most k.
+
+281
+00:18:28.986 --> 00:18:33.656
+The strong hypothesis represents m using distinct powers of two.
+
+282
+00:18:33.656 --> 00:18:39.259
+Every power in that representation has exponent below j, because m itself
+
+283
+00:18:39.259 --> 00:18:42.528
+is smaller than two to the j.
+
+284
+00:18:42.528 --> 00:18:46.264
+Adding the selected power therefore creates no duplicate.
+
+285
+00:18:46.264 --> 00:18:50.000
+Both cases are covered, completing the induction proof.
+
+286
+00:18:50.000 --> 00:18:55.466
+This slide uses strong induction in a different setting: every rational number
+
+287
+00:18:55.466 --> 00:18:58.654
+can be represented by a continued fraction.
+
+288
+00:18:58.654 --> 00:19:04.120
+Under the recursive description here, an integer is a continued fraction, and
+
+289
+00:19:04.120 --> 00:19:09.586
+we can form a new one by taking an integer q plus
+
+290
+00:19:09.586 --> 00:19:12.318
+one over a nonzero continued fraction.
+
+291
+00:19:12.318 --> 00:19:15.962
+Consider a rational number with positive denominator d.
+
+292
+00:19:15.962 --> 00:19:20.062
+At d equal to one it is an integer.
+
+293
+00:19:20.062 --> 00:19:25.527
+For larger d, use division with remainder to write its numerator as
+
+294
+00:19:25.527 --> 00:19:30.993
+q d plus r, where zero is at most r and r
+
+295
+00:19:30.993 --> 00:19:32.815
+is less than d.
+
+296
+00:19:32.815 --> 00:19:36.459
+If r is zero, the number is q.
+
+297
+00:19:36.459 --> 00:19:41.925
+Otherwise it equals q plus one divided by the fraction d over
+
+298
+00:19:41.925 --> 00:19:42.380
+r.
+
+299
+00:19:42.380 --> 00:19:47.846
+The inner rational number, d over r, has positive denominator r, smaller
+
+300
+00:19:47.846 --> 00:19:51.945
+than d, so the strong induction hypothesis covers it.
+
+301
+00:19:51.945 --> 00:19:56.500
+This is the Euclidean algorithm expressed as a continued fraction.
+
+302
+00:19:56.500 --> 00:20:00.450
+Now the step may depend on two adjacent earlier statements.
+
+303
+00:20:00.450 --> 00:20:05.190
+The first variation says: prove p of one and p of two.
+
+304
+00:20:05.190 --> 00:20:09.930
+Then, for every k at least two, assume both p of k
+
+305
+00:20:09.930 --> 00:20:14.670
+minus one and p of k, and prove p of k plus
+
+306
+00:20:14.670 --> 00:20:15.065
+one.
+
+307
+00:20:15.065 --> 00:20:19.805
+At k equals two, the two base cases give p of three.
+
+308
+00:20:19.805 --> 00:20:24.545
+At k equals three, p of two and the newly established p
+
+309
+00:20:24.545 --> 00:20:28.100
+of three give p of four, and so on.
+
+310
+00:20:28.100 --> 00:20:32.840
+One base case would be insufficient for this step, because it asks
+
+311
+00:20:32.840 --> 00:20:36.000
+for two earlier facts at its first application.
+
+312
+00:20:36.000 --> 00:20:41.228
+The general variation has d consecutive base cases: p of one through
+
+313
+00:20:41.228 --> 00:20:42.535
+p of d.
+
+314
+00:20:42.535 --> 00:20:47.762
+For each k at least d, a step may use the d
+
+315
+00:20:47.762 --> 00:20:52.990
+most recent statements, from p of k minus d plus one through
+
+316
+00:20:52.990 --> 00:20:57.347
+p of k, to prove p of k plus one.
+
+317
+00:20:57.347 --> 00:21:02.574
+This describes the dependency pattern of a recurrence using d preceding terms.
+
+318
+00:21:02.574 --> 00:21:07.802
+The bookkeeping is important: the first step begins at k equal to
+
+319
+00:21:07.802 --> 00:21:11.723
+d and uses exactly the d statements already verified.
+
+320
+00:21:11.723 --> 00:21:16.950
+Once the next statement is obtained, the window shifts forward one place.
+
+321
+00:21:16.950 --> 00:21:20.000
+The next example uses three base cases.
+
+322
+00:21:20.000 --> 00:21:24.466
+Define a sequence with first terms one, one, and three.
+
+323
+00:21:24.466 --> 00:21:28.932
+Every later term is the sum of the preceding three.
+
+324
+00:21:28.932 --> 00:21:34.291
+Thus the fourth, fifth, and sixth terms are five, nine, and seventeen,
+
+325
+00:21:34.291 --> 00:21:35.184
+as shown.
+
+326
+00:21:35.184 --> 00:21:40.544
+The proposition claims that a sub n is at most two to
+
+327
+00:21:40.544 --> 00:21:44.563
+the power n minus one for every positive n.
+
+328
+00:21:44.563 --> 00:21:49.922
+Check the three required starting cases: one is at most one, one
+
+329
+00:21:49.922 --> 00:21:54.388
+is at most two, and three is at most four.
+
+330
+00:21:54.388 --> 00:21:59.748
+To prove the next bound, we will need the bounds for all
+
+331
+00:21:59.748 --> 00:22:02.427
+three terms appearing in the recurrence.
+
+332
+00:22:02.427 --> 00:22:06.000
+This is why the multiple-base-case form fits naturally.
+
+333
+00:22:06.000 --> 00:22:10.655
+Take k at least three and assume the required bounds for a
+
+334
+00:22:10.655 --> 00:22:15.310
+sub k minus two, a sub k minus one, and a sub
+
+335
+00:22:15.310 --> 00:22:15.698
+k.
+
+336
+00:22:15.698 --> 00:22:19.966
+The recurrence gives a sub k plus one as their sum.
+
+337
+00:22:19.966 --> 00:22:24.621
+The hypotheses bound that sum by two to the k minus three,
+
+338
+00:22:24.621 --> 00:22:29.276
+plus two to the k minus two, plus two to the k
+
+339
+00:22:29.276 --> 00:22:30.052
+minus one.
+
+340
+00:22:30.052 --> 00:22:34.707
+Factor out two to the k minus three: the coefficient is one
+
+341
+00:22:34.707 --> 00:22:37.034
+plus two plus four, or seven.
+
+342
+00:22:37.034 --> 00:22:41.690
+Since seven is at most eight, the result is at most eight
+
+343
+00:22:41.690 --> 00:22:46.345
+times two to the k minus three, which equals two to the
+
+344
+00:22:46.345 --> 00:22:46.733
+k.
+
+345
+00:22:46.733 --> 00:22:51.000
+That is precisely the target bound at index k plus one.
+
+346
+00:22:51.000 --> 00:22:55.404
+The final practice problem starts a sequence at index zero.
+
+347
+00:22:55.404 --> 00:23:00.688
+We are given s sub zero equals zero, s sub one equals
+
+348
+00:23:00.688 --> 00:23:05.972
+four, and each later term equals six times the preceding term minus
+
+349
+00:23:05.972 --> 00:23:08.615
+five times the term before that.
+
+350
+00:23:08.615 --> 00:23:13.899
+The proposed closed form is s sub n equals five to the
+
+351
+00:23:13.899 --> 00:23:18.303
+power n minus one for all n at least zero.
+
+352
+00:23:18.303 --> 00:23:23.587
+Because the recurrence looks back two places, verify the formula at both
+
+353
+00:23:23.587 --> 00:23:24.908
+zero and one.
+
+354
+00:23:24.908 --> 00:23:30.193
+The inductive step must use both formulas at k minus one and
+
+355
+00:23:30.193 --> 00:23:34.156
+k to prove the formula at k plus one.
+
+356
+00:23:34.156 --> 00:23:39.000
+Keep those two hypotheses visible when you substitute into the recurrence.
+
+357
+00:23:39.000 --> 00:23:44.298
+At zero, five to the power zero minus one is zero; at
+
+358
+00:23:44.298 --> 00:23:46.947
+one, five minus one is four.
+
+359
+00:23:46.947 --> 00:23:49.596
+Both bases match the given values.
+
+360
+00:23:49.596 --> 00:23:52.687
+Now let k be at least one.
+
+361
+00:23:52.687 --> 00:23:57.985
+The first induction hypothesis gives s sub k minus one as five
+
+362
+00:23:57.985 --> 00:24:02.401
+raised to the exponent k minus one, then subtract one.
+
+363
+00:24:02.401 --> 00:24:07.699
+The second gives s sub k as five to the power k,
+
+364
+00:24:07.699 --> 00:24:09.023
+then subtract one.
+
+365
+00:24:09.023 --> 00:24:14.322
+The recurrence says to multiply s sub k by six and subtract
+
+366
+00:24:14.322 --> 00:24:17.412
+five times s sub k minus one.
+
+367
+00:24:17.412 --> 00:24:22.711
+After substitution, the first contribution is six times the difference between five
+
+368
+00:24:22.711 --> 00:24:25.360
+to the power k and one.
+
+369
+00:24:25.360 --> 00:24:30.658
+The second is five times the difference between five raised to the
+
+370
+00:24:30.658 --> 00:24:33.307
+exponent k minus one and one.
+
+371
+00:24:33.307 --> 00:24:36.398
+Subtract the second contribution from the first.
+
+372
+00:24:36.398 --> 00:24:41.696
+The power terms simplify to five to the power k plus one,
+
+373
+00:24:41.696 --> 00:24:44.345
+while the constants give negative one.
+
+374
+00:24:44.345 --> 00:24:47.877
+This proves the formula at k plus one.
+
+375
+00:24:47.877 --> 00:24:53.175
+The step needed both preceding claims, even though the slide's closing shorthand
+
+376
+00:24:53.175 --> 00:24:54.500
+names only one.

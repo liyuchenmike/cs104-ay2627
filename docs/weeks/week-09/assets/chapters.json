@@ -1,0 +1,41 @@
+{
+  "duration": 1494.52002,
+  "chapters": [
+    {
+      "title": "The induction principle",
+      "time": 0
+    },
+    {
+      "title": "Arithmetic and geometric sums",
+      "time": 236.5
+    },
+    {
+      "title": "Sum of squares",
+      "time": 384
+    },
+    {
+      "title": "Divisibility and inequality",
+      "time": 524.5
+    },
+    {
+      "title": "Faulty induction proofs",
+      "time": 754
+    },
+    {
+      "title": "Strong induction and binary sums",
+      "time": 855
+    },
+    {
+      "title": "Continued fractions",
+      "time": 1130
+    },
+    {
+      "title": "Multiple base cases",
+      "time": 1196.5
+    },
+    {
+      "title": "A two-term recurrence",
+      "time": 1371
+    }
+  ]
+}

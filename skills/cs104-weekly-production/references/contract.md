@@ -78,6 +78,8 @@ Each config contains exactly the shared schema version, week identity, audience-
 
 - root contract passes;
 - canonical source deck exists and is ignored by Git;
+- a new week may initially omit `week.json`;
+- before calling the generic builder, create the canonical `week.json` from the original deck's title and PPTX package slide count, then rerun `source`;
 - when `week.json` exists, its identity is valid and its expected slide count matches the PPTX package.
 
 ### `authoring`

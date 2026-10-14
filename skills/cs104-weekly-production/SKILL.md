@@ -7,6 +7,8 @@ description: Build or revise CS104 weekly portal lessons through the project’s
 
 Use the repository’s canonical workflow for every CS104 weekly lesson. Read [references/contract.md](references/contract.md) before changing a week.
 
+Find source decks on disk: they are Git-ignored, so a default `rg --files` listing may omit them. Available weeks need not be consecutive; use the requested `week-NN.pptx` filename as the week identity even if its slide title has a different lecture number.
+
 ## Non-negotiable gate
 
 Run the validator before any week mutation:
@@ -30,13 +32,14 @@ This approval gate also applies when:
 
 ## Required workflow
 
-1. Validate `source`.
-2. Render `lecture-notes/week-NN.pptx` with Microsoft PowerPoint using the generic builder’s `--render-only` mode.
-3. Inspect all rendered slides and create only the canonical config, narration, lesson page, and interactive quiz files.
-4. Validate `authoring`.
-5. Build with the generic builder. Use the private voice reference only from `voice-work/private/`; never copy it into public or tracked paths.
-6. Validate `complete`, run the site checker, decode the MP4, inspect representative frames, and check desktop/mobile interaction.
-7. Commit and push a review branch when requested or when it is the established project workflow. Never merge or deploy without explicit approval.
+1. Validate `source` before changing the week. A new week may have no `week.json` yet.
+2. Read the original deck's title and packaged slide count. Create only the canonical `course/weeks/week-NN/week.json`, then validate `source` again to check its identity and slide count against the deck.
+3. Render `lecture-notes/week-NN.pptx` with Microsoft PowerPoint using the generic builder's `--render-only` mode.
+4. Inspect all rendered slides and create only the canonical narration, lesson page, and interactive quiz files.
+5. Validate `authoring`.
+6. Build with the generic builder. Use the private voice reference only from `voice-work/private/`; never copy it into public or tracked paths.
+7. Validate `complete`, run the site checker, decode the MP4, inspect representative frames, and check desktop/mobile interaction.
+8. Commit and push a review branch when requested or when it is the established project workflow. Never merge or deploy without explicit approval.
 
 ## Content rules
 
