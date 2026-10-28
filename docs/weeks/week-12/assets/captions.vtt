@@ -1,0 +1,1677 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.253
+Welcome to Week Twelve of CS104.
+
+2
+00:00:03.253 --> 00:00:09.758
+This lecture, titled Counting, asks how many possibilities exist when listing them
+
+3
+00:00:09.758 --> 00:00:14.095
+one by one would be slow or impossible.
+
+4
+00:00:14.095 --> 00:00:20.600
+We begin with the number of integers in an interval and the
+
+5
+00:00:20.600 --> 00:00:23.853
+multiplication rule for sequences of choices.
+
+6
+00:00:23.853 --> 00:00:30.358
+Then we count ordered arrangements, combine and subtract sets, and choose unordered
+
+7
+00:00:30.358 --> 00:00:30.900
+groups.
+
+8
+00:00:30.900 --> 00:00:36.321
+We finish with repeated objects and selections that allow repetition.
+
+9
+00:00:36.321 --> 00:00:42.284
+Every formula has assumptions about order, replacement, and whether cases overlap.
+
+10
+00:00:42.284 --> 00:00:48.789
+Before calculating, identify what a single outcome looks like and which outcomes
+
+11
+00:00:48.789 --> 00:00:51.500
+must be counted exactly once.
+
+12
+00:00:51.500 --> 00:00:55.442
+Here is the route through Lecture Ten.
+
+13
+00:00:55.442 --> 00:01:02.200
+Simple Counting begins with a list of consecutive integers and the multiplication
+
+14
+00:01:02.200 --> 00:01:04.453
+rule for several steps.
+
+15
+00:01:04.453 --> 00:01:11.211
+Counting on Sets introduces permutations and the addition, difference, and inclusion-exclusion rules.
+
+16
+00:01:11.211 --> 00:01:17.968
+Combinations count subsets where order is irrelevant; we will also handle indistinguishable
+
+17
+00:01:17.968 --> 00:01:21.911
+repeated letters and selections with repetition allowed.
+
+18
+00:01:21.911 --> 00:01:26.979
+The final table brings four common selection formulas together.
+
+19
+00:01:26.979 --> 00:01:33.737
+The same problem can often be attacked by more than one rule,
+
+20
+00:01:33.737 --> 00:01:40.495
+but the rules must fit the structure of the objects being counted.
+
+21
+00:01:40.495 --> 00:01:45.000
+We will explain those choices in worked examples.
+
+22
+00:01:45.000 --> 00:01:50.878
+Section ten point one begins with the most direct counting task: count
+
+23
+00:01:50.878 --> 00:01:53.327
+the elements of a list.
+
+24
+00:01:53.327 --> 00:01:59.204
+Consecutive integers are a useful case because there is a short formula
+
+25
+00:01:59.204 --> 00:02:04.102
+even when the interval is too long to write out.
+
+26
+00:02:04.102 --> 00:02:08.510
+The key detail is whether both endpoints are included.
+
+27
+00:02:08.510 --> 00:02:14.388
+Once we can count an integer interval, we can count items whose
+
+28
+00:02:14.388 --> 00:02:20.265
+labels run through such an interval, such as the multipliers producing three-digit
+
+29
+00:02:20.265 --> 00:02:21.735
+multiples of five.
+
+30
+00:02:21.735 --> 00:02:27.612
+After that, the lecture turns from one list to a sequence of
+
+31
+00:02:27.612 --> 00:02:33.000
+choices, where the multiplication rule can replace a much larger enumeration.
+
+32
+00:02:33.000 --> 00:02:36.429
+Look at the integers from five through twelve.
+
+33
+00:02:36.429 --> 00:02:41.571
+The slide pairs five with count one, six with count two, and
+
+34
+00:02:41.571 --> 00:02:45.429
+so on until twelve is paired with count eight.
+
+35
+00:02:45.429 --> 00:02:50.571
+Subtracting twelve minus five gives seven gaps between endpoints, but there are
+
+36
+00:02:50.571 --> 00:02:53.571
+eight listed integers because both endpoints count.
+
+37
+00:02:53.571 --> 00:02:58.714
+In general, when m and n are integers with m at most
+
+38
+00:02:58.714 --> 00:03:03.857
+n, the inclusive list m, m plus one, through n has n
+
+39
+00:03:03.857 --> 00:03:06.000
+minus m plus one elements.
+
+40
+00:03:06.000 --> 00:03:11.143
+One way to see this is to shift every item down by
+
+41
+00:03:11.143 --> 00:03:16.286
+m: the list becomes zero through n minus m, which has one
+
+42
+00:03:16.286 --> 00:03:20.143
+item for zero plus one for each positive value.
+
+43
+00:03:20.143 --> 00:03:25.286
+Test the formula with m equal to n; the answer is one,
+
+44
+00:03:25.286 --> 00:03:27.000
+as it should be.
+
+45
+00:03:27.000 --> 00:03:31.333
+How many three-digit integers are divisible by five?
+
+46
+00:03:31.333 --> 00:03:36.750
+The first is one hundred, which is five times twenty.
+
+47
+00:03:36.750 --> 00:03:43.250
+The last is nine hundred ninety-five, which is five times one hundred
+
+48
+00:03:43.250 --> 00:03:43.792
+ninety-nine.
+
+49
+00:03:43.792 --> 00:03:50.292
+Every multiple in between has exactly one integer multiplier from twenty through
+
+50
+00:03:50.292 --> 00:03:56.792
+one hundred ninety-nine, and every multiplier in that interval produces exactly one
+
+51
+00:03:56.792 --> 00:03:58.417
+eligible three-digit number.
+
+52
+00:03:58.417 --> 00:04:03.833
+So we count the multipliers rather than writing every multiple.
+
+53
+00:04:03.833 --> 00:04:10.333
+The inclusive-list rule gives one hundred ninety-nine minus twenty plus one, or
+
+54
+00:04:10.333 --> 00:04:11.958
+one hundred eighty.
+
+55
+00:04:11.958 --> 00:04:18.458
+Using nine hundred ninety-nine as though it were divisible by five, or
+
+56
+00:04:18.458 --> 00:04:24.958
+forgetting the plus one for the inclusive endpoints, would give the wrong
+
+57
+00:04:24.958 --> 00:04:25.500
+answer.
+
+58
+00:04:25.500 --> 00:04:31.896
+Now count possible four-symbol PINs when each position may contain any of
+
+59
+00:04:31.896 --> 00:04:34.561
+twenty-six letters or ten digits.
+
+60
+00:04:34.561 --> 00:04:38.825
+That makes thirty-six available symbols for each position.
+
+61
+00:04:38.825 --> 00:04:45.222
+The slide shows a choice at each of four successive positions, and
+
+62
+00:04:45.222 --> 00:04:50.552
+repetition is allowed: a symbol used earlier remains available later.
+
+63
+00:04:50.552 --> 00:04:56.948
+The sample PINs include letters only, digits only, and mixtures, so do
+
+64
+00:04:56.948 --> 00:05:03.344
+not impose an extra condition that every PIN must contain both types.
+
+65
+00:05:03.344 --> 00:05:08.675
+The multiplication rule will multiply the four numbers of choices.
+
+66
+00:05:08.675 --> 00:05:15.071
+Because each position still has thirty-six choices, the total is thirty-six to
+
+67
+00:05:15.071 --> 00:05:21.467
+the fourth power, or one million six hundred seventy-nine thousand six hundred
+
+68
+00:05:21.467 --> 00:05:22.000
+sixteen.
+
+69
+00:05:22.000 --> 00:05:26.150
+The multiplication rule formalizes a sequence of choices.
+
+70
+00:05:26.150 --> 00:05:32.374
+If step one has n one choices, step two has n two
+
+71
+00:05:32.374 --> 00:05:38.598
+choices regardless of which first choice was made, and the same fixed-count
+
+72
+00:05:38.598 --> 00:05:43.266
+condition holds for each later step, multiply the counts.
+
+73
+00:05:43.266 --> 00:05:49.491
+For the four-symbol PIN, that is thirty-six times thirty-six times thirty-six times
+
+74
+00:05:49.491 --> 00:05:50.009
+thirty-six.
+
+75
+00:05:50.009 --> 00:05:54.159
+The phrase regardless of earlier choices is essential.
+
+76
+00:05:54.159 --> 00:06:00.383
+The individual options can change, but the number of options must remain
+
+77
+00:06:00.383 --> 00:06:06.089
+fixed across every earlier branch for this simple product to work.
+
+78
+00:06:06.089 --> 00:06:12.313
+If a later step has a different number of choices in different
+
+79
+00:06:12.313 --> 00:06:17.500
+branches, split the cases or reorder the steps before multiplying.
+
+80
+00:06:17.500 --> 00:06:20.472
+The officer problem tests that condition.
+
+81
+00:06:20.472 --> 00:06:26.416
+Choose a president, treasurer, and secretary from Ann, Bob, Cyd, and Dan,
+
+82
+00:06:26.416 --> 00:06:27.902
+using distinct people.
+
+83
+00:06:27.902 --> 00:06:33.846
+Ann cannot be president, and the secretary must be Cyd or Dan.
+
+84
+00:06:33.846 --> 00:06:39.790
+A tempting product says three choices for president, three for treasurer, and
+
+85
+00:06:39.790 --> 00:06:42.266
+two for secretary, giving eighteen.
+
+86
+00:06:42.266 --> 00:06:43.752
+That is incorrect.
+
+87
+00:06:43.752 --> 00:06:49.696
+If Cyd or Dan has already taken an earlier office, fewer eligible
+
+88
+00:06:49.696 --> 00:06:53.659
+secretaries remain; in one branch, neither may remain.
+
+89
+00:06:53.659 --> 00:06:59.603
+The count of secretary options depends on the earlier choices, so it
+
+90
+00:06:59.603 --> 00:07:05.547
+cannot be represented by a fixed factor of two at the end.
+
+91
+00:07:05.547 --> 00:07:10.500
+We need to inspect branches or choose a better order.
+
+92
+00:07:10.500 --> 00:07:13.968
+The tree diagram makes the dependency visible.
+
+93
+00:07:13.968 --> 00:07:18.923
+The first branches choose Bob, Cyd, or Dan as president.
+
+94
+00:07:18.923 --> 00:07:24.868
+Later branches choose a different treasurer, and only the paths that end
+
+95
+00:07:24.868 --> 00:07:28.832
+with Cyd or Dan as secretary are valid.
+
+96
+00:07:28.832 --> 00:07:34.777
+Instead of multiplying one count per column, trace each complete path that
+
+97
+00:07:34.777 --> 00:07:36.264
+obeys every restriction.
+
+98
+00:07:36.264 --> 00:07:39.236
+The diagram shows eight such outcomes.
+
+99
+00:07:39.236 --> 00:07:45.182
+For example, if Bob is president and Ann is treasurer, either Cyd
+
+100
+00:07:45.182 --> 00:07:47.659
+or Dan can be secretary.
+
+101
+00:07:47.659 --> 00:07:53.605
+But if Cyd is president and Dan is treasurer, there is no
+
+102
+00:07:53.605 --> 00:07:55.091
+eligible secretary left.
+
+103
+00:07:55.091 --> 00:08:01.036
+This is why the earlier multiplication gave eighteen: it counted impossible final
+
+104
+00:08:01.036 --> 00:08:05.000
+choices as if they existed on every branch.
+
+105
+00:08:05.000 --> 00:08:10.550
+There is a cleaner solution: choose the most restricted office first.
+
+106
+00:08:10.550 --> 00:08:14.587
+The secretary has two choices, Cyd or Dan.
+
+107
+00:08:14.587 --> 00:08:20.642
+Once the secretary is fixed, the president cannot be Ann and cannot
+
+108
+00:08:20.642 --> 00:08:26.193
+be the chosen secretary, leaving two choices among the other people.
+
+109
+00:08:26.193 --> 00:08:31.239
+Then two of the original four remain available for treasurer.
+
+110
+00:08:31.239 --> 00:08:37.294
+Now the number of choices at each step is constant across all
+
+111
+00:08:37.294 --> 00:08:43.349
+previous branches, so the multiplication rule gives two times two times two,
+
+112
+00:08:43.349 --> 00:08:44.358
+or eight.
+
+113
+00:08:44.358 --> 00:08:50.413
+Reordering steps does not change the final assignment being counted; it changes
+
+114
+00:08:50.413 --> 00:08:53.945
+only the way we describe its construction.
+
+115
+00:08:53.945 --> 00:09:00.000
+This is a useful tactic whenever constraints make a naive product unreliable.
+
+116
+00:09:00.000 --> 00:09:04.815
+Section ten point two shifts to counting on sets.
+
+117
+00:09:04.815 --> 00:09:10.700
+First we count permutations, which are complete orderings of distinct objects.
+
+118
+00:09:10.700 --> 00:09:17.120
+Later, set operations help us combine, subtract, and correct for overlapping collections
+
+119
+00:09:17.120 --> 00:09:18.190
+of outcomes.
+
+120
+00:09:18.190 --> 00:09:24.610
+The distinction between an ordered outcome and a subset is worth keeping
+
+121
+00:09:24.610 --> 00:09:31.030
+in view: a row of officers or letters has positions, while a
+
+122
+00:09:31.030 --> 00:09:33.705
+team is merely a group.
+
+123
+00:09:33.705 --> 00:09:40.125
+In the next slides, every object in the starting set is distinct
+
+124
+00:09:40.125 --> 00:09:43.335
+unless the lecture explicitly says otherwise.
+
+125
+00:09:43.335 --> 00:09:49.755
+We will derive factorial and partial-permutation formulas from the multiplication rule before
+
+126
+00:09:49.755 --> 00:09:53.500
+using set operations for other counting problems.
+
+127
+00:09:53.500 --> 00:09:58.976
+A permutation of a set is an ordering of its objects in
+
+128
+00:09:58.976 --> 00:09:59.888
+a row.
+
+129
+00:09:59.888 --> 00:10:05.364
+The three distinct letters a, b, and c have six possible rows:
+
+130
+00:10:05.364 --> 00:10:08.558
+abc, acb, bac, bca, cab, and cba.
+
+131
+00:10:08.558 --> 00:10:14.034
+The same three letters appear in every row, but changing their order
+
+132
+00:10:14.034 --> 00:10:15.859
+creates a different permutation.
+
+133
+00:10:15.859 --> 00:10:21.335
+For instance, abc and bac are distinct even though they contain the
+
+134
+00:10:21.335 --> 00:10:23.160
+same set of letters.
+
+135
+00:10:23.160 --> 00:10:28.636
+We can list six rows here, but listing becomes impractical as the
+
+136
+00:10:28.636 --> 00:10:29.549
+set grows.
+
+137
+00:10:29.549 --> 00:10:35.024
+The natural question is how many rows can be formed from n
+
+138
+00:10:35.024 --> 00:10:35.937
+distinct objects.
+
+139
+00:10:35.937 --> 00:10:40.500
+We will answer by filling positions from left to right.
+
+140
+00:10:40.500 --> 00:10:46.014
+To arrange n distinct objects, choose the first position in n ways.
+
+141
+00:10:46.014 --> 00:10:51.527
+After using one object, choose the second in n minus one ways.
+
+142
+00:10:51.527 --> 00:10:57.041
+The third has n minus two choices, and the final position has
+
+143
+00:10:57.041 --> 00:10:57.500
+one.
+
+144
+00:10:57.500 --> 00:11:03.014
+Every full row arises from exactly one such sequence of choices, so
+
+145
+00:11:03.014 --> 00:11:07.149
+multiply n times n minus one down to one.
+
+146
+00:11:07.149 --> 00:11:11.284
+That product is n factorial, written n exclamation mark.
+
+147
+00:11:11.284 --> 00:11:15.878
+The slide states the theorem for n at least one.
+
+148
+00:11:15.878 --> 00:11:21.392
+For three letters it gives three times two times one, or six,
+
+149
+00:11:21.392 --> 00:11:22.770
+matching the list.
+
+150
+00:11:22.770 --> 00:11:28.284
+Notice how the number of available objects decreases because repetition is not
+
+151
+00:11:28.284 --> 00:11:31.500
+allowed in a permutation of a set.
+
+152
+00:11:31.500 --> 00:11:37.389
+The word COMPUTER has eight distinct letters, so all arrangements use eight
+
+153
+00:11:37.389 --> 00:11:41.315
+factorial, or forty thousand three hundred twenty, rows.
+
+154
+00:11:41.315 --> 00:11:47.204
+If the letters C and O must stay together in that order,
+
+155
+00:11:47.204 --> 00:11:53.093
+treat the fixed block CO as one object along with the six
+
+156
+00:11:53.093 --> 00:11:54.074
+other letters.
+
+157
+00:11:54.074 --> 00:11:59.963
+There are then seven distinct objects to arrange, giving seven factorial, or
+
+158
+00:11:59.963 --> 00:12:01.435
+five thousand forty.
+
+159
+00:12:01.435 --> 00:12:06.833
+The words in that order matter: the block is CO only.
+
+160
+00:12:06.833 --> 00:12:12.722
+If either CO or OC were allowed, that would be a different
+
+161
+00:12:12.722 --> 00:12:16.157
+problem with an extra factor of two.
+
+162
+00:12:16.157 --> 00:12:22.046
+The block method works because every admissible arrangement corresponds to exactly one
+
+163
+00:12:22.046 --> 00:12:24.500
+arrangement of the seven objects.
+
+164
+00:12:24.500 --> 00:12:29.577
+We can also select only r of n distinct objects and arrange
+
+165
+00:12:29.577 --> 00:12:30.846
+those selected objects.
+
+166
+00:12:30.846 --> 00:12:35.923
+For the set containing a, b, and c, the ordered pairs are
+
+167
+00:12:35.923 --> 00:12:38.885
+ab, ac, ba, bc, ca, and cb.
+
+168
+00:12:38.885 --> 00:12:42.692
+This is a two-permutation, and ab differs from ba.
+
+169
+00:12:42.692 --> 00:12:47.769
+Fill the first position in n ways, the second in n minus
+
+170
+00:12:47.769 --> 00:12:50.731
+one ways, and stop after r positions.
+
+171
+00:12:50.731 --> 00:12:55.808
+The product is n times n minus one down to n minus
+
+172
+00:12:55.808 --> 00:13:00.885
+r plus one, or n factorial divided by the factorial of n
+
+173
+00:13:00.885 --> 00:13:01.731
+minus r.
+
+174
+00:13:01.731 --> 00:13:06.808
+The condition is one at most r at most n on this
+
+175
+00:13:06.808 --> 00:13:07.231
+slide.
+
+176
+00:13:07.231 --> 00:13:12.308
+Unlike a combination, an r-permutation keeps track of the order in which
+
+177
+00:13:12.308 --> 00:13:14.000
+the chosen elements appear.
+
+178
+00:13:14.000 --> 00:13:17.309
+Use the formula in three small examples.
+
+179
+00:13:17.309 --> 00:13:22.982
+P of five comma two is five times four, or twenty, because
+
+180
+00:13:22.982 --> 00:13:27.236
+we fill two ordered positions from five distinct objects.
+
+181
+00:13:27.236 --> 00:13:32.909
+P of seven comma four is seven times six times five times
+
+182
+00:13:32.909 --> 00:13:35.273
+four, or eight hundred forty.
+
+183
+00:13:35.273 --> 00:13:40.945
+P of five comma five uses every object and equals five factorial,
+
+184
+00:13:40.945 --> 00:13:42.836
+or one hundred twenty.
+
+185
+00:13:42.836 --> 00:13:48.509
+In the factorial fraction, the final example has zero factorial in the
+
+186
+00:13:48.509 --> 00:13:54.182
+denominator; zero factorial is one, so the expression agrees with a full
+
+187
+00:13:54.182 --> 00:13:54.655
+permutation.
+
+188
+00:13:54.655 --> 00:14:00.327
+These examples also show why the product stops after r factors rather
+
+189
+00:14:00.327 --> 00:14:06.000
+than multiplying all the way down to one unless r equals n.
+
+190
+00:14:06.000 --> 00:14:09.571
+Sometimes the outcomes fall into separate categories.
+
+191
+00:14:09.571 --> 00:14:15.694
+If sets A one, A two, and so on are pairwise disjoint,
+
+192
+00:14:15.694 --> 00:14:21.816
+no outcome belongs to two categories, and the size of their union
+
+193
+00:14:21.816 --> 00:14:24.878
+is the sum of their sizes.
+
+194
+00:14:24.878 --> 00:14:30.490
+Pairwise disjoint means every intersection of two different categories is empty.
+
+195
+00:14:30.490 --> 00:14:34.061
+The slide calls this the addition rule.
+
+196
+00:14:34.061 --> 00:14:36.612
+The condition prevents double counting.
+
+197
+00:14:36.612 --> 00:14:42.735
+If an outcome can appear in more than one category, adding category
+
+198
+00:14:42.735 --> 00:14:48.857
+sizes counts it repeatedly, and we need a correction such as inclusion-exclusion.
+
+199
+00:14:48.857 --> 00:14:54.980
+The next example works because PINs of different lengths cannot be the
+
+200
+00:14:54.980 --> 00:14:56.000
+same sequence.
+
+201
+00:14:56.000 --> 00:15:02.436
+A PIN of one to three letters may have length one, length
+
+202
+00:15:02.436 --> 00:15:06.727
+two, or length three, and letters may repeat.
+
+203
+00:15:06.727 --> 00:15:09.945
+Those three length categories are disjoint.
+
+204
+00:15:09.945 --> 00:15:16.382
+A one-letter PIN has twenty-six choices; a two-letter PIN has twenty-six squared;
+
+205
+00:15:16.382 --> 00:15:20.136
+and a three-letter PIN has twenty-six cubed.
+
+206
+00:15:20.136 --> 00:15:26.573
+The multiplication rule counts within each length, and the addition rule combines
+
+207
+00:15:26.573 --> 00:15:33.009
+the lengths: twenty-six plus six hundred seventy-six plus seventeen thousand five hundred
+
+208
+00:15:33.009 --> 00:15:36.764
+seventy-six equals eighteen thousand two hundred seventy-eight.
+
+209
+00:15:36.764 --> 00:15:43.200
+Do not multiply the three length totals together, because a PIN has
+
+210
+00:15:43.200 --> 00:15:48.027
+one chosen length, not all three lengths at once.
+
+211
+00:15:48.027 --> 00:15:54.464
+Nor should the empty sequence be included; the permitted lengths start at
+
+212
+00:15:54.464 --> 00:15:55.000
+one.
+
+213
+00:15:55.000 --> 00:15:59.856
+The difference rule counts what remains after excluding a known subset.
+
+214
+00:15:59.856 --> 00:16:05.153
+If B is contained in a finite set A, then the number
+
+215
+00:16:05.153 --> 00:16:10.450
+in A but not B is the size of A minus the
+
+216
+00:16:10.450 --> 00:16:11.775
+size of B.
+
+217
+00:16:11.775 --> 00:16:16.189
+This is often easier than counting a complicated target directly.
+
+218
+00:16:16.189 --> 00:16:21.486
+To count objects with at least one special feature, let A be
+
+219
+00:16:21.486 --> 00:16:26.784
+all objects and B be the objects with none of that feature.
+
+220
+00:16:26.784 --> 00:16:29.432
+The target is A minus B.
+
+221
+00:16:29.432 --> 00:16:34.730
+We will apply this to four-symbol PINs with at least one repeated
+
+222
+00:16:34.730 --> 00:16:35.171
+symbol.
+
+223
+00:16:35.171 --> 00:16:40.468
+Be precise about B: it must be a subset of A so
+
+224
+00:16:40.468 --> 00:16:44.000
+that subtraction removes exactly the unwanted outcomes once.
+
+225
+00:16:44.000 --> 00:16:49.347
+Return to four-symbol PINs from thirty-six letters and digits.
+
+226
+00:16:49.347 --> 00:16:56.475
+With repetition allowed, there are thirty-six to the fourth power, or one
+
+227
+00:16:56.475 --> 00:17:02.416
+million six hundred seventy-nine thousand six hundred sixteen total PINs.
+
+228
+00:17:02.416 --> 00:17:09.545
+The complement of having at least one repeated symbol is having four
+
+229
+00:17:09.545 --> 00:17:10.733
+distinct symbols.
+
+230
+00:17:10.733 --> 00:17:17.861
+Fill the four positions without replacement: thirty-six times thirty-five times thirty-four times
+
+231
+00:17:17.861 --> 00:17:24.396
+thirty-three, or one million four hundred thirteen thousand seven hundred twenty.
+
+232
+00:17:24.396 --> 00:17:31.525
+Subtracting gives two hundred sixty-five thousand eight hundred ninety-six PINs with at
+
+233
+00:17:31.525 --> 00:17:33.307
+least one repeat.
+
+234
+00:17:33.307 --> 00:17:40.436
+This includes PINs with several repeated positions; the complement method handles all
+
+235
+00:17:40.436 --> 00:17:44.000
+such patterns without making overlapping cases.
+
+236
+00:17:44.000 --> 00:17:50.178
+When sets overlap, simply adding their sizes counts shared elements more than
+
+237
+00:17:50.178 --> 00:17:50.693
+once.
+
+238
+00:17:50.693 --> 00:17:56.871
+For two sets, add the sizes of A and B, then subtract
+
+239
+00:17:56.871 --> 00:17:59.960
+the size of their intersection once.
+
+240
+00:17:59.960 --> 00:18:06.139
+For three sets, add the three individual sizes, subtract each pairwise intersection,
+
+241
+00:18:06.139 --> 00:18:09.228
+then add the triple intersection back.
+
+242
+00:18:09.228 --> 00:18:15.406
+A triple-overlap element was counted three times in the first sum and
+
+243
+00:18:15.406 --> 00:18:21.584
+subtracted three times in the pairwise correction, so adding it once gives
+
+244
+00:18:21.584 --> 00:18:23.644
+the correct final count.
+
+245
+00:18:23.644 --> 00:18:27.248
+The Venn diagram illustrates the shared region.
+
+246
+00:18:27.248 --> 00:18:33.426
+The formulas count elements in the union, meaning outcomes satisfying at least
+
+247
+00:18:33.426 --> 00:18:36.000
+one of the listed conditions.
+
+248
+00:18:36.000 --> 00:18:42.340
+Count integers from one through one thousand that are multiples of three
+
+249
+00:18:42.340 --> 00:18:43.396
+or five.
+
+250
+00:18:43.396 --> 00:18:49.736
+Set A contains multiples of three, so its size is the integer
+
+251
+00:18:49.736 --> 00:18:55.547
+part of one thousand divided by three, or three hundred thirty-three.
+
+252
+00:18:55.547 --> 00:19:00.302
+Set B contains multiples of five, giving two hundred.
+
+253
+00:19:00.302 --> 00:19:06.642
+Their intersection contains multiples of both, which are multiples of fifteen, giving
+
+254
+00:19:06.642 --> 00:19:07.170
+sixty-six.
+
+255
+00:19:07.170 --> 00:19:13.509
+Inclusion-exclusion gives three hundred thirty-three plus two hundred minus sixty-six, or four
+
+256
+00:19:13.509 --> 00:19:14.566
+hundred sixty-seven.
+
+257
+00:19:14.566 --> 00:19:20.906
+Subtract the overlap because those sixty-six integers were counted in both A
+
+258
+00:19:20.906 --> 00:19:21.962
+and B.
+
+259
+00:19:21.962 --> 00:19:28.302
+The word or is inclusive here: multiples of fifteen qualify, but they
+
+260
+00:19:28.302 --> 00:19:32.000
+must appear once in the final count.
+
+261
+00:19:32.000 --> 00:19:35.857
+Section ten point three turns to combinations.
+
+262
+00:19:35.857 --> 00:19:42.469
+A combination selects a subset of a given size from a set
+
+263
+00:19:42.469 --> 00:19:44.122
+of distinct objects.
+
+264
+00:19:44.122 --> 00:19:50.184
+The order of selected objects does not create a new subset.
+
+265
+00:19:50.184 --> 00:19:56.796
+We will derive the choose formula by comparing combinations with ordered selections,
+
+266
+00:19:56.796 --> 00:19:59.551
+then apply it to teams.
+
+267
+00:19:59.551 --> 00:20:06.163
+The section also treats indistinguishable repeated objects, binomial coefficients, and combinations where
+
+268
+00:20:06.163 --> 00:20:11.122
+choosing the same category more than once is allowed.
+
+269
+00:20:11.122 --> 00:20:17.735
+The words combination and repetition describe different aspects of a problem: combination
+
+270
+00:20:17.735 --> 00:20:24.347
+concerns whether order matters, while repetition concerns whether a selected type can
+
+271
+00:20:24.347 --> 00:20:26.000
+be used again.
+
+272
+00:20:26.000 --> 00:20:32.057
+Given a set S with n distinct elements, an r-combination is a
+
+273
+00:20:32.057 --> 00:20:34.580
+subset containing exactly r elements.
+
+274
+00:20:34.580 --> 00:20:40.637
+The notation n choose r counts those subsets for nonnegative integers n
+
+275
+00:20:40.637 --> 00:20:44.675
+and r with r no larger than n.
+
+276
+00:20:44.675 --> 00:20:50.731
+For example, from the set containing one, two, and three, the two-element
+
+277
+00:20:50.731 --> 00:20:53.759
+subsets are one-two, one-three, and two-three.
+
+278
+00:20:53.759 --> 00:20:59.816
+Writing two-one does not add another subset; the set of members is
+
+279
+00:20:59.816 --> 00:21:00.321
+unchanged.
+
+280
+00:21:00.321 --> 00:21:06.377
+This is the central difference from the six ordered two-permutations on the
+
+281
+00:21:06.377 --> 00:21:07.387
+previous slides.
+
+282
+00:21:07.387 --> 00:21:13.443
+We have defined what is being counted, but not yet derived the
+
+283
+00:21:13.443 --> 00:21:14.453
+numerical formula.
+
+284
+00:21:14.453 --> 00:21:19.500
+That comes by relating each subset to its possible orderings.
+
+285
+00:21:19.500 --> 00:21:25.174
+The slide compares ordered and unordered choices side by side.
+
+286
+00:21:25.174 --> 00:21:31.983
+From one, two, and three, the ordered two-selections are one-two, two-one, one-three,
+
+287
+00:21:31.983 --> 00:21:35.388
+three-one, two-three, and three-two: six outcomes.
+
+288
+00:21:35.388 --> 00:21:42.197
+The unordered two-element subsets are only one-two, one-three, and two-three: three outcomes.
+
+289
+00:21:42.197 --> 00:21:47.871
+Each subset corresponds to exactly two factorial, or two, orderings.
+
+290
+00:21:47.871 --> 00:21:54.680
+This suggests a general relationship: if we first choose an r-element subset
+
+291
+00:21:54.680 --> 00:22:01.489
+and then order its r distinct members, we obtain every r-permutation exactly
+
+292
+00:22:01.489 --> 00:22:02.056
+once.
+
+293
+00:22:02.056 --> 00:22:08.865
+The next slide converts that two-step process into the formula for n
+
+294
+00:22:08.865 --> 00:22:10.000
+choose r.
+
+295
+00:22:10.000 --> 00:22:13.259
+Build an ordered r-selection in two steps.
+
+296
+00:22:13.259 --> 00:22:17.914
+First choose an r-element subset, in n choose r ways.
+
+297
+00:22:17.914 --> 00:22:22.569
+Then order its r distinct elements, in r factorial ways.
+
+298
+00:22:22.569 --> 00:22:28.155
+The multiplication rule says P of n comma r equals n choose
+
+299
+00:22:28.155 --> 00:22:30.017
+r times r factorial.
+
+300
+00:22:30.017 --> 00:22:35.603
+Divide to get n choose r equals P of n comma r
+
+301
+00:22:35.603 --> 00:22:41.190
+over r factorial, or n factorial over r factorial times n minus
+
+302
+00:22:41.190 --> 00:22:42.121
+r factorial.
+
+303
+00:22:42.121 --> 00:22:47.707
+The division removes the repeated counting caused by different orders of the
+
+304
+00:22:47.707 --> 00:22:48.638
+same subset.
+
+305
+00:22:48.638 --> 00:22:54.224
+It is not appropriate when the outcome itself has ordered roles; for
+
+306
+00:22:54.224 --> 00:22:58.879
+officers, a president and secretary swapped is a different assignment.
+
+307
+00:22:58.879 --> 00:23:04.000
+The formula also gives one empty subset when r equals zero.
+
+308
+00:23:04.000 --> 00:23:08.458
+A twelve-person group contains five boys and seven girls.
+
+309
+00:23:08.458 --> 00:23:13.907
+How many five-person teams have exactly three boys and two girls?
+
+310
+00:23:13.907 --> 00:23:19.850
+First choose three of the five boys, in five choose three ways.
+
+311
+00:23:19.850 --> 00:23:25.794
+Independently choose two of the seven girls, in seven choose two ways.
+
+312
+00:23:25.794 --> 00:23:31.738
+Multiply because every final team corresponds to exactly one pair of choices,
+
+313
+00:23:31.738 --> 00:23:33.720
+one from each category.
+
+314
+00:23:33.720 --> 00:23:39.664
+Five choose three is ten and seven choose two is twenty-one, giving
+
+315
+00:23:39.664 --> 00:23:41.645
+two hundred ten teams.
+
+316
+00:23:41.645 --> 00:23:47.589
+We do not multiply by five factorial: a team has no internal
+
+317
+00:23:47.589 --> 00:23:49.570
+order or assigned positions.
+
+318
+00:23:49.570 --> 00:23:55.514
+Here we are making both choices, so multiplication rather than addition is
+
+319
+00:23:55.514 --> 00:23:57.000
+the right operation.
+
+320
+00:23:57.000 --> 00:24:01.900
+Now ask for five-person teams with at least one boy.
+
+321
+00:24:01.900 --> 00:24:07.780
+Counting separately the teams with exactly one, two, three, four, and five
+
+322
+00:24:07.780 --> 00:24:11.700
+boys would work, but it creates five cases.
+
+323
+00:24:11.700 --> 00:24:13.660
+The complement is simpler.
+
+324
+00:24:13.660 --> 00:24:19.540
+There are twelve choose five total teams, which is seven hundred ninety-two.
+
+325
+00:24:19.540 --> 00:24:25.420
+The teams with no boy use five of the seven girls, giving
+
+326
+00:24:25.420 --> 00:24:27.870
+seven choose five, or twenty-one.
+
+327
+00:24:27.870 --> 00:24:33.750
+Subtract to obtain seven hundred seventy-one teams with at least one boy.
+
+328
+00:24:33.750 --> 00:24:39.630
+The phrase at least one signals that the zero-boy case is the
+
+329
+00:24:39.630 --> 00:24:41.100
+one to remove.
+
+330
+00:24:41.100 --> 00:24:46.000
+This is the difference rule combined with the combination formula.
+
+331
+00:24:46.000 --> 00:24:50.000
+The letters of MISSISSIPPI are not all distinct.
+
+332
+00:24:50.000 --> 00:24:56.000
+There are eleven positions, four S letters, four I letters, two P
+
+333
+00:24:56.000 --> 00:24:58.000
+letters, and one M.
+
+334
+00:24:58.000 --> 00:25:04.000
+One constructive count chooses four positions for the S letters, then four
+
+335
+00:25:04.000 --> 00:25:10.000
+of the remaining seven for I, then two of the remaining three
+
+336
+00:25:10.000 --> 00:25:13.000
+for P, leaving one for M.
+
+337
+00:25:13.000 --> 00:25:19.000
+The product of eleven choose four, seven choose four, three choose two,
+
+338
+00:25:19.000 --> 00:25:24.000
+and one choose one is thirty-four thousand six hundred fifty.
+
+339
+00:25:24.000 --> 00:25:30.000
+If we started with eleven factorial, we would overcount exchanges among identical
+
+340
+00:25:30.000 --> 00:25:34.500
+S letters, identical I letters, and identical P letters.
+
+341
+00:25:34.500 --> 00:25:40.500
+Dividing by four factorial, four factorial, and two factorial yields the same
+
+342
+00:25:40.500 --> 00:25:41.000
+answer.
+
+343
+00:25:41.000 --> 00:25:44.689
+The general repeated-object theorem extends that reasoning.
+
+344
+00:25:44.689 --> 00:25:51.014
+Suppose n positions are filled with n one indistinguishable objects of type
+
+345
+00:25:51.014 --> 00:25:57.338
+one, n two of type two, and so on, with the group
+
+346
+00:25:57.338 --> 00:25:58.919
+sizes totaling n.
+
+347
+00:25:58.919 --> 00:26:05.243
+The number of distinguishable arrangements is n factorial divided by the product
+
+348
+00:26:05.243 --> 00:26:11.568
+of n one factorial, n two factorial, and the other group factorials.
+
+349
+00:26:11.568 --> 00:26:17.892
+Each swap among objects of the same type leaves the visible arrangement
+
+350
+00:26:17.892 --> 00:26:23.162
+unchanged, so the ordinary n factorial count includes many duplicates.
+
+351
+00:26:23.162 --> 00:26:28.959
+An equivalent constructive method chooses positions for each type in sequence.
+
+352
+00:26:28.959 --> 00:26:35.284
+Before using this formula, confirm that objects within each type truly are
+
+353
+00:26:35.284 --> 00:26:39.500
+indistinguishable and that all n objects are used.
+
+354
+00:26:39.500 --> 00:26:42.671
+The binomial expansion has a counting interpretation.
+
+355
+00:26:42.671 --> 00:26:48.107
+In the product of n copies of a plus b, each term
+
+356
+00:26:48.107 --> 00:26:52.637
+arises by choosing either a or b from each copy.
+
+357
+00:26:52.637 --> 00:26:58.073
+To obtain a to the power n minus k times b to
+
+358
+00:26:58.073 --> 00:27:03.509
+the power k, choose exactly k of the n copies from which
+
+359
+00:27:03.509 --> 00:27:07.132
+to take b; all remaining copies contribute a.
+
+360
+00:27:07.132 --> 00:27:11.209
+The number of such choices is n choose k.
+
+361
+00:27:11.209 --> 00:27:16.645
+That explains the coefficient in the binomial theorem, rather than treating it
+
+362
+00:27:16.645 --> 00:27:18.910
+as an unexplained algebraic number.
+
+363
+00:27:18.910 --> 00:27:24.346
+We are choosing a subset of positions, so their order is irrelevant.
+
+364
+00:27:24.346 --> 00:27:29.782
+Each choice of k positions produces the same monomial, and the coefficient
+
+365
+00:27:29.782 --> 00:27:32.500
+counts how many choices do so.
+
+366
+00:27:32.500 --> 00:27:39.100
+Now allow the same category to be selected more than once, while
+
+367
+00:27:39.100 --> 00:27:42.400
+the order of selections remains irrelevant.
+
+368
+00:27:42.400 --> 00:27:49.000
+From categories one, two, three, and four, the slide lists all size-three
+
+369
+00:27:49.000 --> 00:27:49.550
+multisets.
+
+370
+00:27:49.550 --> 00:27:52.850
+Examples include one-one-one, one-one-two, and one-three-four.
+
+371
+00:27:52.850 --> 00:27:55.600
+The list contains twenty outcomes.
+
+372
+00:27:55.600 --> 00:28:02.200
+There are four cubed ordered triples, but many of those triples represent
+
+373
+00:28:02.200 --> 00:28:07.700
+the same multiset, so four cubed is not the answer.
+
+374
+00:28:07.700 --> 00:28:13.200
+Nor can we use four choose three, which forbids repetition.
+
+375
+00:28:13.200 --> 00:28:19.800
+The next slides show a one-to-one correspondence between these multisets and arrangements
+
+376
+00:28:19.800 --> 00:28:22.000
+of stars and separators.
+
+377
+00:28:22.000 --> 00:28:26.661
+Think of the four labels as four fixed categories.
+
+378
+00:28:26.661 --> 00:28:32.875
+A star means one item selected from a category, and three vertical
+
+379
+00:28:32.875 --> 00:28:35.464
+bars separate the four categories.
+
+380
+00:28:35.464 --> 00:28:40.643
+For example, three stars before the first bar represents one-one-one.
+
+381
+00:28:40.643 --> 00:28:46.857
+A star in the first compartment, one in the third, and one
+
+382
+00:28:46.857 --> 00:28:49.446
+in the fourth represents one-three-four.
+
+383
+00:28:49.446 --> 00:28:55.661
+The encoding uses three stars and three bars, six symbols in total.
+
+384
+00:28:55.661 --> 00:29:01.875
+Choose which three of the six positions hold stars; the remaining positions
+
+385
+00:29:01.875 --> 00:29:02.911
+hold bars.
+
+386
+00:29:02.911 --> 00:29:09.125
+That gives six choose three, or twenty, encodings and therefore twenty size-three
+
+387
+00:29:09.125 --> 00:29:09.643
+multisets.
+
+388
+00:29:09.643 --> 00:29:15.857
+This is the stars-and-bars idea: unlike an ordered triple, the notation records
+
+389
+00:29:15.857 --> 00:29:20.000
+only how many objects came from each category.
+
+390
+00:29:20.000 --> 00:29:23.108
+The theorem generalizes the previous picture.
+
+391
+00:29:23.108 --> 00:29:29.324
+To choose r items from n categories with repetitions allowed and order
+
+392
+00:29:29.324 --> 00:29:35.541
+ignored, use r stars for the chosen items and n minus one
+
+393
+00:29:35.541 --> 00:29:37.613
+separators between the categories.
+
+394
+00:29:37.613 --> 00:29:42.275
+The row has r plus n minus one positions.
+
+395
+00:29:42.275 --> 00:29:48.491
+Choosing the r star positions gives r plus n minus one choose
+
+396
+00:29:48.491 --> 00:29:49.527
+r outcomes.
+
+397
+00:29:49.527 --> 00:29:52.117
+Equivalently, choose the separator positions.
+
+398
+00:29:52.117 --> 00:29:58.333
+For four categories and three items, this becomes six choose three, or
+
+399
+00:29:58.333 --> 00:29:58.851
+twenty.
+
+400
+00:29:58.851 --> 00:30:05.068
+The formula applies to categories whose supply is unrestricted; if each category
+
+401
+00:30:05.068 --> 00:30:11.284
+has a cap, the simple stars-and-bars count may include forbidden selections and
+
+402
+00:30:11.284 --> 00:30:12.320
+needs correction.
+
+403
+00:30:12.320 --> 00:30:17.500
+The number n of categories is positive in this construction.
+
+404
+00:30:17.500 --> 00:30:23.302
+The final table is a decision guide for choosing k items from
+
+405
+00:30:23.302 --> 00:30:24.269
+n types.
+
+406
+00:30:24.269 --> 00:30:26.202
+Ask two independent questions.
+
+407
+00:30:26.202 --> 00:30:27.653
+Does order matter?
+
+408
+00:30:27.653 --> 00:30:29.103
+Is repetition allowed?
+
+409
+00:30:29.103 --> 00:30:34.905
+If both answers are yes, fill k positions independently in n to
+
+410
+00:30:34.905 --> 00:30:36.355
+the k ways.
+
+411
+00:30:36.355 --> 00:30:42.157
+If order matters but repetition is forbidden, use the falling product P
+
+412
+00:30:42.157 --> 00:30:44.091
+of n comma k.
+
+413
+00:30:44.091 --> 00:30:49.893
+If order does not matter and repetition is forbidden, use n choose
+
+414
+00:30:49.893 --> 00:30:50.376
+k.
+
+415
+00:30:50.376 --> 00:30:56.178
+If order does not matter and repetition is allowed, use n plus
+
+416
+00:30:56.178 --> 00:30:58.595
+k minus one choose k.
+
+417
+00:30:58.595 --> 00:31:04.397
+Check the result against a tiny example before trusting it, and remember
+
+418
+00:31:04.397 --> 00:31:10.198
+that extra conditions, such as restricted offices or overlapping categories, may require
+
+419
+00:31:10.198 --> 00:31:16.000
+case splitting, a complement, or inclusion-exclusion on top of the base formula.

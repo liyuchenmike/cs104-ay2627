@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 12: counting lists and choices, permutations, set rules, combinations, repeated objects and selections with repetition.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 12 · Counting · CS104</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css?v=2">
+</head>
+<body data-lesson="week-12">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2026–27</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../../index.html">Course home</a>
+      <a aria-current="page" href="./">Week 12</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../../index.html">Course home</a> <span aria-hidden="true">/</span> Week 12</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 12 · Counting</p>
+          <h1>How can we count possibilities without listing every one?</h1>
+          <p class="lesson-summary">Choose the right rule for ordered choices, sets and teams, overlapping cases, and selections that allow repetition.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+          <ul>
+            <li>count inclusive integer lists and multi-step choices;</li>
+            <li>recognise when a simple product fails because choices depend on earlier steps;</li>
+            <li>distinguish permutations from combinations;</li>
+            <li>use addition, complements and inclusion–exclusion without double counting;</li>
+            <li>count repeated objects and unordered selections with repetition.</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+        <a href="#lecture">Lecture</a>
+        <a href="#lists">1. Inclusive lists</a>
+        <a href="#products">2. Choices and constraints</a>
+        <a href="#permutations">3. Ordered arrangements</a>
+        <a href="#sets">4. Counting with sets</a>
+        <a href="#combinations">5. Unordered teams</a>
+        <a href="#repeated">6. Repeated objects</a>
+        <a href="#stars-bars">7. Repetition allowed</a>
+        <a href="#choose-rule">8. Choose a formula</a>
+        <a href="#quiz">9. Quiz</a>
+      </nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Counting</h2>
+          <p>The lecture uses all 35 original Week 12 slides. The chapters group the counting rules and worked examples; five short retrieval questions pause the video at useful transitions.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="assets/cover.webp">
+              <source src="assets/lecture.mp4" type="video/mp4">
+              <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video.
+            </video>
+            <div class="chapters" id="chapter-list" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">00:00 · Counting lists and products</button>
+            </div>
+            <div class="video-caption">
+              <span>Includes English captions and five knowledge checks.</span>
+              <span id="video-status">Progress saves in this browser.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="lists">
+          <p class="eyebrow">1 · Count both ends</p>
+          <h2>Inclusive integer lists have one more item than gaps</h2>
+          <p>From 5 through 12, there are seven steps between the endpoints but eight integers: 5, 6, 7, 8, 9, 10, 11 and 12. In general, integers from m through n, with m ≤ n, number <strong>n − m + 1</strong>. The plus one includes the starting value. If m = n, the formula correctly gives one item.</p>
+          <div class="formula-card formula-text">Number of integers in [m, n] = n − m + 1 &nbsp; (m ≤ n)</div>
+          <div class="worked-example">
+            <h3>Count multiples by their multipliers</h3>
+            <p>Three-digit multiples of 5 start at 100 = 5 × 20 and end at 995 = 5 × 199. Each eligible multiplier from 20 through 199 corresponds to one eligible number, so the count is 199 − 20 + 1 = <strong>180</strong>.</p>
+            <p>The upper endpoint is 995, although the range of three-digit integers ends at 999. First identify the valid objects, then apply the inclusive-list formula to their labels.</p>
+          </div>
+          <div class="misconception">
+            <h3>Subtracting endpoints counts gaps</h3>
+            <p>Forgetting the plus one would count the gaps between the first and last integers. Test a proposed formula on a one-item interval to catch this error.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="products">
+          <p class="eyebrow">2 · Build an outcome step by step</p>
+          <h2>Multiply choices only when the step counts stay fixed</h2>
+          <p>A four-symbol PIN may use any of 26 letters or 10 digits in each position. Because repetition is allowed, every position has 36 choices, regardless of earlier symbols. The multiplication rule gives 36 × 36 × 36 × 36 = <strong>1,679,616</strong> PINs. Each complete PIN is produced by exactly one sequence of four choices.</p>
+          <div class="formula-card formula-text">Fixed step counts n₁, n₂, …, nₖ ⇒ total n₁ × n₂ × ⋯ × nₖ</div>
+          <div class="worked-example">
+            <h3>Reorder constrained choices</h3>
+            <p>Choose a president, treasurer and secretary from Ann, Bob, Cyd and Dan. Ann cannot be president; Cyd or Dan must be secretary. The tempting count 3 × 3 × 2 = 18 assumes two eligible secretaries survive every earlier choice. They do not.</p>
+            <p>Choose the secretary first: 2 options. The president then has 2 options, excluding Ann and the secretary. The treasurer has 2 remaining options. The valid count is <strong>2 × 2 × 2 = 8</strong>, matching the slide's decision tree.</p>
+          </div>
+          <div class="misconception">
+            <h3>Constraints can make a product invalid</h3>
+            <p>If a later number of choices varies by branch, a single product of fixed factors is not justified. Split the branches and add them, or choose the most restricted position first.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="permutations">
+          <p class="eyebrow">3 · Order changes the outcome</p>
+          <h2>Permutations fill ordered positions</h2>
+          <p>A permutation is an ordering of distinct objects. With n distinct objects, the first position has n choices, the second n − 1, and so on. Multiplying gives <strong>n!</strong>. If only r positions are filled without reusing an object, stop after r factors:</p>
+          <div class="formula-card formula-text">P(n, r) = n(n − 1)⋯(n − r + 1) = n!/(n − r)! &nbsp; (1 ≤ r ≤ n)</div>
+          <div class="worked-example">
+            <h3>Keep “CO” together in COMPUTER</h3>
+            <p>All eight letters are distinct, so unrestricted arrangements number 8! = 40,320. If C and O must remain together <em>in that order</em>, treat the fixed block CO as one object. Arrange it with the six other letters: 7! = <strong>5,040</strong>. If OC were also allowed, the answer would be different.</p>
+            <p>For a partial ordering, P(7, 4) = 7 × 6 × 5 × 4 = <strong>840</strong>. There are four ordered positions, not merely a four-element group.</p>
+          </div>
+          <div class="misconception">
+            <h3>A block can have an internal order</h3>
+            <p>Do not multiply by 2 for the block CO when the question fixes its order. Read whether “together” permits both internal orders.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="sets">
+          <p class="eyebrow">4 · Combine and correct counts</p>
+          <h2>Add disjoint cases, subtract complements, correct overlaps</h2>
+          <p>If outcomes fall into disjoint categories, their counts add. PINs made of one, two or three letters have different lengths, so their categories do not overlap. With repetition allowed, the total is 26 + 26² + 26³ = <strong>18,278</strong>. Multiplication counts the choices within each length; addition combines the alternatives.</p>
+          <div class="worked-example">
+            <h3>“At least one” often suggests a complement</h3>
+            <p>Among four-symbol PINs from 36 symbols, there are 36⁴ total. Those with no repeated symbol number 36 × 35 × 34 × 33. Thus PINs with at least one repeat number 1,679,616 − 1,413,720 = <strong>265,896</strong>.</p>
+          </div>
+          <div class="worked-example">
+            <h3>Use inclusion–exclusion for overlapping sets</h3>
+            <p>There are 333 multiples of 3 and 200 multiples of 5 from 1 through 1,000. The 66 multiples of 15 belong to both sets, so adding 333 and 200 counts them twice. The number divisible by 3 <em>or</em> 5 is <strong>333 + 200 − 66 = 467</strong>.</p>
+            <p>For three sets, add the three single-set counts, subtract the three pairwise intersections, then add back the triple intersection. The final addition restores elements that the pairwise corrections removed too many times.</p>
+          </div>
+          <div class="misconception">
+            <h3>“Or” includes the overlap</h3>
+            <p>Multiples of 15 qualify because they meet both conditions. Inclusion–exclusion keeps each in the union once; it does not discard them.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="combinations">
+          <p class="eyebrow">5 · Select a group</p>
+          <h2>Combinations ignore the order of selected members</h2>
+          <p>An r-combination of n distinct objects is a subset of size r. From {1, 2, 3}, the pairs {1, 2} and {2, 1} are the same subset. Each chosen r-element subset can be ordered in r! ways, so dividing the ordered-selection count by r! gives:</p>
+          <div class="formula-card formula-text">C(n, r) = P(n, r)/r! = n!/[r!(n − r)!] &nbsp; (0 ≤ r ≤ n)</div>
+          <div class="worked-example">
+            <h3>Build a team with two types of members</h3>
+            <p>From five boys and seven girls, a team with exactly three boys and two girls is formed by choosing three of five boys and two of seven girls. The choices are independent, so multiply: C(5, 3) × C(7, 2) = 10 × 21 = <strong>210</strong>. Do not order the five teammates.</p>
+            <p>For a five-person team with at least one boy, subtract the all-girl teams from all teams: C(12, 5) − C(7, 5) = 792 − 21 = <strong>771</strong>.</p>
+          </div>
+          <div class="misconception">
+            <h3>Ordered roles are not teams</h3>
+            <p>President and secretary are different offices, so swapping them changes an assignment. A team is a set, so rearranging its list of members does not change the outcome.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="repeated">
+          <p class="eyebrow">6 · Identical objects collapse arrangements</p>
+          <h2>Divide out swaps that nobody can distinguish</h2>
+          <p>The eleven letters of MISSISSIPPI include four S's, four I's, two P's and one M. Starting with 11! labelled arrangements overcounts because swapping identical letters does not make a new visible word. Divide by the internal factorial for each repeated type:</p>
+          <div class="formula-card formula-text">11!/(4! × 4! × 2!) = 34,650</div>
+          <div class="worked-example">
+            <h3>Choose positions instead</h3>
+            <p>Choose four of eleven positions for the S's, four of the remaining seven for the I's, and two of the remaining three for the P's. The last position holds M. The product C(11, 4) × C(7, 4) × C(3, 2) gives the same <strong>34,650</strong> arrangements.</p>
+            <p>The general rule for n objects split into indistinguishable types of sizes n₁, n₂, … is n!/(n₁!n₂!⋯), provided those type sizes sum to n.</p>
+          </div>
+          <h3>Why binomial coefficients appear in expansions</h3>
+          <p>In (a + b)ⁿ, each of the n factors contributes either a or b. To get aⁿ⁻ᵏbᵏ, choose exactly k factors from which to take b. There are C(n, k) such choices, explaining the coefficient of that term.</p>
+          <div class="misconception">
+            <h3>Repeated letters differ from repeated selection</h3>
+            <p>MISSISSIPPI uses a fixed multiset of letters and asks for its arrangements. The next topic chooses a multiset from categories where the supply of each category is unrestricted.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="stars-bars">
+          <p class="eyebrow">7 · Choose the same category again</p>
+          <h2>Stars and bars count unordered selections with repetition</h2>
+          <p>Select three items from categories {1, 2, 3, 4}, allowing a category to appear more than once. The outcomes {1, 1, 2} and {1, 2, 1} are the same selection because order does not matter. The lecture lists <strong>20</strong> such size-three multisets.</p>
+          <div class="worked-example">
+            <h3>Encode the count in each category</h3>
+            <p>Use three stars for the three selected items and three bars to separate four fixed categories. For example, <span class="formula-text">x||x|x</span> means one item from category 1, none from category 2, one from category 3 and one from category 4. The row has six positions; choosing which three hold stars gives C(6, 3) = 20.</p>
+            <p>In general, r selections from n categories use r stars and n − 1 bars. Choosing the star positions gives <strong>C(n + r − 1, r)</strong>.</p>
+          </div>
+          <div class="misconception">
+            <h3>Repetition does not make order matter</h3>
+            <p>The ordered count nʳ distinguishes sequences such as 1, 1, 2 and 2, 1, 1. Stars and bars counts them once as the same multiset. It assumes each category can be selected without a supply limit.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="choose-rule">
+          <p class="eyebrow">8 · Make the model explicit</p>
+          <h2>Ask two questions before choosing a formula</h2>
+          <p>First ask whether changing order makes a new outcome. Then ask whether an item or category may be selected again. The lecture's final table summarises the four basic cases for k choices from n possibilities:</p>
+          <div class="formula-card formula-text">Order matters, repetition allowed: nᵏ<br>Order matters, no repetition: P(n, k)<br>Order irrelevant, no repetition: C(n, k)<br>Order irrelevant, repetition allowed: C(n + k − 1, k)</div>
+          <p>A PIN has positions, so order matters. A team has no roles, so order does not matter. A word made from a fixed collection of repeated letters is a different setup from choosing categories with repetition; use the repeated-object arrangement formula for the former.</p>
+          <div class="misconception">
+            <h3>Extra restrictions still need care</h3>
+            <p>The four formulas count unrestricted base cases. Restricted officer roles, a required type of team member, or overlapping categories need a careful construction, case split, complement or inclusion–exclusion before a formula applies.</p>
+          </div>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">9 · Retrieval practice</p>
+          <h2>Week 12 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer for an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+      <button class="button button-secondary" id="checkpoint-skip" type="button">Skip checkpoint</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 12</strong></p>
+    <p><a href="../../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="assets/lesson.js?v=2"></script>
+</body>
+</html>

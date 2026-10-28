@@ -1,0 +1,37 @@
+{
+  "duration": 1192.52002,
+  "chapters": [
+    {
+      "title": "Recursive descriptions",
+      "time": 0
+    },
+    {
+      "title": "Fibonacci and rabbits",
+      "time": 224
+    },
+    {
+      "title": "Tower of Hanoi",
+      "time": 387
+    },
+    {
+      "title": "Counting staircase paths",
+      "time": 603.5
+    },
+    {
+      "title": "Characteristic equation",
+      "time": 658.5
+    },
+    {
+      "title": "Distinct-root solutions",
+      "time": 820.5
+    },
+    {
+      "title": "Fibonacci explicit formula",
+      "time": 924.5
+    },
+    {
+      "title": "Repeated-root solutions",
+      "time": 1037.5
+    }
+  ]
+}

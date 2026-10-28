@@ -1,0 +1,41 @@
+{
+  "duration": 1876.02002,
+  "chapters": [
+    {
+      "title": "Counting lists and products",
+      "time": 0
+    },
+    {
+      "title": "Dependent choices",
+      "time": 377.5
+    },
+    {
+      "title": "Permutations",
+      "time": 540
+    },
+    {
+      "title": "Selected permutations",
+      "time": 744.5
+    },
+    {
+      "title": "Set counting rules",
+      "time": 846
+    },
+    {
+      "title": "Combinations",
+      "time": 1172
+    },
+    {
+      "title": "Repeated elements and binomial coefficients",
+      "time": 1486
+    },
+    {
+      "title": "Combinations with repetition",
+      "time": 1652.5
+    },
+    {
+      "title": "Choose the counting model",
+      "time": 1817.5
+    }
+  ]
+}

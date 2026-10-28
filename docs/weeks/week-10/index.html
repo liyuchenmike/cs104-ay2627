@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 10: sequences, finite sums and products, convergence, epsilon proofs, and limit laws.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 10 · Sequence · CS104</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css?v=2">
+</head>
+<body data-lesson="week-10">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2026–27</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../../index.html">Course home</a>
+      <a aria-current="page" href="./">Week 10</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../../index.html">Course home</a> <span aria-hidden="true">/</span> Week 10</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 10 · Sequence</p>
+          <h1>How do we describe a sequence and prove where its terms go?</h1>
+          <p class="lesson-summary">Read indexed formulas, simplify finite sums and products, then turn the intuition of “getting close” into a rigorous limit proof.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+          <ul>
+            <li>read and write explicit formulas with the correct starting index;</li>
+            <li>expand, simplify, and reindex finite sums and products;</li>
+            <li>distinguish convergence from two different kinds of divergence;</li>
+            <li>choose a threshold for an ε–K limit proof;</li>
+            <li>apply limit laws with their required conditions.</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+        <a href="#lecture">Lecture</a>
+        <a href="#formulas">1. Sequence formulas</a>
+        <a href="#summation">2. Summation and telescoping</a>
+        <a href="#patterns">3. Arithmetic and geometric sequences</a>
+        <a href="#products">4. Products and reindexing</a>
+        <a href="#behavior">5. Long-run behavior</a>
+        <a href="#epsilon">6. The limit definition</a>
+        <a href="#proofs">7. Proving limits</a>
+        <a href="#laws">8. Limit laws</a>
+        <a href="#quiz">9. Quiz</a>
+      </nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Sequence</h2>
+          <p>The lecture uses all 29 original Week 10 slides. Choose a chapter to revisit an idea; five short retrieval questions pause the video at useful transitions.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="assets/cover.webp">
+              <source src="assets/lecture.mp4" type="video/mp4">
+              <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video.
+            </video>
+            <div class="chapters" id="chapter-list" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">00:00 · Sequences and explicit formulas</button>
+            </div>
+            <div class="video-caption">
+              <span>Includes English captions and five knowledge checks.</span>
+              <span id="video-status">Progress saves in this browser.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="formulas">
+          <p class="eyebrow">1 · Know the starting index</p><h2>A sequence gives a value at each index</h2>
+          <p>The deck writes a sequence as a₀, a₁, a₂, … . With this index-zero convention, the even-number example is aₙ = 2n, giving 0, 2, 4, …, and the doubling example is aₙ = 2ⁿ, giving 1, 2, 4, … . An <strong>explicit formula</strong> computes a term directly from n. A recurrence instead uses earlier terms.</p>
+          <div class="formula-card formula-text">aₙ = 2n → 0, 2, 4, … &nbsp; · &nbsp; aₙ = 2ⁿ → 1, 2, 4, …</div>
+          <div class="worked-example"><h3>Fibonacci has more than one description</h3><p>The displayed Fibonacci sequence begins 1, 1, 2, 3, 5, 8. Its simple recurrence says each term after the first two equals the preceding two added together. The slide also gives an explicit formula involving (1 + √5)/2 and (1 − √5)/2. A closed formula exists, but the recurrence is usually easier for generating the next term.</p></div>
+          <div class="misconception"><h3>“First term” does not always mean n = 1</h3><p>Here a₀ is the first displayed term. Before using a formula or counting terms in a sum, check whether the index begins at zero or one.</p></div>
+        </section>
+
+        <section class="lesson-section" id="summation">
+          <p class="eyebrow">2 · Read both endpoints</p><h2>Summation notation and cancellation</h2>
+          <p>The expression Σ from k = m to n of aₖ means aₘ + aₘ₊₁ + ⋯ + aₙ. Both bounds are included. Thus Σ from k = 0 to n of 2k starts with 0 and ends with 2n, and it has n + 1 terms.</p>
+          <div class="worked-example"><h3>Build or expand a sum</h3><p>In the slide's first exercise, 1/n + 2/(n + 1) + ⋯ + (n + 1)/(2n) is Σ from i = 0 to n of (i + 1)/(n + i), for positive n. The endpoints confirm both the numerator and denominator patterns. In the next exercise, Σ from i = 0 to 2n of (−1)ⁱ/(i + 1) expands to 1 − 1/2 + 1/3 − ⋯ − 1/(2n) + 1/(2n + 1). The final sign is positive because 2n is even.</p></div>
+          <div class="formula-card formula-text">1/[k(k + 1)] = 1/k − 1/(k + 1)<br>Σ from k = 1 to n of 1/[k(k + 1)] = 1 − 1/(n + 1) = n/(n + 1).</div>
+          <p>In that <strong>telescoping sum</strong>, every interior fraction cancels with its neighbor. Write the first and last few terms before crossing anything out; the answer consists of the surviving boundaries.</p>
+          <div class="misconception"><h3>Do not lose the last term</h3><p>A pattern in the middle does not determine the bounds. Substitute the lower and upper index into your proposed summand and check that they reproduce the first and final displayed terms.</p></div>
+        </section>
+
+        <section class="lesson-section" id="patterns">
+          <p class="eyebrow">3 · Difference or ratio?</p><h2>Arithmetic and geometric sequences</h2>
+          <p>An <strong>arithmetic sequence</strong> has constant difference d and formula aₙ = a₀ + nd. Its sum through index n has n + 1 terms, so pairing first and last gives (a₀ + aₙ)(n + 1)/2. A <strong>geometric sequence</strong> has constant ratio r and formula aₙ = a₀rⁿ.</p>
+          <div class="formula-card formula-text">Σ from k = 0 to n of a₀rᵏ = a₀(rⁿ⁺¹ − 1)/(r − 1) &nbsp; when r ≠ 1.</div>
+          <p>When r = 1, the displayed fraction is undefined; the sum is simply (n + 1)a₀. State this special case instead of dividing by zero.</p>
+          <div class="worked-example"><h3>Exercise 8.1.5</h3><p>The arithmetic list 2 + 5 + 8 + ⋯ + 302 has difference 3. There are (302 − 2)/3 + 1 = 101 terms, so its sum is 101(2 + 302)/2 = <strong>15,352</strong>. The geometric list 2¹⁰ + 2¹¹ + ⋯ + 2²⁹ has 20 terms and sums to <strong>2³⁰ − 2¹⁰</strong>.</p></div>
+          <div class="misconception"><h3>Count terms before applying a formula</h3><p>Index zero through n includes n + 1 terms, while exponent ten through twenty-nine includes twenty. A correct pattern with the wrong term count gives the wrong total.</p></div>
+        </section>
+
+        <section class="lesson-section" id="products">
+          <p class="eyebrow">4 · Multiplication and index changes</p><h2>Products and reindexing</h2>
+          <p>Capital pi denotes a product: Π from k = m to n of aₖ equals aₘaₘ₊₁⋯aₙ. In the lecture's example, Π from k = 1 to n of k/(k + 1) equals (1/2)(2/3)⋯[n/(n + 1)] = 1/(n + 1). The middle factors cancel, just as interior terms cancel in a telescoping sum.</p>
+          <div class="worked-example"><h3>Combine expressions over a shared range</h3><p>When aₖ = k + 1 and bₖ = k − 1, the slide's Σaₖ + 2Σbₖ becomes Σ(aₖ + 2bₖ) = Σ(3k − 1), with the same bounds m through n. Likewise (Πaₖ)(Πbₖ) = Π(aₖbₖ) = Π(k² − 1). A constant moves into a sum once per term; a product follows its own multiplication rule.</p></div>
+          <div class="formula-card formula-text">Σ from k = 1 to n of 1/(k + 1) = Σ from j = 2 to n + 1 of 1/j, &nbsp; where j = k + 1.</div>
+          <div class="misconception"><h3>Change the bounds with the variable</h3><p>Replacing k by j in the summand while keeping k's old bounds would add 1 and omit 1/(n + 1). Reindexing changes the labels and endpoints, never the underlying terms.</p></div>
+        </section>
+
+        <section class="lesson-section" id="behavior">
+          <p class="eyebrow">5 · Look at the whole tail</p><h2>Which sequences approach a number?</h2>
+          <p>The sequence 1/n approaches 0 as n grows; none of its positive terms needs to equal 0. Similarly n/(n + 1) = 1 − 1/(n + 1) approaches 1. The terms of 1 + (−1/2)ⁿ alternate around 1, but the alternating correction shrinks to zero, so this sequence also converges to 1.</p>
+          <div class="worked-example"><h3>Two ways to diverge</h3><p>The deck plots xₙ = n + 1, which grows beyond every fixed number, and xₙ = (−1)ⁿ⁺¹, which keeps alternating between 1 and −1. Both lack a finite limit. The second remains bounded, showing that boundedness alone does not imply convergence.</p></div>
+          <div class="misconception"><h3>Alternation is not automatically divergence</h3><p>Compare (−1)ⁿ, whose jump never shrinks, with (−1/2)ⁿ, whose size tends to zero. A limit requires all sufficiently late terms to stay close to one target.</p></div>
+        </section>
+
+        <section class="lesson-section" id="epsilon">
+          <p class="eyebrow">6 · Make “close” precise</p><h2>The ε–K definition of a limit</h2>
+          <p>For a real target L and ε &gt; 0, the ε-neighborhood of L is the open interval (L − ε, L + ε). Saying x lies inside it is equivalent to |x − L| &lt; ε. A sequence xₙ converges to L when <strong>every</strong> positive ε has a threshold K after which <strong>every</strong> term lies in that neighborhood.</p>
+          <div class="formula-card formula-text">∀ε &gt; 0, ∃K = K(ε) such that ∀n ≥ K, |xₙ − L| &lt; ε.</div>
+          <div class="worked-example"><h3>What the picture says</h3><p>Early terms may lie outside the horizontal band. After the chosen K, all later terms must remain inside it. A smaller ε may require a larger K; that dependence is allowed. The claim is about the entire tail, not one conveniently chosen term.</p></div>
+          <div class="misconception"><h3>Keep the quantifiers in order</h3><p>Choose ε first, then find K. Showing that some large term is close to L is weaker than proving that every term from K onward is close.</p></div>
+        </section>
+
+        <section class="lesson-section" id="proofs">
+          <p class="eyebrow">7 · Choose a threshold</p><h2>Prove convergence and divergence</h2>
+          <p>A constant sequence xₙ = c is distance zero from c at every index. For xₙ = 1/n, choose an integer K &gt; 1/ε. Then for every n ≥ K, |1/n − 0| = 1/n &lt; ε. These simple proofs show the ε–K pattern.</p>
+          <div class="worked-example"><h3>A rational limit</h3><p>For xₙ = (3n + 1)/(2n + 5), subtract the proposed limit 3/2:</p><p>|xₙ − 3/2| = 13/(4n + 10) &lt; 13/(4n).</p><p>Given ε &gt; 0, take an integer K &gt; 13/(4ε). Then all n ≥ K satisfy |xₙ − 3/2| &lt; ε.</p></div>
+          <div class="worked-example"><h3>Factorial growth beats 4ⁿ</h3><p>Let aₙ = 4ⁿ/n!. For n ≥ 7, aₙ₊₁/aₙ = 4/(n + 1) ≤ 1/2. Thus aₙ ≤ a₇(1/2)ⁿ⁻⁷ for n ≥ 7. Given ε &gt; 0, choose K large enough that this geometric bound is below ε. Then every later aₙ is below ε, proving aₙ → 0.</p></div>
+          <div class="misconception"><h3>Persistent oscillation cannot fit one band</h3><p>The terms of 1 + (−1)ⁿ are 0 and 2 at arbitrarily large odd and even indices. If a limit L existed, ε = 1/2 would eventually require both values to lie within 1/2 of L, which is impossible.</p></div>
+        </section>
+
+        <section class="lesson-section" id="laws">
+          <p class="eyebrow">8 · Use the rules with care</p><h2>Limit laws and their conditions</h2>
+          <p>Limits pass through a sum, difference, product, and fixed positive integer power. They also pass through a quotient when the denominator terms are nonzero and their limit is nonzero. Check the component limits before using a rule.</p>
+          <div class="worked-example"><h3>Two calculations from the slides</h3><p>Divide (2n³ + n²)/(n³ + 5) by n³ to obtain (2 + 1/n)/(1 + 5/n³), so the limit is <strong>2</strong>. Also n/(1 + 2n) = 1/(1/n + 2) tends to 1/2; taking its fifth power gives <strong>1/32</strong>.</p></div>
+          <div class="misconception"><h3>An exponent-zero exception in the source slide</h3><p>Slide 28 states c/nᵏ → 0 for k ∈ ℕ, while slide 4 includes zero in ℕ. The result needs <strong>k ≥ 1</strong>: at k = 0, c/n⁰ = c for every n, so its limit is c, not generally zero. The slide image is preserved, and this condition corrects its claim.</p></div>
+          <p>The quotient condition matters for the same reason: a denominator approaching zero cannot simply be replaced by its limit in a fraction.</p>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">9 · Retrieval practice</p>
+          <h2>Week 10 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer for an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+      <button class="button button-secondary" id="checkpoint-skip" type="button">Skip checkpoint</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 10</strong></p>
+    <p><a href="../../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="assets/lesson.js?v=2"></script>
+</body>
+</html>
