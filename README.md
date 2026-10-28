@@ -5,10 +5,10 @@ A static, accessible course companion with weekly explanations, narrated lecture
 ## Current content
 
 - Source lecture decks available for Weeks 1–6 and 9–12
-- Complete Week 1–6 and Week 9 lessons: Logical Reasoning, Parts I and II; Method of Proof, Parts I and II; Sets and Functions; Relations; and Mathematical Induction
+- Complete Week 1–6 and Week 9–12 lessons: Logical Reasoning, Parts I and II; Method of Proof, Parts I and II; Sets and Functions; Relations; Mathematical Induction; Sequence; Recursion; and Counting
 - Chaptered narrated lecture videos with captions
 - Detailed explanations, worked examples and misconceptions
-- Seventy mastery questions with immediate feedback and browser-local progress
+- One hundred mastery questions with immediate feedback and browser-local progress
 - Optional knowledge checks embedded in each video timeline
 
 ## Local preview

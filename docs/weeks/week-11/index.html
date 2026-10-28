@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Week 11: recursive sequences, Fibonacci numbers, Tower of Hanoi, characteristic equations and explicit formulas.">
+  <meta name="theme-color" content="#0b1f3a">
+  <title>Week 11 · Recursion · CS104</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css?v=2">
+</head>
+<body data-lesson="week-11">
+  <a class="skip-link" href="#lesson-content">Skip to lesson content</a>
+  <header class="site-header">
+    <a class="brand" href="../../index.html" aria-label="CS104 home">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span><strong>CS104</strong><small>AY2026–27</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../../index.html">Course home</a>
+      <a aria-current="page" href="./">Week 11</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="lesson-shell">
+      <p class="breadcrumb"><a href="../../index.html">Course home</a> <span aria-hidden="true">/</span> Week 11</p>
+      <section class="lesson-hero">
+        <div>
+          <p class="lesson-kicker">Week 11 · Recursion</p>
+          <h1>How do a few starting values determine a whole sequence?</h1>
+          <p class="lesson-summary">Model problems recursively, then turn second-order recurrence rules into explicit formulas using characteristic roots.</p>
+        </div>
+        <aside class="objective-card" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">By the end, you can…</h2>
+          <ul>
+            <li>pair a recurrence rule with enough initial values;</li>
+            <li>model rabbits, Hanoi moves and staircase paths;</li>
+            <li>recognize a second-order linear homogeneous rule;</li>
+            <li>derive and solve its characteristic equation;</li>
+            <li>fit distinct-root and repeated-root formulas to starting values.</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+
+    <div class="progress-wrap" aria-label="Lesson reading progress">
+      <div class="progress-inner">
+        <span>Lesson progress</span>
+        <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        <span id="progress-label">0%</span>
+      </div>
+    </div>
+
+    <div class="lesson-shell lesson-grid">
+      <nav class="lesson-nav" aria-label="Lesson contents">
+        <p>On this page</p>
+        <a href="#lecture">Lecture</a>
+        <a href="#recursive">1. Recursive foundations</a>
+        <a href="#fibonacci">2. Fibonacci and rabbits</a>
+        <a href="#hanoi">3. Tower of Hanoi</a>
+        <a href="#stairs">4. Staircase paths</a>
+        <a href="#characteristic">5. Characteristic equation</a>
+        <a href="#distinct">6. Distinct roots</a>
+        <a href="#closed-form">7. Fibonacci formula</a>
+        <a href="#repeated">8. Repeated roots</a>
+        <a href="#quiz">9. Quiz</a>
+      </nav>
+
+      <div class="lesson-content" id="lesson-content">
+        <section class="lesson-section" id="lecture">
+          <p class="eyebrow">Guided lecture</p>
+          <h2>Recursion</h2>
+          <p>The lecture follows all 22 original Week 11 slides. Use the chapters to revisit a model or solution method; five short retrieval questions pause the video at useful transitions.</p>
+          <div class="video-panel">
+            <video id="lecture-video" controls preload="metadata" poster="assets/cover.webp">
+              <source src="assets/lecture.mp4" type="video/mp4">
+              <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+              Your browser does not support embedded video.
+            </video>
+            <div class="chapters" id="chapter-list" aria-label="Video chapters">
+              <button class="chapter-button" type="button" data-time="0">0:00 · Recursive descriptions</button>
+            </div>
+            <div class="video-caption">
+              <span>Includes English captions and five knowledge checks.</span>
+              <span id="video-status">Progress saves in this browser.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="lesson-section" id="recursive">
+          <p class="eyebrow">1 · Start and continue</p>
+          <h2>A recurrence needs an initial condition</h2>
+          <p>A recursive sequence is determined by starting value(s) and a rule for later terms. For example, an arithmetic sequence with a₀ = c and fixed difference d obeys aₙ = aₙ₋₁ + d for n ≥ 1. From the same starting value, a geometric sequence with ratio r obeys aₙ = r aₙ₋₁. Without c, either rule describes many sequences.</p>
+          <div class="formula-card formula-text">a₀ = c, aₙ = aₙ₋₁ + d  ⇒  aₙ = c + nd<br>a₀ = c, aₙ = r aₙ₋₁  ⇒  aₙ = crⁿ</div>
+          <div class="worked-example"><h3>Factorial is recursive too</h3><p>Start with 0! = 1, then define n! = n(n − 1)! for n ≥ 1. Thus 4! = 4·3! = 4·3·2·1 = 24. The recurrence says how to obtain a term; the initial condition stops the backward chain.</p></div>
+          <div class="misconception"><h3>Count how far the rule looks back</h3><p>A rule that uses both aₙ₋₁ and aₙ₋₂ normally needs two starting values. A single first term does not determine the next one.</p></div>
+        </section>
+
+        <section class="lesson-section" id="fibonacci">
+          <p class="eyebrow">2 · Two earlier terms</p>
+          <h2>Fibonacci numbers model the rabbit population</h2>
+          <p>This lecture defines f₀ = f₁ = 1 and fₙ = fₙ₋₁ + fₙ₋₂ for n ≥ 2. Its first values are 1, 1, 2, 3, 5, 8, 13. This indexing is deliberate: some books instead begin with 0, 1, shifting every later label by one.</p>
+          <div class="worked-example"><h3>From rabbit rules to an equation</h3><p>Let rₙ be the number of <em>pairs</em> alive at the end of month n. No pair dies, so the current total is last month's total plus newborn pairs. Pairs born this month come from pairs old enough to reproduce, counted two months earlier. Hence rₙ = rₙ₋₁ + rₙ₋₂, with r₀ = r₁ = 1.</p><p>Under the slide's idealized rules, r₁₂ = 233 pairs after twelve months. That is 466 individual rabbits. The unit matters when answering “how many rabbits?”</p></div>
+          <div class="misconception"><h3>Do not silently change the first terms</h3><p>Using the 0, 1 convention while keeping this lecture's indices would give the wrong month count and the wrong closed formula later.</p></div>
+        </section>
+
+        <section class="lesson-section" id="hanoi">
+          <p class="eyebrow">3 · Solve a smaller copy</p>
+          <h2>The Tower of Hanoi doubles its work</h2>
+          <p>To transfer k disks without putting a larger disk on a smaller one, first move the top k − 1 disks to the spare pole, then move the largest disk once, then transfer the smaller tower onto it. Let mₖ be the minimum moves. The first and last stages each cost mₖ₋₁, giving the recurrence below.</p>
+          <div class="formula-card formula-text">m₁ = 1;  mₖ = 2mₖ₋₁ + 1 for k ≥ 2<br>mₖ = 2ᵏ − 1</div>
+          <div class="worked-example"><h3>Unroll and check</h3><p>The first values are m₁ = 1, m₂ = 3, m₃ = 7 and m₄ = 15. The pattern is 1 + 2 + 4 + ⋯ + 2ᵏ⁻¹ = 2ᵏ − 1. Substituting 2ᵏ⁻¹ − 1 into the recurrence produces 2(2ᵏ⁻¹ − 1) + 1 = 2ᵏ − 1. For 30 disks, the minimum is 1,073,741,823 moves.</p></div>
+          <div class="misconception"><h3>The middle move is essential</h3><p>Writing 2mₖ₋₁ omits the one move of the largest disk. The two smaller transfers also cannot be skipped, because the largest disk must first be uncovered and then have the tower rebuilt above it.</p></div>
+        </section>
+
+        <section class="lesson-section" id="stairs">
+          <p class="eyebrow">4 · Split by the last step</p>
+          <h2>Climbing stairs has a Fibonacci count</h2>
+          <p>Suppose each move climbs one or two stairs. A path to stair n ends in exactly one of two ways: a one-stair move after a path to n − 1, or a two-stair move after a path to n − 2. These classes are disjoint, so their counts add.</p>
+          <div class="formula-card formula-text">s₀ = 1, s₁ = 1;  sₙ = sₙ₋₁ + sₙ₋₂ for n ≥ 2</div>
+          <div class="worked-example"><h3>Three stairs</h3><p>The three routes are 1 + 1 + 1, 1 + 2 and 2 + 1. Thus s₃ = 3. The one empty route for zero stairs supplies s₀ = 1; s₂ = 2, s₃ = 3 and s₄ = 5 follow. With this lecture's indexing, sₙ = fₙ.</p></div>
+          <div class="misconception"><h3>Count paths, not the number of moves</h3><p>The route 1 + 2 and the route 2 + 1 are different orders and count separately. The empty route for zero stairs is one valid starting case, not zero ways.</p></div>
+        </section>
+
+        <section class="lesson-section" id="characteristic">
+          <p class="eyebrow">5 · From rule to formula</p>
+          <h2>Recognize the characteristic equation</h2>
+          <p>A second-order linear homogeneous recurrence with constant coefficients has the form aₖ = A aₖ₋₁ + B aₖ₋₂, where A and B are fixed real numbers, B ≠ 0, and k ≥ 2. It looks back two terms; the earlier values are multiplied by constants and added, with no extra independent term.</p>
+          <div class="worked-example"><h3>Classify before solving</h3><p>The rule eₖ = 2eₖ₋₂ fits with A = 0 and B = 2. A rule involving aₖ₋₃ is third-order; a squared preceding term is nonlinear; a trailing “+ 1” is nonhomogeneous; and a coefficient involving k is not constant. The root method below is for the stated family.</p></div>
+          <p>Try a power sequence aₖ = tᵏ with t ≠ 0. Substitute it into the rule and divide by tᵏ⁻². A solution must satisfy:</p>
+          <div class="formula-card formula-text">tᵏ = Atᵏ⁻¹ + Btᵏ⁻²  ⇒  t² − At − B = 0.</div>
+          <div class="misconception"><h3>Keep the sign on B</h3><p>The recurrence has +B aₖ₋₂ on the right. Moving it left produces −B in the characteristic polynomial.</p></div>
+        </section>
+
+        <section class="lesson-section" id="distinct">
+          <p class="eyebrow">6 · Two different roots</p>
+          <h2>Combine power sequences</h2>
+          <p>For aₖ = aₖ₋₁ + 2aₖ₋₂, the characteristic equation is t² − t − 2 = (t − 2)(t + 1) = 0. Its roots 2 and −1 give separate solutions 2ᵏ and (−1)ᵏ. Because the recurrence is linear and homogeneous, any constant combination is also a solution.</p>
+          <div class="formula-card formula-text">If r ≠ s are roots:  aₖ = C rᵏ + D sᵏ.<br>a₀ = C + D;  a₁ = Cr + Ds.</div>
+          <div class="worked-example"><h3>Initial values select one combination</h3><p>The roots specify the two building blocks but do not fix C and D. Given a₀ and a₁, solve the two displayed equations. Distinct roots ensure a unique pair of constants. For the example above, aₖ = C·2ᵏ + D·(−1)ᵏ; every choice of C and D follows the rule, but only one choice fits any given pair of first terms.</p></div>
+          <div class="misconception"><h3>A root is not an initial value</h3><p>Finding roots ends the characteristic-equation step. The initial conditions still have to be imposed before you have the formula for the particular sequence.</p></div>
+        </section>
+
+        <section class="lesson-section" id="closed-form">
+          <p class="eyebrow">7 · Fit the Fibonacci bases</p>
+          <h2>An explicit formula for this Fibonacci sequence</h2>
+          <p>The Fibonacci rule fₖ = fₖ₋₁ + fₖ₋₂ has characteristic equation t² − t − 1 = 0. Write its roots as φ = (1 + √5)/2 and ψ = (1 − √5)/2. Distinct roots give fₖ = Cφᵏ + Dψᵏ. The bases f₀ = f₁ = 1 yield C + D = 1 and Cφ + Dψ = 1.</p>
+          <div class="formula-card formula-text">C = φ/√5,  D = −ψ/√5<br>fₖ = (φᵏ⁺¹ − ψᵏ⁺¹)/√5</div>
+          <div class="worked-example"><h3>Check the shift</h3><p>At k = 0, φ − ψ = √5, so the formula gives f₀ = 1. At k = 1, φ² − ψ² = (φ − ψ)(φ + ψ) = √5, giving f₁ = 1. The exponent k + 1 is essential for the one-and-one convention on the slides.</p></div>
+          <div class="misconception"><h3>Do not import an unshifted formula</h3><p>The often-seen formula (φᵏ − ψᵏ)/√5 begins with zero at k = 0. It solves the same recurrence with different initial values, so it is not this deck's fₖ.</p></div>
+        </section>
+
+        <section class="lesson-section" id="repeated">
+          <p class="eyebrow">8 · One root twice</p>
+          <h2>A repeated root needs a second kind of term</h2>
+          <p>If t² − At − B has a repeated real root r, the general solution is (C + Dk)rᵏ. The extra factor k makes a second independent solution; two copies of rᵏ would give only one adjustable constant. The lecture's example starts with b₀ = 1, b₁ = 3 and bₖ = 4bₖ₋₁ − 4bₖ₋₂.</p>
+          <div class="worked-example"><h3>Fit the repeated-root example</h3><p>Its characteristic polynomial is t² − 4t + 4 = (t − 2)², so write bₖ = (C + Dk)2ᵏ. At k = 0, C = 1. At k = 1, 3 = 2(C + D), so D = 1/2. Therefore bₖ = 2ᵏ(1 + k/2). At k = 2 this gives 8, matching 4·3 − 4·1.</p></div>
+          <div class="misconception"><h3>Check which root case applies</h3><p>Use C rᵏ + D sᵏ only for distinct roots; use (C + Dk)rᵏ for a repeated real root. The slide closes by asking about no real roots, which is a further complex-root case beyond these two formulas.</p></div>
+        </section>
+
+        <section class="lesson-section quiz-section" id="quiz">
+          <p class="eyebrow">9 · Retrieval practice</p>
+          <h2>Week 11 mastery check</h2>
+          <p class="quiz-intro">Answer all ten questions. Check each answer for an explanation, then calculate your score. You may retry as often as you like; your best score stays in this browser.</p>
+          <div id="quiz-container" aria-live="polite"></div>
+          <button class="button button-primary" id="finish-quiz" type="button">Calculate my score</button>
+          <button class="button button-secondary" id="reset-quiz" type="button">Reset answers</button>
+          <div class="quiz-result" id="quiz-result" role="status"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog class="checkpoint-dialog" id="checkpoint-dialog" aria-labelledby="checkpoint-title">
+    <div class="dialog-inner">
+      <p class="dialog-kicker">Video checkpoint</p>
+      <h2 id="checkpoint-title">Pause and retrieve</h2>
+      <p id="checkpoint-prompt"></p>
+      <div class="dialog-options" id="checkpoint-options"></div>
+      <p class="dialog-feedback" id="checkpoint-feedback" role="status"></p>
+      <button class="button button-primary dialog-continue" id="checkpoint-continue" type="button">Continue lecture</button>
+      <button class="button button-secondary" id="checkpoint-skip" type="button">Skip checkpoint</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p><strong>CS104 · Week 11</strong></p>
+    <p><a href="../../index.html">Return to the course portal</a></p>
+  </footer>
+  <script src="assets/lesson.js?v=1"></script>
+</body>
+</html>

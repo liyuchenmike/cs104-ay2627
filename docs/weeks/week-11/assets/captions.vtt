@@ -1,0 +1,1177 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.083
+Welcome to Week Eleven of CS104.
+
+2
+00:00:03.083 --> 00:00:09.250
+This lecture studies recursion: defining a new value in terms of values
+
+3
+00:00:09.250 --> 00:00:10.278
+already known.
+
+4
+00:00:10.278 --> 00:00:15.931
+The first part constructs sequences from initial conditions and recurrence rules.
+
+5
+00:00:15.931 --> 00:00:22.097
+We will see Fibonacci numbers in a rabbit model, count the moves
+
+6
+00:00:22.097 --> 00:00:28.264
+in the Tower of Hanoi, and reason about ways to climb stairs.
+
+7
+00:00:28.264 --> 00:00:34.431
+The second part asks for explicit formulas, which give the value at
+
+8
+00:00:34.431 --> 00:00:38.028
+an index without calculating every earlier term.
+
+9
+00:00:38.028 --> 00:00:44.194
+We will derive a characteristic equation for second-order recurrences, then work through
+
+10
+00:00:44.194 --> 00:00:47.792
+the cases of distinct and repeated roots.
+
+11
+00:00:47.792 --> 00:00:53.958
+The slide calls this Lecture Nine, while this course portal places it
+
+12
+00:00:53.958 --> 00:00:55.500
+in Week Eleven.
+
+13
+00:00:55.500 --> 00:00:57.698
+Here is the route.
+
+14
+00:00:57.698 --> 00:01:01.545
+Section nine point one defines sequences recursively.
+
+15
+00:01:01.545 --> 00:01:08.140
+An initial condition anchors the sequence, and a recurrence tells us how
+
+16
+00:01:08.140 --> 00:01:09.788
+to continue it.
+
+17
+00:01:09.788 --> 00:01:16.383
+Arithmetic and geometric sequences show simple one-step rules; Fibonacci needs two earlier
+
+18
+00:01:16.383 --> 00:01:16.932
+terms.
+
+19
+00:01:16.932 --> 00:01:22.977
+The rabbit and Hanoi stories turn those rules into counting models.
+
+20
+00:01:22.977 --> 00:01:29.572
+Section nine point two narrows to second-order linear homogeneous recurrences with constant
+
+21
+00:01:29.572 --> 00:01:30.122
+coefficients.
+
+22
+00:01:30.122 --> 00:01:36.716
+We will try solutions that are powers of a number, solve a
+
+23
+00:01:36.716 --> 00:01:43.311
+quadratic characteristic equation, and use initial values to select one particular sequence.
+
+24
+00:01:43.311 --> 00:01:49.356
+The two algebraic cases are distinct roots and a repeated root.
+
+25
+00:01:49.356 --> 00:01:55.950
+Keep the difference between a rule and an explicit formula in mind
+
+26
+00:01:55.950 --> 00:01:56.500
+throughout.
+
+27
+00:01:56.500 --> 00:02:00.168
+We begin by defining a sequence recursively.
+
+28
+00:02:00.168 --> 00:02:06.457
+A sequence is an ordered collection of values indexed by integers, often
+
+29
+00:02:06.457 --> 00:02:08.029
+starting at zero.
+
+30
+00:02:08.029 --> 00:02:14.317
+A recursive description has two ingredients: enough starting values, and a rule
+
+31
+00:02:14.317 --> 00:02:18.510
+that expresses each later value using earlier ones.
+
+32
+00:02:18.510 --> 00:02:24.798
+The starting values matter because a rule such as take the previous
+
+33
+00:02:24.798 --> 00:02:31.087
+term and add three describes many different sequences until we say where
+
+34
+00:02:31.087 --> 00:02:32.135
+it begins.
+
+35
+00:02:32.135 --> 00:02:38.423
+If the rule looks back two positions, we usually need two initial
+
+36
+00:02:38.423 --> 00:02:38.947
+values.
+
+37
+00:02:38.947 --> 00:02:45.236
+This week builds on the multiple-base-case reasoning from the induction lecture: the
+
+38
+00:02:45.236 --> 00:02:51.000
+number of starting facts should match the dependencies in the recurrence.
+
+39
+00:02:51.000 --> 00:02:54.198
+The slide gives three familiar recursive definitions.
+
+40
+00:02:54.198 --> 00:02:59.681
+For an arithmetic sequence, start with a sub zero equal to c,
+
+41
+00:02:59.681 --> 00:03:05.164
+then add the fixed difference d each time: a sub n equals
+
+42
+00:03:05.164 --> 00:03:08.362
+a sub n minus one plus d.
+
+43
+00:03:08.362 --> 00:03:12.017
+Its explicit form is c plus n d.
+
+44
+00:03:12.017 --> 00:03:17.500
+For a geometric sequence, start at c and multiply by the fixed
+
+45
+00:03:17.500 --> 00:03:22.526
+ratio r each time, giving c times r to the n.
+
+46
+00:03:22.526 --> 00:03:28.009
+Factorial starts with zero factorial equal to one and multiplies the preceding
+
+47
+00:03:28.009 --> 00:03:31.664
+factorial by n for n at least one.
+
+48
+00:03:31.664 --> 00:03:36.690
+For example, four factorial is four times three factorial, or twenty-four.
+
+49
+00:03:36.690 --> 00:03:42.172
+Notice that each rule needs its initial condition; the recurrence alone does
+
+50
+00:03:42.172 --> 00:03:44.000
+not determine the values.
+
+51
+00:03:44.000 --> 00:03:49.583
+Definition nine point one point one introduces the Fibonacci sequence used in
+
+52
+00:03:49.583 --> 00:03:50.513
+this deck.
+
+53
+00:03:50.513 --> 00:03:56.096
+Its first two values are f sub zero equals one and f
+
+54
+00:03:56.096 --> 00:03:57.957
+sub one equals one.
+
+55
+00:03:57.957 --> 00:04:03.539
+From index two onward, each term is the sum of the previous
+
+56
+00:04:03.539 --> 00:04:09.122
+two: f sub n equals f sub n minus one plus f
+
+57
+00:04:09.122 --> 00:04:10.983
+sub n minus two.
+
+58
+00:04:10.983 --> 00:04:16.565
+So the sequence begins one, one, two, three, five, eight, and thirteen.
+
+59
+00:04:16.565 --> 00:04:22.148
+Some books use zero and one as their first two values, which
+
+60
+00:04:22.148 --> 00:04:23.543
+shifts the indices.
+
+61
+00:04:23.543 --> 00:04:27.730
+In this lesson we keep the slide's one-and-one convention.
+
+62
+00:04:27.730 --> 00:04:33.313
+The spiral images illustrate a common visual association, but the mathematical definition
+
+63
+00:04:33.313 --> 00:04:37.500
+is the recurrence together with those two initial values.
+
+64
+00:04:37.500 --> 00:04:41.881
+The rabbit story explains why a two-term recurrence appears.
+
+65
+00:04:41.881 --> 00:04:46.748
+One pair is born at the beginning of the year.
+
+66
+00:04:46.748 --> 00:04:52.588
+A pair does not reproduce during its first month, then produces one
+
+67
+00:04:52.588 --> 00:04:58.429
+new pair at the end of each later month; no rabbits die.
+
+68
+00:04:58.429 --> 00:05:04.270
+To count accurately, track pairs rather than individual animals, because every birth
+
+69
+00:05:04.270 --> 00:05:05.730
+produces one pair.
+
+70
+00:05:05.730 --> 00:05:11.571
+At the end of a month, the population consists of all pairs
+
+71
+00:05:11.571 --> 00:05:15.465
+alive one month earlier plus the newborn pairs.
+
+72
+00:05:15.465 --> 00:05:21.305
+The newborns come from pairs old enough to reproduce, which correspond to
+
+73
+00:05:21.305 --> 00:05:24.226
+the pairs counted two months earlier.
+
+74
+00:05:24.226 --> 00:05:30.066
+This separation between existing and newly born pairs leads to the Fibonacci
+
+75
+00:05:30.066 --> 00:05:32.500
+rule on the next slide.
+
+76
+00:05:32.500 --> 00:05:37.344
+Let r sub n count rabbit pairs alive at the end of
+
+77
+00:05:37.344 --> 00:05:41.785
+month n, and let a sub n count pairs born then.
+
+78
+00:05:41.785 --> 00:05:46.630
+No pair dies, so r sub n equals r sub n minus
+
+79
+00:05:46.630 --> 00:05:48.648
+one plus a sub n.
+
+80
+00:05:48.648 --> 00:05:53.493
+The reproductive timing gives a sub n equal to r sub n
+
+81
+00:05:53.493 --> 00:05:54.300
+minus two.
+
+82
+00:05:54.300 --> 00:05:59.144
+Therefore r sub n equals r sub n minus one plus r
+
+83
+00:05:59.144 --> 00:06:03.989
+sub n minus two for n at least two, with r sub
+
+84
+00:06:03.989 --> 00:06:07.622
+zero and r sub one both equal to one.
+
+85
+00:06:07.622 --> 00:06:10.448
+The values match this deck's Fibonacci sequence.
+
+86
+00:06:10.448 --> 00:06:15.293
+At the end of twelve months there are r sub twelve, or
+
+87
+00:06:15.293 --> 00:06:20.137
+two hundred thirty-three pairs, which means four hundred sixty-six individual rabbits under
+
+88
+00:06:20.137 --> 00:06:20.944
+the model.
+
+89
+00:06:20.944 --> 00:06:25.789
+State the unit when reporting the answer: pairs and rabbits are not
+
+90
+00:06:25.789 --> 00:06:27.000
+the same count.
+
+91
+00:06:27.000 --> 00:06:29.703
+Now consider the Tower of Hanoi.
+
+92
+00:06:29.703 --> 00:06:35.108
+All k disks begin on one pole, ordered with the largest at
+
+93
+00:06:35.108 --> 00:06:36.009
+the bottom.
+
+94
+00:06:36.009 --> 00:06:41.414
+We want to transfer the stack to another pole using a third
+
+95
+00:06:41.414 --> 00:06:41.865
+pole.
+
+96
+00:06:41.865 --> 00:06:47.270
+A move carries exactly one disk, and a larger disk may never
+
+97
+00:06:47.270 --> 00:06:49.523
+sit on a smaller one.
+
+98
+00:06:49.523 --> 00:06:54.928
+Counting random legal moves is not the goal; we want the minimum
+
+99
+00:06:54.928 --> 00:06:55.829
+number needed.
+
+100
+00:06:55.829 --> 00:07:01.234
+The largest disk cannot move until every smaller disk is out of
+
+101
+00:07:01.234 --> 00:07:02.135
+its way.
+
+102
+00:07:02.135 --> 00:07:07.541
+That observation suggests a recursive plan: move the smaller tower aside, move
+
+103
+00:07:07.541 --> 00:07:12.495
+the largest disk once, then move the smaller tower onto it.
+
+104
+00:07:12.495 --> 00:07:17.000
+The next two slides turn that plan into a recurrence.
+
+105
+00:07:17.000 --> 00:07:19.641
+Read the diagram as three stages.
+
+106
+00:07:19.641 --> 00:07:24.923
+First, transfer the top k minus one disks from pole A to
+
+107
+00:07:24.923 --> 00:07:26.684
+the spare pole B.
+
+108
+00:07:26.684 --> 00:07:30.645
+The largest base disk is now exposed on A.
+
+109
+00:07:30.645 --> 00:07:35.927
+Second, move that one base disk from A to the destination pole
+
+110
+00:07:35.927 --> 00:07:36.368
+C.
+
+111
+00:07:36.368 --> 00:07:41.209
+Third, transfer the k minus one disks from B onto C.
+
+112
+00:07:41.209 --> 00:07:46.491
+Each smaller-tower transfer is itself the same kind of Hanoi problem, just
+
+113
+00:07:46.491 --> 00:07:48.252
+with one fewer disk.
+
+114
+00:07:48.252 --> 00:07:53.534
+The rules force these stages if we want to move the largest
+
+115
+00:07:53.534 --> 00:07:56.615
+disk and finish with a complete stack.
+
+116
+00:07:56.615 --> 00:08:01.897
+Thus the diagram is both a constructive strategy and a way to
+
+117
+00:08:01.897 --> 00:08:07.179
+see why any solution needs at least the two smaller transfers and
+
+118
+00:08:07.179 --> 00:08:08.500
+one base-disk move.
+
+119
+00:08:08.500 --> 00:08:13.717
+Let m sub k be the minimum number of moves for k
+
+120
+00:08:13.717 --> 00:08:14.152
+disks.
+
+121
+00:08:14.152 --> 00:08:18.935
+The first smaller-tower transfer costs m sub k minus one moves.
+
+122
+00:08:18.935 --> 00:08:21.543
+The base disk costs one move.
+
+123
+00:08:21.543 --> 00:08:26.761
+The final smaller-tower transfer costs another m sub k minus one moves.
+
+124
+00:08:26.761 --> 00:08:31.978
+Therefore m sub k equals two times m sub k minus one
+
+125
+00:08:31.978 --> 00:08:35.022
+plus one for k at least two.
+
+126
+00:08:35.022 --> 00:08:38.935
+With just one disk, m sub one equals one.
+
+127
+00:08:38.935 --> 00:08:44.152
+The recursive strategy achieves this count, and the largest disk cannot be
+
+128
+00:08:44.152 --> 00:08:48.935
+moved without clearing the smaller disks, so it is a minimum.
+
+129
+00:08:48.935 --> 00:08:54.152
+The extra plus one is easy to overlook: it is the single
+
+130
+00:08:54.152 --> 00:08:58.500
+move of the largest disk between the two recursive calls.
+
+131
+00:08:58.500 --> 00:09:02.739
+Unroll the Hanoi recurrence for the first few cases.
+
+132
+00:09:02.739 --> 00:09:08.391
+One disk needs one move; two need three; three need seven; four
+
+133
+00:09:08.391 --> 00:09:09.333
+need fifteen.
+
+134
+00:09:09.333 --> 00:09:13.572
+These are one less than successive powers of two.
+
+135
+00:09:13.572 --> 00:09:19.225
+The slide writes the pattern as one plus two plus four and
+
+136
+00:09:19.225 --> 00:09:24.406
+so on through two raised to the exponent k minus one.
+
+137
+00:09:24.406 --> 00:09:30.058
+That geometric sum is two raised to exponent k, then subtract one.
+
+138
+00:09:30.058 --> 00:09:35.710
+We can verify it by substitution: if m at index k minus
+
+139
+00:09:35.710 --> 00:09:41.362
+one is one less than two raised to exponent k minus one,
+
+140
+00:09:41.362 --> 00:09:47.014
+then twice that value plus one is one less than two raised
+
+141
+00:09:47.014 --> 00:09:48.428
+to exponent k.
+
+142
+00:09:48.428 --> 00:09:54.080
+For thirty disks the minimum is two raised to the thirtieth power,
+
+143
+00:09:54.080 --> 00:09:59.732
+then subtract one: one billion seventy-three million seven hundred forty-one thousand eight
+
+144
+00:09:59.732 --> 00:10:01.145
+hundred twenty-three moves.
+
+145
+00:10:01.145 --> 00:10:03.500
+Recursive growth becomes enormous quickly.
+
+146
+00:10:03.500 --> 00:10:08.353
+The stair-climbing problem asks for the number of ways to reach the
+
+147
+00:10:08.353 --> 00:10:11.993
+top when every move climbs one or two stairs.
+
+148
+00:10:11.993 --> 00:10:16.846
+Let s sub n be the number of ways to climb n
+
+149
+00:10:16.846 --> 00:10:17.250
+stairs.
+
+150
+00:10:17.250 --> 00:10:20.081
+Classify a route by its last move.
+
+151
+00:10:20.081 --> 00:10:24.934
+If that move is one stair, everything before it is a way
+
+152
+00:10:24.934 --> 00:10:27.360
+to climb n minus one stairs.
+
+153
+00:10:27.360 --> 00:10:32.213
+If it is two, everything before it is a way to climb
+
+154
+00:10:32.213 --> 00:10:33.426
+n minus two.
+
+155
+00:10:33.426 --> 00:10:38.279
+The two classes do not overlap, so s sub n equals s
+
+156
+00:10:38.279 --> 00:10:42.324
+sub n minus one plus s sub n minus two.
+
+157
+00:10:42.324 --> 00:10:47.176
+There is one empty route for zero stairs and one route for
+
+158
+00:10:47.176 --> 00:10:52.029
+one stair, giving s sub zero equals s sub one equals one.
+
+159
+00:10:52.029 --> 00:10:56.882
+Thus the counts match this lecture's Fibonacci indexing: one, one, two, three,
+
+160
+00:10:56.882 --> 00:10:58.500
+five, and so on.
+
+161
+00:10:58.500 --> 00:11:02.238
+Section nine point two changes the question.
+
+162
+00:11:02.238 --> 00:11:08.646
+A recurrence tells us how to compute the next term from earlier
+
+163
+00:11:08.646 --> 00:11:15.053
+terms, but an explicit formula gives a term directly from its index.
+
+164
+00:11:15.053 --> 00:11:21.461
+We focus on a specific family: second-order linear homogeneous recurrence relations with
+
+165
+00:11:21.461 --> 00:11:22.529
+constant coefficients.
+
+166
+00:11:22.529 --> 00:11:26.801
+Second-order means the rule reaches back two terms.
+
+167
+00:11:26.801 --> 00:11:33.209
+Linear means each earlier term appears only to the first power, with
+
+168
+00:11:33.209 --> 00:11:35.879
+no products of sequence terms.
+
+169
+00:11:35.879 --> 00:11:40.150
+Homogeneous means there is no independent added term.
+
+170
+00:11:40.150 --> 00:11:46.024
+Constant coefficients mean the multipliers do not vary with the index.
+
+171
+00:11:46.024 --> 00:11:52.432
+For this family, a quadratic equation provides a practical route to an
+
+172
+00:11:52.432 --> 00:11:53.500
+explicit expression.
+
+173
+00:11:53.500 --> 00:11:58.900
+The precise form is a sub k equals A times a sub
+
+174
+00:11:58.900 --> 00:12:04.300
+k minus one plus B times a sub k minus two, for
+
+175
+00:12:04.300 --> 00:12:09.700
+k at least two, where A and B are fixed real numbers
+
+176
+00:12:09.700 --> 00:12:11.500
+and B is nonzero.
+
+177
+00:12:11.500 --> 00:12:13.300
+The slide sorts examples.
+
+178
+00:12:13.300 --> 00:12:18.700
+Three times the previous term plus two times the term before fits.
+
+179
+00:12:18.700 --> 00:12:24.100
+So does a rule using only the term two steps back: take
+
+180
+00:12:24.100 --> 00:12:25.900
+A equal to zero.
+
+181
+00:12:25.900 --> 00:12:29.500
+A rule reaching back three terms is third-order.
+
+182
+00:12:29.500 --> 00:12:34.450
+A square or product of sequence terms makes a rule nonlinear.
+
+183
+00:12:34.450 --> 00:12:37.600
+An extra plus one makes it nonhomogeneous.
+
+184
+00:12:37.600 --> 00:12:42.100
+A multiplier such as k minus one makes coefficients variable.
+
+185
+00:12:42.100 --> 00:12:47.500
+Classification matters because the characteristic-root formulas ahead apply to this exact family.
+
+186
+00:12:47.500 --> 00:12:52.318
+To derive the characteristic equation, try a sequence of powers: a sub
+
+187
+00:12:52.318 --> 00:12:55.932
+k equals t to the k, with t nonzero.
+
+188
+00:12:55.932 --> 00:13:00.750
+Substitute this guess into a sub k equals A a sub k
+
+189
+00:13:00.750 --> 00:13:04.364
+minus one plus B a sub k minus two.
+
+190
+00:13:04.364 --> 00:13:09.182
+We obtain t to the k equals A times t to the
+
+191
+00:13:09.182 --> 00:13:14.000
+k minus one plus B times t to the k minus two.
+
+192
+00:13:14.000 --> 00:13:17.614
+Divide through by t to the k minus two.
+
+193
+00:13:17.614 --> 00:13:22.432
+The result is t squared minus A t minus B equals zero.
+
+194
+00:13:22.432 --> 00:13:27.250
+Every root t of that quadratic produces a power sequence satisfying the
+
+195
+00:13:27.250 --> 00:13:27.652
+recurrence.
+
+196
+00:13:27.652 --> 00:13:32.470
+Be careful with the sign on B: the recurrence has plus B
+
+197
+00:13:32.470 --> 00:13:37.288
+on the right, so the characteristic polynomial has minus B on the
+
+198
+00:13:37.288 --> 00:13:37.689
+left.
+
+199
+00:13:37.689 --> 00:13:40.500
+Initial values have not been used yet.
+
+200
+00:13:40.500 --> 00:13:45.573
+For a concrete example, the recurrence is a sub k equals a
+
+201
+00:13:45.573 --> 00:13:50.224
+sub k minus one plus two a sub k minus two.
+
+202
+00:13:50.224 --> 00:13:55.297
+Here A is one and B is two, so the characteristic equation
+
+203
+00:13:55.297 --> 00:13:59.102
+is t squared minus t minus two equals zero.
+
+204
+00:13:59.102 --> 00:14:03.329
+Factor it as t minus two times t plus one.
+
+205
+00:14:03.329 --> 00:14:08.402
+The distinct roots are two and negative one, giving the power sequences
+
+206
+00:14:08.402 --> 00:14:12.630
+two to the k and negative one to the k.
+
+207
+00:14:12.630 --> 00:14:14.321
+Each solves the recurrence.
+
+208
+00:14:14.321 --> 00:14:19.394
+Because the rule is linear and homogeneous, adding scaled solutions also gives
+
+209
+00:14:19.394 --> 00:14:20.240
+a solution.
+
+210
+00:14:20.240 --> 00:14:25.313
+Thus a general candidate is C times two to the k plus
+
+211
+00:14:25.313 --> 00:14:28.272
+D times negative one to the k.
+
+212
+00:14:28.272 --> 00:14:32.500
+The constants depend on whatever first two terms we specify.
+
+213
+00:14:32.500 --> 00:14:35.750
+The distinct-roots theorem makes that candidate general.
+
+214
+00:14:35.750 --> 00:14:41.321
+If the characteristic equation has two different roots r and s, every
+
+215
+00:14:41.321 --> 00:14:46.893
+sequence satisfying this second-order recurrence has the form a sub k equals
+
+216
+00:14:46.893 --> 00:14:52.000
+C r to the k plus D s to the k.
+
+217
+00:14:52.000 --> 00:14:55.250
+The first two values determine the constants.
+
+218
+00:14:55.250 --> 00:15:00.357
+At k equals zero, a sub zero equals C plus D.
+
+219
+00:15:00.357 --> 00:15:05.929
+At k equals one, a sub one equals C r plus D
+
+220
+00:15:05.929 --> 00:15:06.393
+s.
+
+221
+00:15:06.393 --> 00:15:11.964
+Because r and s differ, these two equations have a unique solution
+
+222
+00:15:11.964 --> 00:15:13.821
+for C and D.
+
+223
+00:15:13.821 --> 00:15:19.393
+The slide omits the full theorem proof, but the structure is useful:
+
+224
+00:15:19.393 --> 00:15:24.500
+roots determine the building-block sequences, while initial conditions select their combination.
+
+225
+00:15:24.500 --> 00:15:29.854
+Apply the distinct-root method to this deck's Fibonacci sequence, with f sub
+
+226
+00:15:29.854 --> 00:15:33.869
+zero and f sub one both equal to one.
+
+227
+00:15:33.869 --> 00:15:39.223
+The recurrence has A and B both equal to one, so its
+
+228
+00:15:39.223 --> 00:15:44.131
+characteristic equation is t squared minus t minus one equals zero.
+
+229
+00:15:44.131 --> 00:15:46.808
+The quadratic formula gives two roots.
+
+230
+00:15:46.808 --> 00:15:52.162
+Phi equals the quantity one plus square root of five, all over
+
+231
+00:15:52.162 --> 00:15:52.608
+two.
+
+232
+00:15:52.608 --> 00:15:57.962
+Psi equals the quantity one minus square root of five, all over
+
+233
+00:15:57.962 --> 00:15:58.408
+two.
+
+234
+00:15:58.408 --> 00:16:03.762
+We therefore write f sub k as C times phi to the
+
+235
+00:16:03.762 --> 00:16:08.223
+power k plus D times psi to the power k.
+
+236
+00:16:08.223 --> 00:16:13.577
+The next step is not another recurrence calculation; it is solving for
+
+237
+00:16:13.577 --> 00:16:17.146
+C and D from the two starting values.
+
+238
+00:16:17.146 --> 00:16:22.500
+Remember that this convention is shifted from the common zero-one Fibonacci indexing.
+
+239
+00:16:22.500 --> 00:16:27.425
+Use f sub zero equals one to get C plus D equals
+
+240
+00:16:27.425 --> 00:16:27.836
+one.
+
+241
+00:16:27.836 --> 00:16:32.761
+Use f sub one equals one to get C phi plus D
+
+242
+00:16:32.761 --> 00:16:33.993
+psi equals one.
+
+243
+00:16:33.993 --> 00:16:38.918
+Solving gives C equal to phi divided by square root of five
+
+244
+00:16:38.918 --> 00:16:43.843
+and D equal to negative psi divided by square root of five.
+
+245
+00:16:43.843 --> 00:16:48.769
+Substituting yields f sub k equal to phi raised to exponent k
+
+246
+00:16:48.769 --> 00:16:53.694
+plus one, minus psi raised to exponent k plus one, with the
+
+247
+00:16:53.694 --> 00:16:56.978
+whole difference divided by square root of five.
+
+248
+00:16:56.978 --> 00:17:01.903
+Check the index: at k equals zero, the numerator is phi minus
+
+249
+00:17:01.903 --> 00:17:06.828
+psi, which is square root of five, so the formula gives one.
+
+250
+00:17:06.828 --> 00:17:10.112
+At k equals one it also gives one.
+
+251
+00:17:10.112 --> 00:17:15.037
+The exponent k plus one reflects this deck's f sub zero equals
+
+252
+00:17:15.037 --> 00:17:17.500
+f sub one equals one convention.
+
+253
+00:17:17.500 --> 00:17:22.573
+What if the characteristic quadratic has only one real root because the
+
+254
+00:17:22.573 --> 00:17:24.264
+same root occurs twice?
+
+255
+00:17:24.264 --> 00:17:29.336
+We cannot use two copies of r to the k as independent
+
+256
+00:17:29.336 --> 00:17:30.182
+building blocks.
+
+257
+00:17:30.182 --> 00:17:35.255
+The single-root theorem supplies a second form, k times r to the
+
+258
+00:17:35.255 --> 00:17:35.677
+k.
+
+259
+00:17:35.677 --> 00:17:40.750
+The general solution is a sub k equals C r to the
+
+260
+00:17:40.750 --> 00:17:45.823
+k plus D k r to the k, or equivalently C plus
+
+261
+00:17:45.823 --> 00:17:48.782
+D k times r to the k.
+
+262
+00:17:48.782 --> 00:17:51.741
+Again two known values determine the constants.
+
+263
+00:17:51.741 --> 00:17:56.814
+The zero-index value is especially convenient: at k equals zero, the D
+
+264
+00:17:56.814 --> 00:18:00.195
+term vanishes, so C equals a sub zero.
+
+265
+00:18:00.195 --> 00:18:04.000
+The next example uses a repeated root of two.
+
+266
+00:18:04.000 --> 00:18:08.828
+The example defines b sub k as four times b sub k
+
+267
+00:18:08.828 --> 00:18:13.656
+minus one minus four times b sub k minus two, beginning with
+
+268
+00:18:13.656 --> 00:18:18.082
+b sub zero equals one and b sub one equals three.
+
+269
+00:18:18.082 --> 00:18:21.703
+Here A is four and B is negative four.
+
+270
+00:18:21.703 --> 00:18:26.531
+The characteristic polynomial is t squared minus four t plus four, which
+
+271
+00:18:26.531 --> 00:18:29.750
+factors as the square of t minus two.
+
+272
+00:18:29.750 --> 00:18:32.969
+There is a repeated root r equals two.
+
+273
+00:18:32.969 --> 00:18:37.797
+Therefore write b sub k as C times two to the k
+
+274
+00:18:37.797 --> 00:18:41.418
+plus D times k times two to the k.
+
+275
+00:18:41.418 --> 00:18:46.246
+We cannot determine C and D from the recurrence alone; the two
+
+276
+00:18:46.246 --> 00:18:48.660
+given starting values will fix them.
+
+277
+00:18:48.660 --> 00:18:53.488
+Notice that the coefficient B is allowed to be negative, as long
+
+278
+00:18:53.488 --> 00:18:55.500
+as it is not zero.
+
+279
+00:18:55.500 --> 00:18:58.193
+Now substitute the two starting values.
+
+280
+00:18:58.193 --> 00:19:03.579
+At k equals zero, b sub zero equals C, so C is
+
+281
+00:19:03.579 --> 00:19:04.028
+one.
+
+282
+00:19:04.028 --> 00:19:09.413
+At k equals one, b sub one equals two C plus two
+
+283
+00:19:09.413 --> 00:19:14.799
+D, so three equals two plus two D and D is one
+
+284
+00:19:14.799 --> 00:19:15.248
+half.
+
+285
+00:19:15.248 --> 00:19:20.634
+The explicit formula is b sub k equals two to the k
+
+286
+00:19:20.634 --> 00:19:23.327
+times one plus k over two.
+
+287
+00:19:23.327 --> 00:19:28.713
+Check k equals two: the formula gives four times two, or eight,
+
+288
+00:19:28.713 --> 00:19:34.098
+and the recurrence gives four times three minus four times one, also
+
+289
+00:19:34.098 --> 00:19:34.547
+eight.
+
+290
+00:19:34.547 --> 00:19:39.933
+The highlighted closing question asks what happens when the characteristic equation has
+
+291
+00:19:39.933 --> 00:19:41.280
+no real root.
+
+292
+00:19:41.280 --> 00:19:46.665
+That complex-root case is beyond the two real-root formulas developed here; it
+
+293
+00:19:46.665 --> 00:19:52.051
+is a useful next question, not a reason to apply either theorem
+
+294
+00:19:52.051 --> 00:19:52.500
+blindly.
